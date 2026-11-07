@@ -177,7 +177,6 @@ export function Header() {
                   onPointerEnter={() => setPreview(index)}
                   onFocus={() => setPreview(index)}
                 >
-                  <small>{String(index + 1).padStart(2, "0")}</small>
                   {link.label}
                 </Link>
               ))}

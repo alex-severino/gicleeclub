@@ -550,20 +550,12 @@ a:hover .logo__accent {
 .mega__link {
   display: flex;
   align-items: baseline;
-  gap: 0.7em;
   font-family: var(--font-display);
   line-height: 1.16;
   text-transform: uppercase;
   transition:
     transform 0.45s var(--ease-out),
     color 0.2s;
-}
-.mega__link > small {
-  font-family: var(--font-sans);
-  font-size: 0.68rem;
-  font-weight: 650;
-  letter-spacing: 0.18em;
-  opacity: 0.45;
 }
 .mega__link[data-active] {
   color: var(--color-ultra);
