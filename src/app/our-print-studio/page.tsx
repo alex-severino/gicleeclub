@@ -25,10 +25,9 @@ export default function PrintStudioPage() {
   return (
     <Sheet ink="studio">
       <Hero
-        name="shoreditch"
-        alt="A Shoreditch corner building painted from pavement to roofline in an orange and teal mural, beside a coral field"
+        name="london-skyline"
+        alt="An illustrated London skyline at sunset: Tower Bridge, the London Eye and Big Ben above the River Thames, beside a coral field"
         title={["Print", "Studio"]}
-        credit="Photo by Ambitious Studio* | Rick Barrett"
       >
         <p>Giclée Club is located in London.</p>
         <p>
