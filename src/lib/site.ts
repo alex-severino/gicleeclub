@@ -1,0 +1,224 @@
+/** Studio facts and the site map. Everything navigational reads from here. */
+
+export const studio = {
+  name: "Giclée Club",
+  email: "hello@gicleeclub.com",
+  street: "Grootzeil 107, 1034LS",
+  city: "Amsterdam, The Netherlands",
+  kvk: "90185528",
+  instagram: "https://www.instagram.com/posteress_amsterdam",
+  url: "https://www.gicleeclub.com",
+};
+
+/** Each page has its own colour story, taken from Angelina's gradient pairs. */
+export type InkName = keyof typeof inks;
+
+export const inks = {
+  home: ["#fe5581", "#ffa602"],
+  giclee: ["#fe5581", "#ffb1e0"],
+  packaging: ["#ffb1e0", "#ca89ea"],
+  certificate: ["#ffa602", "#a0ba3d"],
+  proof: ["#05b470", "#2466fd"],
+  portfolio: ["#9ba8ae", "#424749"],
+  samples: ["#6f3fff", "#ffb1e0"],
+  prices: ["#2466fd", "#ffb1e0"],
+  printers: ["#2466fd", "#9ba8ae"],
+  papers: ["#ffa602", "#ffb1e0"],
+  preparing: ["#2466fd", "#ffa602"],
+  proofing: ["#05b470", "#ffb1e0"],
+  icc: ["#5000b4", "#6f3fff"],
+  people: ["#6f3fff", "#ffb1e0"],
+  studio: ["#fe5581", "#ffb1e0"],
+  planet: ["#ff7e3f", "#ffb1e0"],
+  shipping: ["#2466fd", "#fe5581"],
+  contact: ["#5000b4", "#ff7e3f"],
+  order: ["#6f3fff", "#ffb1e0"],
+  legal: ["#9ba8ae", "#424749"],
+} as const;
+
+export type NavLink = {
+  label: string;
+  href: string;
+  /** Preview shown in the menu panel. */
+  image: string;
+};
+
+export type NavItem =
+  | { label: string; href: string }
+  | { label: string; items: NavLink[] };
+
+const gicleePrinting: NavLink = {
+  label: "Giclée Printing",
+  href: "/giclee-printing",
+  image: "/media/section/giclee-printing.png",
+};
+const brandedPackaging: NavLink = {
+  label: "Branded Packaging",
+  href: "/branded-packaging",
+  image: "/media/section/packaging.png",
+};
+
+export const nav: NavItem[] = [
+  {
+    label: "What We Do",
+    items: [
+      gicleePrinting,
+      brandedPackaging,
+      {
+        label: "Certificate of Authenticity",
+        href: "/certificate-of-authenticity",
+        image: "/media/section/certificate.png",
+      },
+      {
+        label: "Proof Printing Strip",
+        href: "/proof-printing-strip",
+        image: "/media/section/proof-strip.png",
+      },
+      {
+        label: "Premium Portfolio Set",
+        href: "/premium-portfolio-set",
+        image: "/media/section/portfolio.png",
+      },
+    ],
+  },
+  { label: "Sample Packs", href: "/sample-packs" },
+  { label: "Prices", href: "/prices" },
+  {
+    label: "Info",
+    items: [
+      gicleePrinting,
+      {
+        label: "High-End Printers",
+        href: "/high-end-printers",
+        image: "/media/section/printers.png",
+      },
+      {
+        label: "Fine Art Papers",
+        href: "/fine-art-papers",
+        image: "/media/section/papers.png",
+      },
+      brandedPackaging,
+    ],
+  },
+  {
+    label: "Help",
+    items: [
+      {
+        label: "Preparing Your Files",
+        href: "/preparing-your-files",
+        image: "/media/section/requirements.png",
+      },
+      {
+        label: "Soft Proofing",
+        href: "/soft-proofing",
+        image: "/media/section/monitor.png",
+      },
+      {
+        label: "ICC Print Profiles",
+        href: "/icc-profiles",
+        image: "/media/section/icc-chart.png",
+      },
+    ],
+  },
+  {
+    label: "About",
+    items: [
+      {
+        label: "Who We Are",
+        href: "/who-we-are",
+        image: "/media/section/angelina.png",
+      },
+      {
+        label: "Our Print Studio",
+        href: "/our-print-studio",
+        image: "/media/section/studio-2.png",
+      },
+      {
+        label: "Sustainability",
+        href: "/sustainability",
+        image: "/media/section/solar-panels.png",
+      },
+      {
+        label: "Contact Us",
+        href: "/contact-us",
+        image: "/media/section/gloves.png",
+      },
+    ],
+  },
+];
+
+/** Route → ink and the title flashed on the page transition. */
+export const routes: Record<string, { ink: InkName; title: string }> = {
+  "/": { ink: "home", title: "We print for artists" },
+  "/giclee-printing": { ink: "giclee", title: "Giclée Printing" },
+  "/branded-packaging": { ink: "packaging", title: "Branded Packaging" },
+  "/certificate-of-authenticity": { ink: "certificate", title: "Certificate" },
+  "/proof-printing-strip": { ink: "proof", title: "Proof Strip" },
+  "/premium-portfolio-set": { ink: "portfolio", title: "Portfolio Set" },
+  "/sample-packs": { ink: "samples", title: "Sample Packs" },
+  "/prices": { ink: "prices", title: "Prices" },
+  "/high-end-printers": { ink: "printers", title: "Printers" },
+  "/fine-art-papers": { ink: "papers", title: "Fine Art Papers" },
+  "/preparing-your-files": { ink: "preparing", title: "Your Files" },
+  "/soft-proofing": { ink: "proofing", title: "Soft Proofing" },
+  "/icc-profiles": { ink: "icc", title: "ICC Profiles" },
+  "/who-we-are": { ink: "people", title: "Who We Are" },
+  "/our-print-studio": { ink: "studio", title: "Print Studio" },
+  "/sustainability": { ink: "planet", title: "Sustainability" },
+  "/contact-us": { ink: "contact", title: "Contact" },
+  "/shipping": { ink: "shipping", title: "Shipping" },
+  "/order": { ink: "order", title: "Order" },
+  "/terms-and-conditions": { ink: "legal", title: "Terms" },
+  "/privacy-policy": { ink: "legal", title: "Privacy" },
+};
+
+export function routeFor(pathname: string) {
+  const base = pathname.startsWith("/order") ? "/order" : pathname;
+  return routes[base] ?? routes["/"];
+}
+
+/** The four Hahnemühle stocks the whole site can be "printed" on. */
+export const stocks = [
+  {
+    id: "photo-rag",
+    name: "Photo Rag",
+    line: "Matt FineArt Smooth",
+    gsm: 308,
+    fibre: "100% cotton",
+    white: "White",
+    finish: "Matt premium inkjet coating",
+    surface: "Characteristic felt structure",
+  },
+  {
+    id: "german-etching",
+    name: "German Etching",
+    line: "Matt FineArt Textured",
+    gsm: 310,
+    fibre: "100% α-cellulose",
+    white: "White",
+    finish: "Genuine mould-made paper",
+    surface: "Clearly defined felt structure",
+  },
+  {
+    id: "pearl",
+    name: "FineArt Pearl",
+    line: "Glossy",
+    gsm: 285,
+    fibre: "100% α-cellulose",
+    white: "Bright white",
+    finish: "Pearl-gloss premium inkjet coating",
+    surface: "Delicately textured surface",
+  },
+  {
+    id: "bamboo",
+    name: "Bamboo",
+    line: "Natural Line",
+    gsm: 290,
+    fibre: "90% bamboo fibres, 10% cotton",
+    white: "Natural white",
+    finish: "Matt premium inkjet coating",
+    surface: "Soft, lightly textured felt structure",
+  },
+] as const;
+
+export type StockId = (typeof stocks)[number]["id"];

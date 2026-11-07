@@ -1,0 +1,12 @@
+import type { Metadata } from "next";
+import { Legal } from "@/components/blocks/Legal";
+import { privacy } from "@/content/legal";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description: "How Giclée Club handles your personal data.",
+};
+
+export default function PrivacyPage() {
+  return <Legal title="Privacy Policy" sections={privacy} />;
+}
