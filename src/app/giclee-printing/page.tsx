@@ -28,8 +28,9 @@ export default function GicleePrintingPage() {
           papers.
         </p>
         <p>
-          Giclée printing creates the most colourful and long-lasting art prints – be it digital
-          illustration, graphic design, professional photographs or reproductions of paintings.
+          Giclée printing creates the most colourful and long-lasting prints – be it a family
+          photograph, a poster for your wall, digital illustration, graphic design or the
+          reproduction of a painting.
         </p>
       </Hero>
 
@@ -68,8 +69,8 @@ export default function GicleePrintingPage() {
         </p>
         <p>
           A key factor of these papers is their longevity of more than 100 years, which makes them
-          ideal for Fine Art printing, art collections, limited editions, museum and gallery
-          exhibitions.
+          ideal for anything you want to keep: family photographs, art collections, limited
+          editions, museum and gallery exhibitions.
         </p>
       </Split>
 

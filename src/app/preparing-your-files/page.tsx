@@ -11,7 +11,7 @@ import { Preflight } from "@/components/tools/Preflight";
 export const metadata: Metadata = {
   title: "Preparing Your Files",
   description:
-    "Follow our guidelines to get the best out of your art print: resolution, safe areas, borders, flattening and exporting your file.",
+    "Follow our guidelines to get the best out of your print: resolution, safe areas, borders, flattening and exporting your file.",
 };
 
 const steps = [
@@ -39,13 +39,12 @@ export default function PreparingFilesPage() {
         action={{ href: "/contact-us", label: "Contact us" }}
       >
         <p>
-          Making sure that your digital art piece is correctly prepared is the key for a great
-          quality, high-definition print. Follow our guidelines to get the best out of your art
-          print.
+          Making sure that your file is correctly prepared is the key for a great quality,
+          high-definition print. Follow our guidelines to get the best out of your print.
         </p>
         <p>
           It can be a little daunting at first, so please feel completely free to contact us. You can
-          ask us any questions you might have about preparing your art for printing.
+          ask us any questions you might have about preparing your files for printing.
         </p>
       </Hero>
 
@@ -64,8 +63,8 @@ export default function PreparingFilesPage() {
           </p>
           <p>
             It will enable us to inform you in case your file still needs work or if it was sent to us
-            with insufficient resolution. This way we avoid printing out artworks that are not
-            satisfactory to the artist’s customers.
+            with insufficient resolution. This way nothing leaves our printers unless it can meet
+            museum quality.
           </p>
           <p>Every order passes through this approval before it is printed.</p>
         </Split>
@@ -85,7 +84,7 @@ export default function PreparingFilesPage() {
             <strong>Adobe RGB (1998)</strong> colour profile.
           </p>
           <Note>
-            When you start creating your digital artwork in raster (e.g. in Photoshop) it is wise to
+            When you start creating a digital image in raster (e.g. in Photoshop) it is wise to
             think about the maximum size (inches or mm) that you would like to print in the future
             and set your document to 300 PPI.
           </Note>
@@ -99,7 +98,7 @@ export default function PreparingFilesPage() {
           title="Find out your maximum print size"
         >
           <p>
-            Ideally your digital artwork was initially created at 300 PPI with your desired width
+            Ideally your image was initially created at 300 PPI with your desired width
             and height in inches or millimetres.
           </p>
           <p>
@@ -144,8 +143,8 @@ export default function PreparingFilesPage() {
           title="Vector art"
         >
           <p>
-            A vector-based artwork (e.g. created in Adobe Illustrator) is scalable to any size
-            without quality loss. To print it out, you will need to export your vector artwork as a
+            A vector-based file (e.g. created in Adobe Illustrator) is scalable to any size without
+            quality loss. To print it out, you will need to export your vector file as a
             raster TIFF file in your desired unit (inches or mm) at 300 PPI.
           </p>
           <p>
@@ -164,16 +163,16 @@ export default function PreparingFilesPage() {
         >
           <p>
             Our professional printers produce borderless prints – this is why we need to receive
-            your artwork in the <strong>exact size</strong> that you would like it to be printed in.
+            your file in the <strong>exact size</strong> that you would like it to be printed in.
             This means that no added bleed area is required.
           </p>
           <p>
-            It is important to keep all the essential elements of your artwork (e.g. logos or texts)
+            It is important to keep all the essential elements of your image (e.g. logos or texts)
             inside your printed image without them being cut off in the printing process or
             overlapped with a frame.
           </p>
           <p>
-            To do so, please place all the important elements of your artwork{" "}
+            To do so, please place all the important elements of your image{" "}
             <strong>10mm</strong> away from the edges on all sides of your image.
           </p>
         </Split>
@@ -186,12 +185,12 @@ export default function PreparingFilesPage() {
           title="Borders"
         >
           <p>
-            If you would like your work to be printed out with borders of your desired thickness,
+            If you would like your image to be printed out with borders of your desired thickness,
             please include them in your file.
           </p>
           <Note>
             It is important to place the borders inside your chosen print area. If you were to add
-            the borders on the outside of your artwork, it would change the height and width of your
+            the borders on the outside of your image, it would change the height and width of your
             file.
           </Note>
         </Split>
@@ -245,7 +244,7 @@ export default function PreparingFilesPage() {
             (Edit ➔ Color Settings).
           </p>
           <p>
-            Then export your artwork as a raster <strong>TIFF</strong> file in{" "}
+            Then export it as a raster <strong>TIFF</strong> file in{" "}
             <strong>300 PPI</strong>. You can do this by clicking File ➔ Export ➔ Export As.
           </p>
         </Split>

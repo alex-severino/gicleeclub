@@ -171,7 +171,7 @@ export default function PrintersPage() {
         <p>
           The Epson SureColor P700 operates with 10 colour cartridges: Cyan, Light Cyan, Vivid
           Magenta, Vivid Light Magenta, Yellow, Grey, Light Grey, Violet, Photo Black and Matte
-          Black. They make incredible high definition art prints that last for up to 200 years for
+          Black. They make incredible high definition prints that last for up to 200 years for
           colour and up to 400 years for black and white.
         </p>
       </Split>

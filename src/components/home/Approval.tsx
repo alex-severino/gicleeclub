@@ -25,8 +25,8 @@ export function Approval() {
             </p>
             <p>
               It will enable us to inform you in case your file still needs work or if it was sent to
-              us with insufficient resolution. This way we avoid printing out artworks that are not
-              satisfactory to the artist’s customers.
+              us with insufficient resolution. This way nothing leaves our printers unless it can
+              meet museum quality.
             </p>
             <p>Every order passes through this approval before it is printed.</p>
           </div>

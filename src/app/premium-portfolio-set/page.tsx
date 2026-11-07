@@ -23,7 +23,7 @@ export default function PortfolioPage() {
         credit="Art by Ave Calvar, Tim Stief, Augustine Wong, Sappho Bakker"
         action={{ href: contactHref("Premium Portfolio Set"), label: "Contact us" }}
       >
-        <p>Showcase your work in style and create the impression your art deserves.</p>
+        <p>Showcase your work in style and create the impression it deserves.</p>
       </Hero>
 
       <Split

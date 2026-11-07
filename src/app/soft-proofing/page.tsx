@@ -11,13 +11,13 @@ import { Note, Sheet, Ticks } from "@/components/blocks/Text";
 export const metadata: Metadata = {
   title: "Soft Proofing",
   description:
-    "Get the best impression possible of how your colours will turn out on paper: calibrate your monitor, install ICC profiles and preview your art in Photoshop.",
+    "Get the best impression possible of how your colours will turn out on paper: calibrate your monitor, install ICC profiles and preview your image in Photoshop.",
 };
 
 const steps = [
   { id: "calibrate", label: "Calibrate your monitor" },
   { id: "install", label: "Install ICC profiles" },
-  { id: "previewing", label: "Previewing your art" },
+  { id: "previewing", label: "Previewing your image" },
   { id: "intents", label: "Rendering intents" },
   { id: "save", label: "Save to print" },
 ];
@@ -49,7 +49,7 @@ export default function SoftProofingPage() {
         >
           <p>
             It is ideal to have a professional IPS monitor to be able to achieve colour accuracy and
-            consistency when working on your digital art and preparing your files for printing. To
+            consistency when editing your images and preparing your files for printing. To
             calibrate your monitor, you can choose to invite a professional, or to invest in a
             monitor calibrator (e.g. X-Rite i1Studio).
           </p>
@@ -73,7 +73,7 @@ export default function SoftProofingPage() {
         >
           <p>
             ICC profiles contain information about how the colours of a specific printer will look
-            like on a specific paper. This way you can see how your artwork will turn out on a
+            like on a specific paper. This way you can see how your image will turn out on a
             certain printer-paper combination. <Link href="/icc-profiles">Read more</Link>
           </p>
           <p>To install the ICC profiles, please copy the .icc files to the following directories:</p>
@@ -96,7 +96,7 @@ export default function SoftProofingPage() {
           image="previewing"
           alt="The Photoshop Customize Proof Condition window"
           eyebrow="Soft proofing in Photoshop"
-          title="Previewing your art"
+          title="Previewing your image"
           flip
         >
           <p>

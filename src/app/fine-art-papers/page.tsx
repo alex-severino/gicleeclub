@@ -80,8 +80,9 @@ export default function PapersPage() {
       >
         <p>
           Hahnemühle’s Digital FineArt Collection has a wide range of unique artisan papers with a
-          high age resistance of more than 100 years. This makes them perfect for long-term
-          exhibitions, art collections and special editions.
+          high age resistance of more than 100 years. This makes them perfect for prints you want to
+          keep for generations, from family photographs to exhibitions, art collections and special
+          editions.
         </p>
       </Hero>
 

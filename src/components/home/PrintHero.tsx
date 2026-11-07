@@ -7,13 +7,13 @@ import { PointerDepth } from "./PointerDepth";
 const ribbons = [0, 1, 2, 3, 4];
 const rings = [0, 1, 2, 3];
 const stripes = [0, 1, 2, 3];
-const lines = ["We print", "for artists"];
+const lines = ["We print", "for anyone"];
 
 function Type({ onAmber }: { onAmber?: boolean }) {
   const Title = onAmber ? "p" : "h1";
   return (
     <div className={onAmber ? "ph__type ph__type--amber" : "ph__type"} aria-hidden={onAmber || undefined}>
-      <p className="eyebrow ph__eyebrow">Giclée printing made easy</p>
+      <p className="eyebrow ph__eyebrow">Museum quality Giclée printing</p>
       <Title className="ph__title">
         {lines.map((line, i) => (
           <span className="line" key={line} style={{ "--i": i } as CSSProperties}>
@@ -35,7 +35,7 @@ export function PrintHero() {
   preload("/textures/slate.webp", { as: "image" });
   preload("/textures/plaster.webp", { as: "image" });
   return (
-    <section className="ph" id="opening" data-ink="home" aria-label="We print for artists">
+    <section className="ph" id="opening" data-ink="home" aria-label="We print for anyone">
       <div className="ph__sep" style={{ "--at": "0.2s" } as CSSProperties}>
         <div className="ph__plaster" />
       </div>

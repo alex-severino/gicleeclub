@@ -64,7 +64,7 @@ export function ProofStripTool() {
         <div>
           <p className="eyebrow">Try it</p>
           <h2 className="h-md" id="strip-title" style={{ marginTop: "0.7rem" }}>
-            Select the most important area of your artwork
+            Select the most important area of your image
           </h2>
           <div className="strip-tool__proof">
             <div
@@ -90,7 +90,7 @@ export function ProofStripTool() {
             />
           </label>
           <label className="btn btn--ghost" style={{ marginTop: "1.2rem" }}>
-            Try your own artwork
+            Try your own image
             <input
               type="file"
               accept="image/*"

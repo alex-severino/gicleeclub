@@ -78,10 +78,10 @@ export function StickerDemo() {
 
       <div className="split__text" data-reveal="rise">
         <p className="eyebrow">Branded package sticker</p>
-        <h2 className="h-md">Your art, your way</h2>
+        <h2 className="h-md">Your print, your way</h2>
         <div className="split__body prose-sheet">
           <p>
-            When ordering your art print you can choose to add your name, logo, pattern or signature
+            When ordering your print you can choose to add your name, logo, pattern or signature
             to the packaging. We will print it full colour on a sustainable sticker and place it on
             the package.
           </p>

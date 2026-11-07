@@ -9,7 +9,7 @@ import { Sheet } from "@/components/blocks/Text";
 export const metadata: Metadata = {
   title: "ICC Print Profiles",
   description:
-    "ICC profiles help you preview your art before printing. Download ours to simulate the colours of your future print on your monitor.",
+    "ICC profiles help you preview your image before printing. Download ours to simulate the colours of your future print on your monitor.",
 };
 
 export default function IccProfilesPage() {
@@ -27,7 +27,7 @@ export default function IccProfilesPage() {
         }}
       >
         <p>
-          ICC profiles help you with previewing your art before printing. It is the best way to
+          ICC profiles help you with previewing your image before printing. It is the best way to
           simulate the colours of your future print on your monitor.
         </p>
       </Hero>
@@ -52,18 +52,18 @@ export default function IccProfilesPage() {
       <Split
         image="previewing-icc"
         alt="The Photoshop Customize Proof Condition window over a colourful artwork"
-        eyebrow="Preview your art"
+        eyebrow="Preview your print"
         title="Soft proofing"
         flip
       >
         <p>
           In order to preview your future print on your monitor you need to have our ICC profiles
           installed on your computer. This way you can access them in Photoshop and see as accurately
-          as possible how your artwork’s colours will turn out printed with a specific printer on the
+          as possible how your image’s colours will turn out printed with a specific printer on the
           paper of your choice.
         </p>
         <p>
-          You can read more about how to install ICC profiles and soft proof your art in our{" "}
+          You can read more about how to install ICC profiles and soft proof your files in our{" "}
           <Link href="/soft-proofing">Soft Proofing</Link> section.
         </p>
       </Split>

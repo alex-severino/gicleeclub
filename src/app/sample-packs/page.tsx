@@ -11,7 +11,7 @@ import { contactHref } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Sample Packs",
   description:
-    "Get your hands on what our Giclée printing service can deliver. See how our artisan papers perform with different types of art. For only £5!",
+    "Get your hands on what our Giclée printing service can deliver. See how our artisan papers perform with different types of images. For only £5!",
 };
 
 const packs = [
@@ -70,7 +70,7 @@ export default function SamplePacksPage() {
       >
         <p>
           Get your hands on what our Giclée printing service can deliver. See how our artisan papers
-          perform with different types of art. For only <Money gbp={pricing.samplePack} />!
+          perform with different types of images. For only <Money gbp={pricing.samplePack} />!
         </p>
       </Hero>
 
@@ -80,7 +80,7 @@ export default function SamplePacksPage() {
           id={pack.id}
           image={pack.image}
           alt={pack.alt}
-          eyebrow="4 artworks on 4 papers"
+          eyebrow="4 prints on 4 papers"
           title={pack.title}
           credit={pack.credit}
           flip={index % 2 === 0}

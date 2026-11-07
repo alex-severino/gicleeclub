@@ -16,7 +16,7 @@ const flatLayCredit =
 
 /** The closing call on every page. */
 export function ContactCta({
-  title = "Send us your art print",
+  title = "Send us your file",
   about,
   image = "order",
   credit = flatLayCredit,

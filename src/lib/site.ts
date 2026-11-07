@@ -154,7 +154,7 @@ export const nav: NavItem[] = [
 
 /** Route → ink and the title flashed on the page transition. */
 export const routes: Record<string, { ink: InkName; title: string }> = {
-  "/": { ink: "home", title: "We print for artists" },
+  "/": { ink: "home", title: "We print for anyone" },
   "/giclee-printing": { ink: "giclee", title: "Giclée Printing" },
   "/branded-packaging": { ink: "packaging", title: "Branded Packaging" },
   "/certificate-of-authenticity": { ink: "certificate", title: "Certificate" },

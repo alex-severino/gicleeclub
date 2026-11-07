@@ -9,7 +9,7 @@ import { StickerDemo } from "@/components/tools/StickerDemo";
 export const metadata: Metadata = {
   title: "Branded Packaging",
   description:
-    "Your prints sent with your name, logo, pattern or signature, in a sturdy sustainable package that will keep your art safe.",
+    "Your prints sent with your name, logo, pattern or signature, in a sturdy sustainable package that will keep them safe.",
 };
 
 export default function BrandedPackagingPage() {
@@ -17,14 +17,14 @@ export default function BrandedPackagingPage() {
     <Sheet ink="packaging">
       <Hero
         name="branded-packaging"
-        alt="Cardboard tubes and boxes, each with a different artist's sticker"
+        alt="Cardboard tubes and boxes, each with a different branded sticker"
         eyebrow="Safe sturdy"
         title={["Branded", "Packaging"]}
         credit="Art by Pawel Czerwinski, Dan Christian Padure, Jessica Dismorr, Jene Stephaniuk"
       >
         <p>
           Your prints can be sent with your name | logo | pattern | signature | you name it, in a
-          sturdy sustainable package that will keep your art safe.
+          sturdy sustainable package that will keep them safe.
         </p>
       </Hero>
 
@@ -33,16 +33,16 @@ export default function BrandedPackagingPage() {
       <Split
         image="silk-paper"
         alt="A gloved hand laying silk tissue paper over a print"
-        eyebrow="Your art protected"
+        eyebrow="Your print protected"
         title="Silk tissue paper"
         credit="Art by Posteress"
       >
         <p>
-          The first step to ensure your art print’s protection is to carefully apply silk tissue
-          paper before rolling it.
+          The first step to ensure your print’s protection is to carefully apply silk tissue paper
+          before rolling it.
         </p>
         <p>
-          We handle your art using protective cotton gloves to ensure there are no scratches or
+          We handle your prints using protective cotton gloves to ensure there are no scratches or
           folds on your print while the packaging process takes place.
         </p>
       </Split>
@@ -55,10 +55,9 @@ export default function BrandedPackagingPage() {
         flip
       >
         <p>
-          Your art print is then placed into our strong triangular tubes that ensure the protection
-          of your art. Once delivered, the triangular shape helps with grabbing hold of and taking
-          out the print without damaging it. This guarantees a safe, risk-free delivery and
-          unpacking of your art.
+          Your print is then placed into one of our strong triangular tubes that keep it protected.
+          Once delivered, the triangular shape helps with grabbing hold of and taking out the print
+          without damaging it. This guarantees a safe, risk-free delivery and unpacking.
         </p>
       </Split>
 
@@ -69,7 +68,7 @@ export default function BrandedPackagingPage() {
         title="Handling gloves"
       >
         <p>
-          We include cotton handling gloves in the packaging so that your art can be unpacked and
+          We include cotton handling gloves in the packaging so that your print can be unpacked and
           handled in the safest way possible.
         </p>
       </Split>

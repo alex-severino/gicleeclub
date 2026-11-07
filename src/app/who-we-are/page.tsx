@@ -9,7 +9,7 @@ import { Sheet, Statement } from "@/components/blocks/Text";
 export const metadata: Metadata = {
   title: "Who We Are",
   description:
-    "Giclée Club is a London-based family business run by visual artist and graphic designer Angelina Severino and music artist Alex Severino.",
+    "Giclée Club is a London-based family business run by visual artist and graphic designer Angelina Severino and music artist Alex Severino, bringing museum quality printing to everyone.",
 };
 
 export default function WhoWeArePage() {
@@ -19,7 +19,7 @@ export default function WhoWeArePage() {
         name="who-we-are"
         alt="Angelina and Alex Severino, the founders of Giclée Club"
         eyebrow="We are"
-        title={["Artists who print", "for artists"]}
+        title={["Artists who print", "for everyone"]}
         credit="Photo by Daniel Anohin"
       >
         <p>
@@ -29,9 +29,9 @@ export default function WhoWeArePage() {
       </Hero>
 
       <Statement title="Our vision">
-        Giclée Club was born from the will to provide visual artists with a global, affordable and
-        easy-to-use Giclée printing service that meets the highest world standards of museum quality
-        printing.
+        Giclée Club was born from the will to give everyone – whether they are printing a family
+        photograph, a favourite poster or their own artwork – a global, affordable and easy-to-use
+        Giclée printing service that meets the highest world standards of museum quality printing.
       </Statement>
 
       <section className="bio">
@@ -48,14 +48,14 @@ export default function WhoWeArePage() {
             When I began my artistic career I used to have my art printed in different places but I
             was never totally satisfied with the results. Either the quality of the prints were not
             great or they were not packed carefully enough. Also I could never add a personal touch
-            like a note or a letter to my client. It made me think that probably many other artists
+            like a note or a letter to my client. It made me think that probably many other people
             have the same problem and that is how the idea of a Giclée printing studio came to life.
           </p>
           <p>
             After more than 15 years of industry experience as a professional graphic and product
-            designer, I have a strong wish to provide artists with an easy, hassle-free process of
-            ordering their top-of-the-world quality prints and sending them to the destination of
-            their choice with an added personal touch.
+            designer, I have a strong wish to give everyone an easy, hassle-free process of ordering
+            top-of-the-world quality prints and sending them to the destination of their choice with
+            an added personal touch.
           </p>
           <p>
             I enjoy the magic of a digital art piece materialising through a special machine on
@@ -106,8 +106,8 @@ export default function WhoWeArePage() {
           <p>
             I have always had a love for the visual arts. One way or another they keep finding their
             way into my life. And now, I find myself contributing to this world by providing
-            technical and customer support to our print house. My wish is to help artists all around
-            the world to bridge any difficulties they may encounter with printing their art.
+            technical and customer support to our print house. My wish is to help people all around
+            the world to bridge any difficulties they may encounter with printing.
           </p>
         </div>
       </section>

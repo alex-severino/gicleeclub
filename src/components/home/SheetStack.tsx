@@ -21,7 +21,7 @@ const sheets: {
     title: "Branded packaging",
     text: [
       "You can choose to brand the package sticker with your name, logo, signature or pattern – you name it!",
-      "Your art print will be protected with silk tissue paper, packed in 100% recyclable robust cardboard tube and will include cotton handling gloves.",
+      "Your print will be protected with silk tissue paper, packed in 100% recyclable robust cardboard tube and will include cotton handling gloves.",
     ],
     href: "/branded-packaging",
     credit: "Art by Posteress",
@@ -45,7 +45,7 @@ const sheets: {
     eyebrow: "A5 prints",
     title: "Sample packs",
     text: [
-      "We offer five sample packs with different types of artworks printed on our Hahnemühle papers. We cover different art disciplines: Illustration, Graphic Design, Photography, Painting and Mixed Arts.",
+      "We offer five sample packs with different types of images printed on our Hahnemühle papers: Illustration, Digital Art, Photography, Painting and Mixed Arts.",
     ],
     href: "/sample-packs",
     credit: "Art by John James Audubon, Ahmed Syed, MagicPattern, Jene Stephaniuk",
@@ -57,7 +57,7 @@ const sheets: {
     eyebrow: "Test strip",
     title: "Proof printing",
     text: [
-      "Ensure that your large format art print meets your expectations regarding colour representation, sharpness and quality. On our test strip you will be able to see a part of your art piece on the Hahnemühle paper of your choice.",
+      "Ensure that your large format print meets your expectations regarding colour representation, sharpness and quality. On our test strip you will be able to see a part of your image on the Hahnemühle paper of your choice.",
     ],
     href: "/proof-printing-strip",
     credit: "Art by Calvin Lupiya",
@@ -69,7 +69,7 @@ const sheets: {
     eyebrow: "A5 | A4 | A3 prints",
     title: "Premium Portfolio Set",
     text: [
-      "Give your art the presentation it deserves. We will send your artworks printed out on the paper of your choice to any destination in a stylish black envelope branded with your logo for maximum effect.",
+      "Give your work the presentation it deserves. We will send your prints on the paper of your choice to any destination in a stylish black envelope branded with your logo for maximum effect.",
     ],
     href: "/premium-portfolio-set",
     credit: "Art by Tim Stief, Augustine Wong, Sappho Bakker",

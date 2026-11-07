@@ -31,8 +31,8 @@ export default function HomePage() {
               <p>
                 Giclée (from French <span className="gicler__word">gicler</span>, meaning{" "}
                 <span className="gicler__word">to spray</span>) is the name for latest technology
-                inkjet printing using pigment-based archival inks. This method produces art prints
-                with a longevity that matches the strictest museum requirements.
+                inkjet printing using pigment-based archival inks. This method produces prints with a
+                longevity that matches the strictest museum requirements.
               </p>
               <p>
                 Our high-end printers and acid-free Fine Art papers create Giclée prints of
@@ -59,8 +59,8 @@ export default function HomePage() {
         <p className="eyebrow">Best-in-class</p>
         <h2 className="h-md">High-end printers</h2>
         <p style={{ marginTop: "0.9rem" }}>
-          We print your art with the latest top-of-the-line printers HP DesignJet Z9+ with V-Trimmer
-          and Epson SureColor SC-P700. These printers use the most advanced technologies that assure
+          Every order is printed on the latest top-of-the-line printers HP DesignJet Z9+ with
+          V-Trimmer and Epson SureColor SC-P700. These printers use the most advanced technologies that assure
           smooth colour transitions, stunning sharpness and the widest colour range possible.
         </p>
         <Action href="/high-end-printers" label="Learn more" />
@@ -122,7 +122,7 @@ export default function HomePage() {
       <PrintTable>
         <div className="board__call" data-reveal="rise">
           <p className="eyebrow">Whenever you are ready</p>
-          <h2 className="h-md">Send us your art print</h2>
+          <h2 className="h-md">Send us your file</h2>
           <Action href="/contact-us" label="Contact us" />
           <p className="board__hint label">Or pick up a print and move it around the table.</p>
         </div>

@@ -8,7 +8,7 @@ import { studio } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "To order your art print, contact us. Every order passes through our AI approval system, which checks your file’s quality.",
+    "To order your print, contact us. Every order passes through our AI approval system, which checks your file’s quality.",
 };
 
 export default function ContactPage() {

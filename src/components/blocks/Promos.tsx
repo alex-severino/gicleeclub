@@ -10,21 +10,21 @@ const products = [
     title: "Sample Packs",
     page: "/sample-packs",
     alt: "A fan of sample prints above five art discipline icons",
-    text: "We offer five sample packs with different types of artworks printed on our Hahnemühle papers.",
+    text: "We offer five sample packs with different types of images printed on our Hahnemühle papers.",
   },
   {
     id: "proof-strip",
     title: "Proof Printing Strip",
     page: "/proof-printing-strip",
     alt: "A proof strip cut from a portrait of a woman with flowers in her hair",
-    text: "Ensure that your large format art print meets your expectations regarding colour representation, sharpness and quality.",
+    text: "Ensure that your large format print meets your expectations regarding colour representation, sharpness and quality.",
   },
   {
     id: "portfolio",
     title: "Premium Portfolio Set",
     page: "/premium-portfolio-set",
     alt: "A black envelope with prints and a golden wax seal",
-    text: "Give your art the presentation it deserves. In a stylish black envelope branded with your logo for maximum effect.",
+    text: "Give your work the presentation it deserves. In a stylish black envelope branded with your logo for maximum effect.",
   },
 ] as const;
 

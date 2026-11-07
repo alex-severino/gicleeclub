@@ -61,7 +61,7 @@ export function PriceCalculator() {
   const extras = [sticker && "branded package sticker", certificate && "Certificate of Authenticity"]
     .filter(Boolean)
     .join(" and ");
-  const about = `${quantity} × ${size} art print on ${paperName}${extras ? `, with ${extras}` : ""}`;
+  const about = `${quantity} × ${size} Giclée print on ${paperName}${extras ? `, with ${extras}` : ""}`;
 
   return (
     <section className="tool" id="calculator" aria-labelledby="calculator-title">
@@ -186,7 +186,7 @@ export function PriceCalculator() {
         <tbody>
           {pricing.sizes.map(({ id, mm, price }) => (
             <tr key={id}>
-              <th scope="row">Art print {id}</th>
+              <th scope="row">Giclée print {id}</th>
               <td>
                 {mm[0]} × {mm[1]} mm
               </td>
@@ -197,7 +197,7 @@ export function PriceCalculator() {
           ))}
           <tr>
             <th scope="row">Sample pack</th>
-            <td>4 artworks on 4 papers</td>
+            <td>4 prints on 4 papers</td>
             <td>
               <Money gbp={pricing.samplePack} />
             </td>

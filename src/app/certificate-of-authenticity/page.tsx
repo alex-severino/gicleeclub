@@ -63,7 +63,7 @@ export default function CertificatePage() {
         flip
       >
         <p>
-          All you need to do is add the certificate option when ordering your art print, upload your
+          All you need to do is add the certificate option when ordering your print, upload your
           digital signature and fill in the details of your artwork.
         </p>
       </Split>
