@@ -12,11 +12,19 @@ export function Sheet({ ink, children }: { ink: InkName; children: ReactNode }) 
   );
 }
 
-export function Statement({ title, children }: { title: string; children?: ReactNode }) {
+export function Statement({
+  title,
+  align,
+  children,
+}: {
+  title: string;
+  align?: "start";
+  children?: ReactNode;
+}) {
   return (
-    <section className="statement" data-reveal="rise">
+    <section className={align === "start" ? "statement statement--start" : "statement"} data-reveal="rise">
       <h2 className="h-lg">{title}</h2>
-      {children && <p>{children}</p>}
+      {typeof children === "string" ? <p>{children}</p> : children}
     </section>
   );
 }

@@ -954,6 +954,16 @@ a:hover .logo__accent {
   margin: 1.5rem auto 0;
   font-size: clamp(1.05rem, 1.4vw, 1.3rem);
 }
+.statement p + p {
+  margin-top: 1.15rem;
+}
+.statement--start {
+  text-align: left;
+}
+.statement--start .h-lg {
+  max-width: 46rem;
+  margin-inline: auto;
+}
 
 .fit-heading {
   padding: clamp(3.5rem, 7vw, 7rem) var(--gutter) clamp(1.5rem, 3vw, 3rem);
@@ -1468,7 +1478,7 @@ a:hover .logo__accent {
 .ph__title {
   margin: 0.42em 0 0.32em;
   font-family: var(--font-display);
-  font-size: min(9.4vw, 18svh);
+  font-size: min(7.2vw, 14svh);
   font-weight: 400;
   line-height: 1;
   letter-spacing: -0.02em;

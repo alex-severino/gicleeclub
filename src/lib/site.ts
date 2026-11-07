@@ -137,7 +137,7 @@ export const nav: NavItem[] = [
       {
         label: "Who We Are",
         href: "/who-we-are",
-        image: "/media/section/angelina.png",
+        image: "/media/section/studio-6.png",
       },
       {
         label: "Our Print Studio",
@@ -160,7 +160,7 @@ export const nav: NavItem[] = [
 
 /** Route → ink and the title flashed on the page transition. */
 export const routes: Record<string, { ink: InkName; title: string }> = {
-  "/": { ink: "home", title: "We print for anyone" },
+  "/": { ink: "home", title: "Highest quality printing" },
   "/giclee-printing": { ink: "giclee", title: "Giclée Printing" },
   "/painted-frames": { ink: "frames", title: "Painted Frames" },
   "/branded-packaging": { ink: "packaging", title: "Branded Packaging" },
