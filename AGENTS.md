@@ -7,3 +7,13 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+## Releases
+
+Production is the Vercel project `gicleeclub` in team `alex-severino-projects`, deployed from `main` of `github.com/alex-severino/gicleeclub`, and served at `www.gicleeclub.com` (`gicleeclub.com` redirects there).
+
+- A bare "push" means commit on `main`, push to GitHub, and deploy to Vercel. After committing on `main`, run `npm run ship`. It pushes that exact commit, replaces pending Git builds of the same commit with a cached direct Vercel deployment, and verifies the live address. Bare Git pushes still deploy automatically, more slowly.
+- `npm run deploy:check` is read-only. `npm run test:deploy` tests the safeguards.
+- `.vercelignore` keeps local-only files out of the upload, and the script refuses to deploy if a Git-ignored local file isn't covered there.
+- Respect "commit only" and "do not deploy". Ordinary editing is not permission to release.
+- Keep media in Git at original quality. Add no storage service or lossy compression without approval.

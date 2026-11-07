@@ -1,0 +1,11 @@
+# Local-only files that must never reach a Vercel upload.
+/.claude/
+.next/
+.vercel/
+.DS_Store
+.env*
+*.tsbuildinfo
+/next-env.d.ts
+node_modules/
+/.cursor/
+/scripts/
