@@ -15,6 +15,7 @@ import { Sheet } from "@/components/blocks/Text";
 import { PaperLab } from "@/components/tools/PaperLab";
 
 const sprayInk = ["#5000b4", "#6f3fff", "#fe5581", "#ffa602"];
+const sprayWords = ["GICLÉE MEANS", "TO SPRAY"];
 
 export default function HomePage() {
   return (
@@ -23,7 +24,7 @@ export default function HomePage() {
       <ClubStrip />
 
       <section className="gicler">
-        <SprayType className="gicler__spray" text="TO SPRAY" colors={sprayInk} />
+        <SprayType className="gicler__spray" text={sprayWords} colors={sprayInk} />
         <div className="gicler__grid">
           <div className="gicler__text" data-reveal="rise">
             <p className="eyebrow">Why choose</p>

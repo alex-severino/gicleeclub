@@ -22,7 +22,7 @@ function ramp(stops: number[][], t: number) {
 }
 
 /**
- * Gicler, to spray. The word is sprayed through a stencil: droplets of pigment
+ * Gicler, to spray. The words are sprayed through a stencil: droplets of pigment
  * build up behind the letterforms, the nozzle sweeping left to right and
  * running out of ink as it goes, with overspray settling around the edges.
  */
@@ -31,7 +31,7 @@ export function SprayType({
   colors,
   className,
 }: {
-  text: string;
+  text: string | string[];
   colors: string[];
   className?: string;
 }) {
@@ -42,6 +42,7 @@ export function SprayType({
     if (!canvas) return;
     const out = canvas.getContext("2d");
     if (!out) return;
+    const lines = (Array.isArray(text) ? text : [text]).map((line) => line.toUpperCase());
     const stops = colors.map(parse);
     const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
     let frame = 0;
@@ -71,12 +72,15 @@ export function SprayType({
       const stencil = layer();
       const s = stencil.getContext("2d")!;
       s.font = `100px ${family}`;
-      const size = Math.min((W * 0.965 * 100) / s.measureText(text).width, H * 0.92);
+      const widest = Math.max(...lines.map((line) => s.measureText(line).width));
+      const size = Math.min((W * 0.965 * 100) / widest, (H * 0.9) / (lines.length * 1.08));
       s.font = `${size}px ${family}`;
       s.textAlign = "center";
       s.textBaseline = "middle";
       s.fillStyle = "#000";
-      s.fillText(text, W / 2, H * 0.53);
+      const leading = size * 1.08;
+      const top = H / 2 - ((lines.length - 1) * leading) / 2;
+      lines.forEach((line, i) => s.fillText(line, W / 2, top + i * leading));
 
       // A coarse copy tells us how close a droplet landed to the letterforms.
       const step = 8;
@@ -202,5 +206,6 @@ export function SprayType({
     };
   }, [text, colors]);
 
-  return <canvas ref={ref} className={className} role="img" aria-label={text} />;
+  const label = (Array.isArray(text) ? text : [text]).join(" ");
+  return <canvas ref={ref} className={className} role="img" aria-label={label} />;
 }

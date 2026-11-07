@@ -4,6 +4,9 @@ export function Logo({ className = "logo" }: { className?: string }) {
     <svg
       className={className}
       viewBox="0 0 575.48 305.52"
+      width="575"
+      height="306"
+      shapeRendering="geometricPrecision"
       role="img"
       aria-label="Giclée Club"
     >

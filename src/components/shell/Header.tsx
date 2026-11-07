@@ -115,11 +115,6 @@ export function Header() {
         onMouseLeave={scheduleClose}
         onMouseEnter={() => window.clearTimeout(closing.current)}
       >
-        {!solid && (
-          <Link className="announce" href="/contact-us">
-            To order, contact us
-          </Link>
-        )}
         <div className="bar">
           <Link href="/" aria-label="Giclée Club, home">
             <Logo />

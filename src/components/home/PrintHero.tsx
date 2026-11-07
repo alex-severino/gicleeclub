@@ -22,6 +22,9 @@ function Type({ onAmber }: { onAmber?: boolean }) {
         ))}
       </Title>
       <p className="ph__sub">Hand-printed in London – Delivered Worldwide</p>
+      <div className="ph__action">
+        {!onAmber && <Action href="/contact-us" label="Contact us" />}
+      </div>
     </div>
   );
 }
@@ -72,9 +75,6 @@ export function PrintHero() {
       <Type />
       <Type onAmber />
 
-      <div className="ph__action">
-        <Action href="/contact-us" label="Contact us" />
-      </div>
       <div className="ph__rail">
         <Rail />
       </div>
