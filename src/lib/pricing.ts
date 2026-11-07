@@ -1,27 +1,39 @@
 /**
- * DRAFT PRINT PRICES. Replace before relying on them.
+ * DRAFT PRICES. Confirm before relying on them.
  *
- * All prices are in pounds sterling. No price list for prints exists in the
- * source material: the old Prices page was a "Calculator HERE" placeholder.
- * The A-size figures below are the last live Shopify variants (May 2026), which
- * were the fee for the "Giclée Printing Quality Check", not for a print. The
- * sample pack and proof strip were "only €5" in the copy and are now £5.
+ * All prices are in pounds sterling and are what the customer pays. They were
+ * set in November 2026 against theprintspace's published Giclée prices
+ * (VAT included): A5 £8.66, A4 £12.13, A3 £15.73, A2 £30.38, A1 £58.03,
+ * A0 £121.61, plus their delivery from £5.75. Ours sit above theirs on the
+ * label and about level once their delivery is added, because ours includes
+ * delivery. The sample pack and proof strip were "only €5" in the old copy.
+ *
+ * `frame` is a frame painted by hand in a Farrow & Ball colour, glazed and
+ * ready to hang, with UK delivery. `mount` adds a window mount and the larger
+ * frame it needs. `null` means made to order and priced by quote.
  *
  * Set `confirmed: true` once the prices are real and the "indicative" note
- * disappears from the calculator.
+ * disappears from the calculators.
  */
 export const pricing = {
   confirmed: false,
   sizes: [
-    { id: "A5", mm: [148, 210], price: 2 },
-    { id: "A4", mm: [210, 297], price: 4 },
-    { id: "A3", mm: [297, 420], price: 9 },
-    { id: "A2", mm: [420, 594], price: 19 },
-    { id: "A1", mm: [594, 841], price: 29 },
-    { id: "A0", mm: [841, 1189], price: 39 },
+    { id: "A5", mm: [148, 210], price: 12, frame: 65, mount: 15 },
+    { id: "A4", mm: [210, 297], price: 18, frame: 89, mount: 19 },
+    { id: "A3", mm: [297, 420], price: 24, frame: 125, mount: 25 },
+    { id: "A2", mm: [420, 594], price: 42, frame: 179, mount: 35 },
+    { id: "A1", mm: [594, 841], price: 75, frame: 279, mount: 49 },
+    { id: "A0", mm: [841, 1189], price: 145, frame: null, mount: null },
   ],
   samplePack: 5,
   proofStrip: 5,
 } as const;
 
 export type SizeId = (typeof pricing.sizes)[number]["id"];
+
+export function sizeFor(id: SizeId) {
+  return pricing.sizes.find((s) => s.id === id) ?? pricing.sizes[0];
+}
+
+/** The smallest frame price, for "from" lines. */
+export const framesFrom = Math.min(...pricing.sizes.flatMap((s) => (s.frame ? [s.frame] : [])));

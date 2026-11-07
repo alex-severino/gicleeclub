@@ -49,6 +49,7 @@
 
 [data-ink="home"] { --ink-a: #fe5581; --ink-b: #ffa602; }
 [data-ink="giclee"] { --ink-a: #fe5581; --ink-b: #ffb1e0; }
+[data-ink="frames"] { --ink-a: #05b470; --ink-b: #ffb1e0; }
 [data-ink="packaging"] { --ink-a: #ffb1e0; --ink-b: #ca89ea; }
 [data-ink="certificate"] { --ink-a: #ffa602; --ink-b: #a0ba3d; }
 [data-ink="proof"] { --ink-a: #05b470; --ink-b: #2466fd; }
@@ -1375,19 +1376,21 @@ a:hover .logo__accent {
   mask: linear-gradient(#000 0 43.2%, transparent 0 56.8%, #000 0);
 }
 .ph__ribbons {
+  --ribbon: clamp(9rem, 12.3vw, 19rem);
   position: absolute;
   z-index: 1;
   top: calc(var(--band-top) - 7%);
+  /* Room for the tilted corners and the pointer drift, so the last ribbon stays on the sheet. */
+  bottom: calc(var(--ribbon) * 0.15 + 1.5rem);
   left: 62%;
-  width: clamp(9rem, 12.3vw, 19rem);
-  height: 92%;
+  width: var(--ribbon);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   transform: translate3d(calc(var(--mx, 0) * -20px), calc(var(--my, 0) * -14px), 0);
 }
 .ph__ribbons i {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: calc(var(--i) * 18.6%);
+  flex: none;
   aspect-ratio: 3.212;
   background: linear-gradient(90deg, #6f3fff, #6f3fff);
   opacity: calc(1 - var(--i) * 0.19);
@@ -1401,20 +1404,25 @@ a:hover .logo__accent {
   }
 }
 .ph__rings {
+  --ring: clamp(7rem, 10.25vw, 16rem);
   position: absolute;
   z-index: 1;
   top: calc(var(--band-top) - 7%);
+  bottom: 1.5rem;
   left: 79.6%;
-  width: clamp(7rem, 10.25vw, 16rem);
-  height: 93%;
+  width: var(--ring);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  row-gap: calc(var(--ring) * 0.15);
   color: var(--color-lilac);
   transform: translate3d(calc(var(--mx, 0) * 26px), calc(var(--my, 0) * 18px), 0);
 }
+/* Rings shrink rather than run off the sheet when the window is short. */
 .ph__rings svg {
-  position: absolute;
-  left: 0;
+  flex: 0 1 auto;
+  min-height: 0;
   width: 100%;
-  top: calc(var(--i) * 24.6%);
   overflow: visible;
 }
 .ph__rings ellipse {
@@ -1460,6 +1468,8 @@ a:hover .logo__accent {
   flex-direction: column;
   justify-content: center;
   padding-inline: var(--gutter);
+  /* Clears the Contact us button, which sits on the band floor. */
+  padding-bottom: 6.5rem;
   color: #fff;
   pointer-events: none;
 }
@@ -1504,7 +1514,7 @@ a:hover .logo__accent {
   position: absolute;
   z-index: 5;
   left: var(--gutter);
-  bottom: calc(var(--band-bottom) + 3.4%);
+  bottom: calc(var(--band-bottom) + 2.4rem);
   animation: fade-in 0.9s var(--ease-out) 1.55s both;
 }
 @media (max-width: 860px) {
@@ -1530,19 +1540,18 @@ a:hover .logo__accent {
   .ph__type {
     justify-content: flex-start;
     padding-top: 2rem;
+    padding-bottom: 0;
   }
   .ph__ribbons {
+    --ribbon: 36vw;
     top: 61%;
     left: var(--gutter);
-    width: 36vw;
-    height: 42%;
   }
   .ph__rings {
+    --ring: 27vw;
     top: 60%;
     left: auto;
     right: var(--gutter);
-    width: 27vw;
-    height: 46%;
   }
   .ph__action {
     bottom: 5rem;
@@ -2092,6 +2101,220 @@ a:hover .logo__accent {
   }
   .calc__nest {
     max-width: 26rem;
+  }
+}
+
+/* Painted frames */
+.pf {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 22px 24px rgb(24 20 14 / 0.26)) drop-shadow(0 3px 4px rgb(24 20 14 / 0.16));
+}
+.pf__paint polygon {
+  fill: var(--paint);
+  transition: fill 0.6s var(--ease-out);
+}
+.fp {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 6rem);
+  align-items: start;
+}
+.fp__stage {
+  position: sticky;
+  top: 6rem;
+}
+/* The wall the frame hangs on, sized so any frame fits inside it. */
+.fp__wall {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1 / 1.04;
+  container-type: size;
+  background: #efeee9;
+}
+.fp__wall .pf {
+  width: min(74cqw, 80cqh * var(--ar));
+}
+.fp__caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.7rem;
+}
+.fp__paint {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.2em 0.8em;
+  min-height: 2.4em;
+  margin-bottom: 0.8rem;
+}
+.fp__name {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.7vw, 1.6rem);
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+.fp__chart {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.4rem;
+  max-width: 26rem;
+}
+.fp__swatch {
+  position: relative;
+  aspect-ratio: 1;
+  border: 0;
+  background: var(--c);
+  box-shadow: inset 0 0 0 1px rgb(14 14 14 / 0.1);
+  cursor: pointer;
+  transition: transform 0.25s var(--ease-out);
+}
+@media (hover: hover) {
+  .fp__swatch:hover {
+    transform: scale(1.08);
+  }
+}
+.fp__swatch[aria-checked="true"] {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+/* The chosen colour carries the logo's accent. */
+.fp__swatch[aria-checked="true"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 46%;
+  height: calc(46% / var(--accent-ratio));
+  margin: auto;
+  background: var(--color-ink);
+  transform: rotate(var(--tilt));
+}
+.fp__swatch[data-dark][aria-checked="true"]::after {
+  background: #fff;
+}
+.fp__arts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.fp__art {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  padding: 0;
+  overflow: clip;
+  border: 0;
+  background: #efeee9;
+  box-shadow: inset 0 0 0 1.5px rgb(14 14 14 / 0.12);
+  cursor: pointer;
+}
+.fp__art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.fp__art[aria-pressed="true"] {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+.fp__upload {
+  padding: 0.4rem;
+  font-size: 0.6rem;
+  font-weight: 650;
+  line-height: 1.25;
+  letter-spacing: 0.12em;
+  text-align: center;
+  text-transform: uppercase;
+}
+.fp__upload input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.fp__upload:focus-within {
+  outline: 2px solid var(--color-violet);
+  outline-offset: 3px;
+}
+@media (max-width: 960px) {
+  .fp {
+    grid-template-columns: 1fr;
+  }
+  .fp__stage {
+    position: static;
+  }
+}
+
+.showcase {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(1rem, 2vw, 2rem);
+  align-items: center;
+  max-width: 1720px;
+  margin-inline: auto;
+  padding: clamp(4rem, 8vw, 8rem) var(--gutter);
+}
+.showcase__art {
+  grid-column: 1 / span 6;
+}
+.showcase__text {
+  grid-column: 8 / span 5;
+  max-width: 34rem;
+}
+.showcase__text h2 {
+  margin-top: 0.75rem;
+  font-size: clamp(1.9rem, 3.2vw, 3.4rem);
+}
+.showcase__text .prose-sheet {
+  margin-top: 1.25rem;
+}
+.showcase__swatches {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 2.6rem));
+  gap: 0.4rem;
+  margin-top: 1.7rem;
+}
+.showcase__name {
+  min-height: 1.5em;
+  margin-top: 0.7rem;
+}
+.showcase .btn {
+  margin-top: 1.2rem;
+}
+@media (max-width: 860px) {
+  .showcase {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2rem;
+  }
+  .showcase__text {
+    max-width: none;
+  }
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(2rem, 3vw, 3rem) clamp(1.5rem, 3vw, 3rem);
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+}
+.facts li {
+  padding-top: 1.1rem;
+  border-top: 1.5px solid var(--color-ink);
+}
+.facts p {
+  margin-top: 0.6rem;
+  font-size: 0.96rem;
+}
+@media (max-width: 860px) {
+  .facts {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -2719,6 +2942,30 @@ a:hover .logo__accent {
 }
 .calc__total .currency {
   margin-left: auto;
+}
+.price-list thead th {
+  padding-top: 0;
+  border-top: 0;
+  font-family: var(--font-sans);
+  font-size: 0.64rem;
+  font-weight: 650;
+  letter-spacing: 0.2em;
+  opacity: 0.56;
+}
+.price-list--frames td,
+.price-list--frames thead th:not(:first-child) {
+  text-align: right;
+}
+.price-list--frames td {
+  font-family: var(--font-display);
+  font-size: 0.96rem;
+}
+.price-list + .fine {
+  margin-top: 1rem;
+}
+.fine {
+  max-width: 62rem;
+  margin: 0.5rem auto 0;
 }
 
 .contact__form a {

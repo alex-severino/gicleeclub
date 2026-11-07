@@ -15,7 +15,7 @@ const art: Record<PaperId, { src: string; credit: string }> = {
 /** How each surface answers the light: relief, sheen, gloss, grain scale, paper white. */
 const surface: Record<PaperId, { m: [number, number, number, number]; tint: [number, number, number] }> = {
   "photo-rag": { m: [0.95, 0.03, 18, 1.5], tint: [0.985, 0.98, 0.965] },
-  "german-etching": { m: [1.9, 0.03, 14, 1.05], tint: [0.982, 0.975, 0.955] },
+  "german-etching": { m: [1.4, 0.03, 14, 1.25], tint: [0.982, 0.975, 0.955] },
   pearl: { m: [0.5, 0.34, 40, 1.9], tint: [1, 1, 0.995] },
   bamboo: { m: [0.95, 0.02, 14, 1.3], tint: [0.968, 0.942, 0.888] },
 };

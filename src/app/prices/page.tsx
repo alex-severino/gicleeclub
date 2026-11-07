@@ -26,8 +26,8 @@ export default function PricesPage() {
           always here for you if you have any questions.
         </p>
         <p>
-          Our prices are transparent and you can use our calculator to see exactly what your print
-          will cost.
+          Our prices are transparent. Use the calculator to see what your print will cost, with or
+          without a hand-painted frame.
         </p>
       </Hero>
 

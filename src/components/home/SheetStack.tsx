@@ -45,7 +45,7 @@ const sheets: {
     eyebrow: "A5 prints",
     title: "Sample packs",
     text: [
-      "We offer five sample packs with different types of images printed on our Hahnemühle papers: Illustration, Digital Art, Photography, Painting and Mixed Arts.",
+      "We offer five sample packs with different types of images printed on our Hahnemühle papers: Illustration, Graphic Design, Photography, Painting and Mixed Arts.",
     ],
     href: "/sample-packs",
     credit: "Art by John James Audubon, Ahmed Syed, MagicPattern, Jene Stephaniuk",

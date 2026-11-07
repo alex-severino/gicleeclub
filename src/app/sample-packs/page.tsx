@@ -24,12 +24,12 @@ const packs = [
     text: "In this pack you will find four illustrations in different styles printed on our four Hahnemühle papers so that you can see and better imagine what your art will look like printed out in Giclée.",
   },
   {
-    id: "digital-art",
+    id: "graphic-design",
     image: "sp-digital-art",
-    title: "Sample pack Digital Art",
-    alt: "A fan of four digital artworks printed on different papers",
+    title: "Sample pack Graphic Design",
+    alt: "A fan of four graphic design prints printed on different papers",
     credit: "Art by Dim Gunger, Joel Filipe, And Machines, Yash Bindra",
-    text: "This pack includes four different types of digital art printed on our four Hahnemühle papers. With this pack you will be able to have a good impression of how your digital art will turn out as a Giclée print.",
+    text: "This pack includes four different types of graphic design printed on our four Hahnemühle papers. With this pack you will be able to have a good impression of how your graphic design will turn out as a Giclée print.",
   },
   {
     id: "photography",

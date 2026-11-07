@@ -3,10 +3,9 @@
 import Link from "next/link";
 import { useState } from "react";
 import { CurrencySelect } from "@/components/shell/CurrencySelect";
-import { Money } from "@/components/shell/Money";
-import { pricing, type SizeId } from "@/lib/pricing";
+import { Money, RateNote } from "@/components/shell/Money";
+import { framesFrom, pricing, sizeFor, type SizeId } from "@/lib/pricing";
 import { contactHref, papers, type PaperId } from "@/lib/site";
-import { useCurrency } from "@/lib/useCurrency";
 
 /** Every A size is half the one before it, so they nest into one sheet. */
 function Nest({ size, onPick }: { size: SizeId; onPick: (id: SizeId) => void }) {
@@ -37,31 +36,24 @@ function Nest({ size, onPick }: { size: SizeId; onPick: (id: SizeId) => void }) 
   );
 }
 
-function RateNote() {
-  const { code, date } = useCurrency();
-  const day = new Intl.DateTimeFormat("en-GB", { dateStyle: "long" }).format(new Date(date));
-  return (
-    <p className="label" style={{ marginTop: "0.6rem" }} aria-live="polite">
-      {code === "GBP"
-        ? "Prices are in pounds sterling."
-        : `Converted from pounds at the ${day} rate, as a guide. We charge in pounds sterling.`}
-    </p>
-  );
-}
-
 export function PriceCalculator() {
   const [size, setSize] = useState<SizeId>("A2");
   const [paper, setPaper] = useState<PaperId>("photo-rag");
   const [quantity, setQuantity] = useState(1);
+  const [framed, setFramed] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [sticker, setSticker] = useState(false);
   const [certificate, setCertificate] = useState(false);
 
-  const chosen = pricing.sizes.find((s) => s.id === size) ?? pricing.sizes[0];
+  const chosen = sizeFor(size);
   const paperName = papers.find((p) => p.id === paper)?.name;
+  const canFrame = chosen.frame !== null && chosen.mount !== null;
+  const frame = framed && canFrame ? chosen.frame + (mounted ? chosen.mount : 0) : 0;
+  const framing = framed && (mounted ? "hand-painted frame with a window mount" : "hand-painted frame");
   const extras = [sticker && "branded package sticker", certificate && "Certificate of Authenticity"]
     .filter(Boolean)
     .join(" and ");
-  const about = `${quantity} × ${size} Giclée print on ${paperName}${extras ? `, with ${extras}` : ""}`;
+  const about = `${quantity} × ${size} Giclée print on ${paperName}${framing ? `, in a ${framing}` : ""}${extras ? `, with ${extras}` : ""}`;
 
   return (
     <section className="tool" id="calculator" aria-labelledby="calculator-title">
@@ -129,6 +121,52 @@ export function PriceCalculator() {
           </div>
 
           <div className="calc__group">
+            <span>Frame</span>
+            <label className="check">
+              <input
+                type="checkbox"
+                checked={framed && canFrame}
+                disabled={!canFrame}
+                onChange={(e) => setFramed(e.target.checked)}
+              />
+              <span>
+                Hand-painted Farrow &amp; Ball frame
+                {canFrame ? (
+                  <>
+                    {" "}
+                    (+<Money gbp={chosen.frame} />)
+                  </>
+                ) : (
+                  ` (${size} on request)`
+                )}
+              </span>
+            </label>
+            <label className="check">
+              <input
+                type="checkbox"
+                checked={mounted && framed && canFrame}
+                disabled={!framed || !canFrame}
+                onChange={(e) => setMounted(e.target.checked)}
+              />
+              <span>
+                With a white window mount
+                {canFrame && (
+                  <>
+                    {" "}
+                    (+<Money gbp={chosen.mount} />)
+                  </>
+                )}
+              </span>
+            </label>
+            <p className="label" style={{ marginTop: "0.3rem" }}>
+              <Link className="inline" href="/painted-frames">
+                Choose the colour
+              </Link>{" "}
+              on our frames page.
+            </p>
+          </div>
+
+          <div className="calc__group">
             <span>Extras</span>
             <label className="check">
               <input
@@ -150,10 +188,11 @@ export function PriceCalculator() {
 
           <div className="calc__total">
             <output className="calc__price" aria-live="polite">
-              <Money gbp={chosen.price * quantity} />
+              <Money gbp={(chosen.price + frame) * quantity} />
             </output>
             <span>
               {quantity} × {size} on {paperName}
+              {frame ? ", framed" : ""}
             </span>
             <CurrencySelect />
           </div>
@@ -195,6 +234,15 @@ export function PriceCalculator() {
               </td>
             </tr>
           ))}
+          <tr>
+            <th scope="row">
+              <Link href="/painted-frames">Hand-painted frame</Link>
+            </th>
+            <td>Farrow &amp; Ball colours, A5 to A1</td>
+            <td>
+              from <Money gbp={framesFrom} />
+            </td>
+          </tr>
           <tr>
             <th scope="row">Sample pack</th>
             <td>4 prints on 4 papers</td>

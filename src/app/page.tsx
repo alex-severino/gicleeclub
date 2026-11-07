@@ -6,6 +6,7 @@ import { Approval } from "@/components/home/Approval";
 import { Print } from "@/components/blocks/Print";
 import { Sunburst } from "@/components/blocks/Shapes";
 import { ClubStrip } from "@/components/home/ClubStrip";
+import { FrameShowcase } from "@/components/home/FrameShowcase";
 import { PrintHero } from "@/components/home/PrintHero";
 import { PrintTable } from "@/components/home/PrintTable";
 import { SheetStack } from "@/components/home/SheetStack";
@@ -82,6 +83,8 @@ export default function HomePage() {
           </p>
         </div>
       </PaperLab>
+
+      <FrameShowcase />
 
       <SheetStack />
 

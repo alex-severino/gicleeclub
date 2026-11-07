@@ -22,6 +22,7 @@ export type InkName = keyof typeof inks;
 export const inks = {
   home: ["#fe5581", "#ffa602"],
   giclee: ["#fe5581", "#ffb1e0"],
+  frames: ["#05b470", "#ffb1e0"],
   packaging: ["#ffb1e0", "#ca89ea"],
   certificate: ["#ffa602", "#a0ba3d"],
   proof: ["#05b470", "#2466fd"],
@@ -68,6 +69,11 @@ export const nav: NavItem[] = [
     label: "What We Do",
     items: [
       gicleePrinting,
+      {
+        label: "Hand-Painted Frames",
+        href: "/painted-frames",
+        image: "/media/section/painted-frames.png",
+      },
       brandedPackaging,
       {
         label: "Certificate of Authenticity",
@@ -156,6 +162,7 @@ export const nav: NavItem[] = [
 export const routes: Record<string, { ink: InkName; title: string }> = {
   "/": { ink: "home", title: "We print for anyone" },
   "/giclee-printing": { ink: "giclee", title: "Giclée Printing" },
+  "/painted-frames": { ink: "frames", title: "Painted Frames" },
   "/branded-packaging": { ink: "packaging", title: "Branded Packaging" },
   "/certificate-of-authenticity": { ink: "certificate", title: "Certificate" },
   "/proof-printing-strip": { ink: "proof", title: "Proof Strip" },
