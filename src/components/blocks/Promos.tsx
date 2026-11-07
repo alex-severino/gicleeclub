@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
+import { contactHref } from "@/lib/site";
 import { Action } from "./Action";
 
 const products = [
   {
     id: "sample-packs",
     title: "Sample Packs",
-    href: "/order/sample-pack",
     page: "/sample-packs",
     alt: "A fan of sample prints above five art discipline icons",
     text: "We offer five sample packs with different types of artworks printed on our Hahnemühle papers.",
@@ -15,7 +15,6 @@ const products = [
   {
     id: "proof-strip",
     title: "Proof Printing Strip",
-    href: "/order/proof-strip",
     page: "/proof-printing-strip",
     alt: "A proof strip cut from a portrait of a woman with flowers in her hair",
     text: "Ensure that your large format art print meets your expectations regarding colour representation, sharpness and quality.",
@@ -23,7 +22,6 @@ const products = [
   {
     id: "portfolio",
     title: "Premium Portfolio Set",
-    href: "/order/portfolio-set",
     page: "/premium-portfolio-set",
     alt: "A black envelope with prints and a golden wax seal",
     text: "Give your art the presentation it deserves. In a stylish black envelope branded with your logo for maximum effect.",
@@ -54,7 +52,7 @@ export function Promos({ without }: { without?: (typeof products)[number]["id"] 
           </Link>
           <h3 className="h-sm">{product.title}</h3>
           <p>{product.text}</p>
-          <Action href={product.href} label="Order" />
+          <Action href={contactHref(product.title)} label="Contact us" />
         </article>
       ))}
     </section>

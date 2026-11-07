@@ -9,7 +9,7 @@ import { Sheet, Statement } from "@/components/blocks/Text";
 export const metadata: Metadata = {
   title: "Our Print Studio",
   description:
-    "Giclée Club is located in the Amsterdam Metropolitan Area, with the latest gear including powerful computers, printers and cutters.",
+    "Giclée Club is located in London, with the latest gear including powerful computers, printers and cutters.",
 };
 
 const photos = [
@@ -25,15 +25,15 @@ export default function PrintStudioPage() {
   return (
     <Sheet ink="studio">
       <Hero
-        name="studio"
-        alt="Amsterdam canal houses with bicycles on a bridge, beside a coral field"
+        name="shoreditch"
+        alt="A Shoreditch corner building painted from pavement to roofline in an orange and teal mural, beside a coral field"
         title={["Print", "Studio"]}
-        credit="Photo by Gaurav Jain"
+        credit="Photo by Ambitious Studio* | Rick Barrett"
       >
-        <p>Giclée Club is located in the Amsterdam Metropolitan Area (Greater Amsterdam).</p>
+        <p>Giclée Club is located in London.</p>
         <p>
-          We hold business meetings in the city centre or in the trending Amsterdam Noord, so if
-          you’d like to meet for coffee just let us know!
+          We hold business meetings in the city centre, so if you’d like to meet for coffee just let
+          us know!
         </p>
       </Hero>
 
@@ -54,9 +54,9 @@ export default function PrintStudioPage() {
       </section>
 
       <Bleed
-        image="sustainability"
-        alt="Wind turbines above a field of red tulips, with pink sunbursts"
-        credit="Photo by Appolinary Kalashnikova"
+        image="wind-turbines"
+        alt="Three wind turbines over open fields, with pink sunbursts"
+        credit="Photo by Mon Jester"
       >
         <p className="eyebrow">Contributing to</p>
         <h2 className="h-md">The well-being of our planet</h2>
@@ -66,8 +66,8 @@ export default function PrintStudioPage() {
             printing production.
           </p>
           <p>
-            All our papers and packaging are 100% recyclable. Also we drive a fully electric car and
-            we do short trips the typical Dutch way – by bike!
+            All our papers and packaging are 100% recyclable. Our car is fully electric, and the
+            shortest trips run on nothing but good coffee and comfortable shoes.
           </p>
         </div>
         <Action href="/sustainability" label="Learn more" />

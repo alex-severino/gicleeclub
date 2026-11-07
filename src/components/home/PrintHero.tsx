@@ -1,8 +1,8 @@
 import type { CSSProperties } from "react";
 import { preload } from "react-dom";
 import { Action } from "@/components/blocks/Action";
+import { Rail } from "@/components/blocks/Rail";
 import { PointerDepth } from "./PointerDepth";
-import { StockName } from "./StockName";
 
 const ribbons = [0, 1, 2, 3, 4];
 const rings = [0, 1, 2, 3];
@@ -21,7 +21,7 @@ function Type({ onAmber }: { onAmber?: boolean }) {
           </span>
         ))}
       </Title>
-      <p className="ph__sub">Hand-printed in Amsterdam – Delivered Worldwide</p>
+      <p className="ph__sub">Hand-printed in London – Delivered Worldwide</p>
     </div>
   );
 }
@@ -73,11 +73,11 @@ export function PrintHero() {
       <Type onAmber />
 
       <div className="ph__action">
-        <Action href="/order/art-print" label="Order your art print" />
+        <Action href="/contact-us" label="Contact us" />
       </div>
-      <p className="ph__slug" aria-hidden="true">
-        Sheet 01 · HP DesignJet Z9+ · <StockName />
-      </p>
+      <div className="ph__rail">
+        <Rail />
+      </div>
       <span className="ph__head" aria-hidden="true" />
       <PointerDepth target="opening" />
     </section>

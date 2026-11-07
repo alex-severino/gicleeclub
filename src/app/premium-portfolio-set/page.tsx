@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/blocks/Hero";
-import { OrderCta } from "@/components/blocks/OrderCta";
+import { ContactCta } from "@/components/blocks/ContactCta";
 import { Promos } from "@/components/blocks/Promos";
 import { Split } from "@/components/blocks/Split";
 import { Sheet } from "@/components/blocks/Text";
+import { contactHref } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Premium Portfolio Set",
@@ -20,7 +21,7 @@ export default function PortfolioPage() {
         eyebrow="High-class presentation"
         title={["Premium", "Portfolio Set"]}
         credit="Art by Ave Calvar, Tim Stief, Augustine Wong, Sappho Bakker"
-        action={{ href: "/order/portfolio-set", label: "Order" }}
+        action={{ href: contactHref("Premium Portfolio Set"), label: "Contact us" }}
       >
         <p>Showcase your work in style and create the impression your art deserves.</p>
       </Hero>
@@ -95,9 +96,9 @@ export default function PortfolioPage() {
         </p>
       </Split>
 
-      <OrderCta
-        title="Order your Premium Portfolio Set"
-        href="/order/portfolio-set"
+      <ContactCta
+        title="Ask us about your Premium Portfolio Set"
+        about="Premium Portfolio Set"
         image="order-portfolio"
         credit="Art by Tim Stief, Augustine Wong, Sappho Bakker"
         right

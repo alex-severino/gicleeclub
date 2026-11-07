@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/blocks/Hero";
-import { OrderCta } from "@/components/blocks/OrderCta";
+import { ContactCta } from "@/components/blocks/ContactCta";
 import { Promos } from "@/components/blocks/Promos";
 import { Sheet } from "@/components/blocks/Text";
 import { PriceCalculator } from "@/components/tools/PriceCalculator";
@@ -19,7 +19,7 @@ export default function PricesPage() {
         alt="A pink plaster wall between blue striped fields and a violet gradient"
         eyebrow="Our"
         title={["Prices"]}
-        action={{ href: "/order/art-print", label: "Order your art print" }}
+        action={{ href: "/contact-us", label: "Contact us" }}
       >
         <p>
           We are proud to provide you with our high-quality Giclée printing service and we are
@@ -33,7 +33,7 @@ export default function PricesPage() {
 
       <PriceCalculator />
 
-      <OrderCta />
+      <ContactCta />
       <Promos />
     </Sheet>
   );

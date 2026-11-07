@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/blocks/Hero";
-import { OrderCta } from "@/components/blocks/OrderCta";
+import { ContactCta } from "@/components/blocks/ContactCta";
 import { Promos } from "@/components/blocks/Promos";
 import { Split } from "@/components/blocks/Split";
 import { Sheet } from "@/components/blocks/Text";
@@ -20,7 +20,7 @@ export default function GicleePrintingPage() {
         eyebrow="Why choose"
         title={["Giclée", "Printing"]}
         credit="Art by Posteress"
-        action={{ href: "/order/art-print", label: "Order your art print" }}
+        action={{ href: "/contact-us", label: "Contact us" }}
       >
         <p>
           Giclée is the name for the highest museum quality Fine Art printing. A professional
@@ -73,7 +73,7 @@ export default function GicleePrintingPage() {
         </p>
       </Split>
 
-      <OrderCta />
+      <ContactCta />
       <Promos />
     </Sheet>
   );

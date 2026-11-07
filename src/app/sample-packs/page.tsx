@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/blocks/Hero";
-import { OrderCta } from "@/components/blocks/OrderCta";
+import { ContactCta } from "@/components/blocks/ContactCta";
 import { Promos } from "@/components/blocks/Promos";
 import { Split } from "@/components/blocks/Split";
 import { Sheet } from "@/components/blocks/Text";
+import { Money } from "@/components/shell/Money";
+import { pricing } from "@/lib/pricing";
+import { contactHref } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Sample Packs",
   description:
-    "Get your hands on what our Giclée printing service can deliver. See how our artisan papers perform with different types of art. For only €5!",
+    "Get your hands on what our Giclée printing service can deliver. See how our artisan papers perform with different types of art. For only £5!",
 };
 
 const packs = [
@@ -63,11 +66,11 @@ export default function SamplePacksPage() {
         eyebrow="Giclée printing in action"
         title={["Sample", "Packs"]}
         credit="Art by John James Audubon, Ahmed Syed, MagicPattern, Jene Stephaniuk"
-        action={{ href: "/order/sample-pack", label: "Order" }}
+        action={{ href: contactHref("Sample Pack"), label: "Contact us" }}
       >
         <p>
           Get your hands on what our Giclée printing service can deliver. See how our artisan papers
-          perform with different types of art. For only €5!
+          perform with different types of art. For only <Money gbp={pricing.samplePack} />!
         </p>
       </Hero>
 
@@ -81,13 +84,13 @@ export default function SamplePacksPage() {
           title={pack.title}
           credit={pack.credit}
           flip={index % 2 === 0}
-          action={{ href: `/order/sample-pack?pack=${pack.id}`, label: "Order" }}
+          action={{ href: contactHref(pack.title), label: "Contact us" }}
         >
           <p>{pack.text}</p>
         </Split>
       ))}
 
-      <OrderCta />
+      <ContactCta />
       <Promos without="sample-packs" />
     </Sheet>
   );

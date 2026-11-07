@@ -1,27 +1,54 @@
 "use client";
 
-import { useState } from "react";
-import { sendMail } from "@/lib/mail";
+import { useEffect, useRef, useState, type FormEvent } from "react";
+import { sendEnquiry } from "@/lib/enquiry";
 import { studio } from "@/lib/site";
 
-/** Writes the message into the visitor's mail app, addressed to the studio. */
+type Status = "idle" | "sending" | "sent" | "failed";
+
+/** Every order starts here. */
 export function ContactBlock({ title = "Feel free to contact us" }: { title?: string }) {
-  const [sent, setSent] = useState(false);
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<Status>("idle");
+  const opened = useRef(0);
+
+  // Links from prices and product pages arrive saying what they are about.
+  useEffect(() => {
+    opened.current = Date.now();
+    const about = new URLSearchParams(window.location.search).get("about");
+    if (!about) return;
+    const frame = requestAnimationFrame(() => setMessage(`I would like to order: ${about}.\n\n`));
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const target = event.currentTarget;
+    const form = new FormData(target);
+    setStatus("sending");
+    const delivered = await sendEnquiry({
+      name: String(form.get("name")),
+      email: String(form.get("email")),
+      message,
+      _hp: String(form.get("website") ?? ""),
+      _t: Date.now() - opened.current,
+    });
+    setStatus(delivered ? "sent" : "failed");
+    if (delivered) {
+      target.reset();
+      setMessage("");
+    }
+  };
+
   return (
     <section className="contact" id="contact">
       <h2 className="h-lg">{title}</h2>
-      <form
-        className="contact__form"
-        onSubmit={(event) => {
-          event.preventDefault();
-          const form = new FormData(event.currentTarget);
-          sendMail(
-            `Message from ${form.get("name")}`,
-            `${form.get("message")}\n\n${form.get("name")}\n${form.get("email")}`,
-          );
-          setSent(true);
-        }}
-      >
+      <form className="contact__form" onSubmit={submit}>
+        {/* Hidden from people; bots fill it in. */}
+        <label className="contact__trap" aria-hidden="true">
+          Website
+          <input name="website" tabIndex={-1} autoComplete="off" />
+        </label>
         <label className="field">
           <span>Name</span>
           <input name="name" required autoComplete="name" />
@@ -32,15 +59,24 @@ export function ContactBlock({ title = "Feel free to contact us" }: { title?: st
         </label>
         <label className="field full">
           <span>Message</span>
-          <textarea name="message" required />
+          <textarea
+            name="message"
+            required
+            value={message}
+            onChange={(event) => setMessage(event.target.value)}
+          />
         </label>
-        <button className="btn full" type="submit">
-          Send
+        <button className="btn full" type="submit" disabled={status === "sending"}>
+          {status === "sending" ? "Sending" : "Send"}
         </button>
-        <p className="label full" style={{ textAlign: "center" }} aria-live="polite">
-          {sent
-            ? `Your mail app should now be open with your message. If not, write to ${studio.email}.`
-            : "This opens your mail app with your message filled in."}
+        <p className="contact__status full" role="status">
+          {status === "sent" && "Thank you. Your message is on its way to us, and we will reply soon."}
+          {status === "failed" && (
+            <>
+              Sorry, that did not go through. Please write to us at{" "}
+              <a href={`mailto:${studio.email}`}>{studio.email}</a>.
+            </>
+          )}
         </p>
       </form>
     </section>

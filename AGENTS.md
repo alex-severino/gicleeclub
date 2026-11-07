@@ -8,6 +8,15 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
+## Site rules
+
+- Giclée Club is a trading name of Art Britannia Ltd. Company details live in `src/lib/site.ts`.
+- There are no orders or payments on the site. Every order action leads to `/contact-us` through `contactHref()`. Orders pass through an AI file approval first.
+- Prices are in pounds in `src/lib/pricing.ts` and are shown through `<Money />`, so the currency selector works everywhere. Other currencies are a guide only.
+- The contact form sends through Brevo (`BREVO_SMTP_LOGIN`, `BREVO_SMTP_PASSWORD`, `EMAIL_FROM`, `EMAIL_REPLY_TO`). `EMAIL_FROM` must be a Brevo-authenticated address. `gicleeclub.com` is not authenticated with Brevo and has a strict DMARC policy.
+- The logo is pure black. Keep the page ground plain white, with no paper textures.
+- The brand comes from a classical print test page and from the logo itself: see the Digitangels case study at `digitangels.com/projects/giclee-club-branding`.
+
 ## Releases
 
 Production is the Vercel project `gicleeclub` in team `alex-severino-projects`, deployed from `main` of `github.com/alex-severino/gicleeclub`, and served at `www.gicleeclub.com` (`gicleeclub.com` redirects there).

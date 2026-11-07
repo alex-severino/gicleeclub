@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { CSSProperties } from "react";
 import { Action } from "@/components/blocks/Action";
 import { Bleed } from "@/components/blocks/Bleed";
+import { Approval } from "@/components/home/Approval";
 import { Print } from "@/components/blocks/Print";
 import { Sunburst } from "@/components/blocks/Shapes";
 import { ClubStrip } from "@/components/home/ClubStrip";
@@ -52,7 +53,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <Bleed image="printers" alt="The HP DesignJet Z9+ V-Trimmer" >
+      <Approval />
+
+      <Bleed image="printers" alt="The HP DesignJet Z9+ V-Trimmer">
         <p className="eyebrow">Best-in-class</p>
         <h2 className="h-md">High-end printers</h2>
         <p style={{ marginTop: "0.9rem" }}>
@@ -108,8 +111,8 @@ export default function HomePage() {
             printing production.
           </p>
           <p>
-            All our papers and packaging are 100% recyclable. Also we drive a fully electric car and
-            we do short trips the typical Dutch way – by bike!
+            All our papers and packaging are 100% recyclable. Our car is fully electric, and the
+            shortest trips run on nothing but good coffee and comfortable shoes.
           </p>
           <Action href="/sustainability" label="Learn more" />
         </div>
@@ -119,8 +122,8 @@ export default function HomePage() {
       <PrintTable>
         <div className="board__call" data-reveal="rise">
           <p className="eyebrow">Whenever you are ready</p>
-          <h2 className="h-md">Order your art print</h2>
-          <Action href="/order/art-print" label="Order" />
+          <h2 className="h-md">Send us your art print</h2>
+          <Action href="/contact-us" label="Contact us" />
           <p className="board__hint label">Or pick up a print and move it around the table.</p>
         </div>
       </PrintTable>

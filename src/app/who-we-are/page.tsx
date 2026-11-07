@@ -9,7 +9,7 @@ import { Sheet, Statement } from "@/components/blocks/Text";
 export const metadata: Metadata = {
   title: "Who We Are",
   description:
-    "Giclée Club is an Amsterdam-based family business run by visual artist and graphic designer Angelina Severino and music artist Alex Severino.",
+    "Giclée Club is a London-based family business run by visual artist and graphic designer Angelina Severino and music artist Alex Severino.",
 };
 
 export default function WhoWeArePage() {
@@ -23,8 +23,8 @@ export default function WhoWeArePage() {
         credit="Photo by Daniel Anohin"
       >
         <p>
-          Giclée Club is an Amsterdam-based family business run by visual artist and graphic
-          designer Angelina Severino and music artist Alex Severino.
+          Giclée Club is a London-based family business run by visual artist and graphic designer
+          Angelina Severino and music artist Alex Severino.
         </p>
       </Hero>
 
@@ -73,11 +73,11 @@ export default function WhoWeArePage() {
             <br />
             <a
               className="inline"
-              href="https://www.instagram.com/posteress_amsterdam"
+              href="https://www.instagram.com/theposteress/"
               target="_blank"
               rel="noreferrer"
             >
-              @posteress_amsterdam
+              @theposteress
             </a>
           </p>
         </div>
@@ -113,7 +113,7 @@ export default function WhoWeArePage() {
       </section>
 
       <Bleed image="studio" alt="The studio, with prints on the wall and copper pendant lights">
-        <p className="eyebrow">Amsterdam</p>
+        <p className="eyebrow">London</p>
         <h2 className="h-md">Our studio</h2>
         <p style={{ marginTop: "0.8rem" }}>Everything under one roof</p>
         <Action href="/our-print-studio" label="Learn more" />

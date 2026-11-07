@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Bleed } from "@/components/blocks/Bleed";
 import { Hero } from "@/components/blocks/Hero";
 import { epsonInks, InkSet, zInks } from "@/components/blocks/InkSet";
-import { OrderCta } from "@/components/blocks/OrderCta";
+import { ContactCta } from "@/components/blocks/ContactCta";
 import { Promos } from "@/components/blocks/Promos";
 import { Split } from "@/components/blocks/Split";
 import { FitHeading, Sheet, Specs } from "@/components/blocks/Text";
@@ -21,7 +21,7 @@ export default function PrintersPage() {
         alt="The HP DesignJet Z9+ V-Trimmer in soft blue light"
         eyebrow="Our top-of-the-line"
         title={["Professional", "Printers"]}
-        action={{ href: "/order/art-print", label: "Order your art print" }}
+        action={{ href: "/contact-us", label: "Contact us" }}
       >
         <p>
           Giclée printing is made possible by the newest generation of professional inkjet printers
@@ -178,7 +178,7 @@ export default function PrintersPage() {
 
       <InkSet inks={epsonInks} />
 
-      <OrderCta />
+      <ContactCta />
       <Promos />
     </Sheet>
   );

@@ -2,11 +2,10 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { stocks, type StockId } from "@/lib/site";
-import { setStock, useStock } from "@/lib/stock";
+import { papers, type PaperId } from "@/lib/site";
 
 /** The art the site has always shown on each paper. */
-const art: Record<StockId, { src: string; credit: string }> = {
+const art: Record<PaperId, { src: string; credit: string }> = {
   "photo-rag": { src: "/art/david-becker.jpg", credit: "Art by David Becker" },
   "german-etching": { src: "/art/vojtech-bruzek.jpg", credit: "Art by Vojtech Bruzek" },
   pearl: { src: "/art/milad-fakurian.jpg", credit: "Art by Milad Fakurian" },
@@ -14,7 +13,7 @@ const art: Record<StockId, { src: string; credit: string }> = {
 };
 
 /** How each surface answers the light: relief, sheen, gloss, grain scale, paper white. */
-const surface: Record<StockId, { m: [number, number, number, number]; tint: [number, number, number] }> = {
+const surface: Record<PaperId, { m: [number, number, number, number]; tint: [number, number, number] }> = {
   "photo-rag": { m: [0.95, 0.03, 18, 1.5], tint: [0.985, 0.98, 0.965] },
   "german-etching": { m: [1.9, 0.03, 14, 1.05], tint: [0.982, 0.975, 0.955] },
   pearl: { m: [0.5, 0.34, 40, 1.9], tint: [1, 1, 0.995] },
@@ -70,7 +69,7 @@ void main() {
   gl_FragColor = vec4(vUv.y > line ? b : a, 1.);
 }`;
 
-type Layer = { art: WebGLTexture; height: WebGLTexture; cover: [number, number]; id: StockId };
+type Layer = { art: WebGLTexture; height: WebGLTexture; cover: [number, number]; id: PaperId };
 
 function loadImage(src: string) {
   return new Promise<HTMLImageElement>((resolve, reject) => {
@@ -82,12 +81,12 @@ function loadImage(src: string) {
 }
 
 export function PaperLab({ children }: { children?: ReactNode }) {
-  const stock = useStock();
+  const [paper, setPaper] = useState<PaperId>("photo-rag");
   const stage = useRef<HTMLDivElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
-  const select = useRef<((id: StockId) => void) | null>(null);
+  const select = useRef<((id: PaperId) => void) | null>(null);
   const [supported, setSupported] = useState(true);
-  const current = stocks.find((s) => s.id === stock) ?? stocks[0];
+  const current = papers.find((p) => p.id === paper) ?? papers[0];
 
   useEffect(() => {
     const el = canvas.current;
@@ -139,7 +138,7 @@ export function PaperLab({ children }: { children?: ReactNode }) {
     let raf = 0;
     let visible = false;
     let started = false;
-    const layers = new Map<StockId, Layer>();
+    const layers = new Map<PaperId, Layer>();
     let shown: Layer | null = null;
     let incoming: Layer | null = null;
     let pass = 1;
@@ -210,7 +209,7 @@ export function PaperLab({ children }: { children?: ReactNode }) {
       if (!raf && visible && !disposed) raf = requestAnimationFrame(tick);
     };
 
-    const load = async (id: StockId) => {
+    const load = async (id: PaperId) => {
       const known = layers.get(id);
       if (known) return known;
       const [image, height] = await Promise.all([
@@ -227,7 +226,7 @@ export function PaperLab({ children }: { children?: ReactNode }) {
       return layer;
     };
 
-    const show = async (id: StockId) => {
+    const show = async (id: PaperId) => {
       const layer = await load(id);
       if (disposed) return;
       if (!shown) {
@@ -244,7 +243,7 @@ export function PaperLab({ children }: { children?: ReactNode }) {
       if (started) return;
       started = true;
       resize();
-      void show((document.documentElement.dataset.stock as StockId) || "photo-rag");
+      void show("photo-rag");
     };
 
     const watcher = new IntersectionObserver(
@@ -286,8 +285,8 @@ export function PaperLab({ children }: { children?: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    select.current?.(stock);
-  }, [stock]);
+    select.current?.(paper);
+  }, [paper]);
 
   return (
     <section className="lab" data-ink="papers" aria-label="Compare the papers">
@@ -297,26 +296,26 @@ export function PaperLab({ children }: { children?: ReactNode }) {
             {supported ? (
               <canvas ref={canvas} aria-label={`A print on ${current.name} under a moving lamp`} role="img" />
             ) : (
-              <Image src={`/media/wide/${stock}.png`} alt={`Macro photograph of ${current.name}`} fill sizes="55vw" />
+              <Image src={`/media/wide/${paper}.png`} alt={`Macro photograph of ${current.name}`} fill sizes="55vw" />
             )}
           </div>
           <p className="label" style={{ marginTop: "0.8rem" }}>
-            {art[stock].credit}. Move across the sheet to rake the light over the real paper surface.
+            {art[paper].credit}. Move across the sheet to rake the light over the real paper surface.
           </p>
         </div>
         <div>
           {children}
           <div className="lab__list" role="radiogroup" aria-label="Paper">
-            {stocks.map((s) => (
+            {papers.map((p) => (
               <button
-                key={s.id}
+                key={p.id}
                 type="button"
                 role="radio"
-                aria-checked={s.id === stock}
+                aria-checked={p.id === paper}
                 className="lab__option"
-                onClick={() => setStock(s.id)}
+                onClick={() => setPaper(p.id)}
               >
-                {s.name}
+                {p.name}
               </button>
             ))}
           </div>

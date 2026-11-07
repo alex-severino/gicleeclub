@@ -1,16 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Hero } from "@/components/blocks/Hero";
-import { OrderCta } from "@/components/blocks/OrderCta";
+import { ContactCta } from "@/components/blocks/ContactCta";
 import { Promos } from "@/components/blocks/Promos";
 import { Split } from "@/components/blocks/Split";
 import { Sheet } from "@/components/blocks/Text";
+import { Money } from "@/components/shell/Money";
 import { ProofStripTool } from "@/components/tools/ProofStripTool";
+import { pricing } from "@/lib/pricing";
+import { contactHref } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Proof Printing Strip",
   description:
-    "Preview your art piece. It is great to feel safe when ordering a big art print, and proof printing is here to help. For only €5!",
+    "Preview your art piece. It is great to feel safe when ordering a big art print, and proof printing is here to help. For only £5!",
 };
 
 export default function ProofStripPage() {
@@ -22,11 +25,11 @@ export default function ProofStripPage() {
         eyebrow="Preview your art piece"
         title={["Proof Printing", "Strip"]}
         credit="Art by Calvin Lupiya"
-        action={{ href: "/order/proof-strip", label: "Order" }}
+        action={{ href: contactHref("Proof Printing Strip"), label: "Contact us" }}
       >
         <p>
           It is great to feel safe when ordering a big art print. Proof printing is here to help you
-          with it. For only €5!
+          with it. For only <Money gbp={pricing.proofStrip} />!
         </p>
       </Hero>
 
@@ -70,7 +73,7 @@ export default function ProofStripPage() {
 
       <ProofStripTool />
 
-      <OrderCta href="/order/proof-strip" />
+      <ContactCta about="Proof Printing Strip" />
       <Promos without="proof-strip" />
     </Sheet>
   );

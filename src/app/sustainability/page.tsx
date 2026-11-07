@@ -14,11 +14,11 @@ export default function SustainabilityPage() {
   return (
     <Sheet ink="planet">
       <Hero
-        name="sustainability"
-        alt="Wind turbines above a field of red tulips, beside an orange field with pink sunbursts"
+        name="wind-turbines"
+        alt="Three wind turbines over open fields, beside an orange field with pink sunbursts"
         eyebrow="Sustainability"
         title={["Environmental", "Awareness"]}
-        credit="Photo by Martijn Baudoin"
+        credit="Photo by Mon Jester"
       >
         <p>
           We do our part to make sure our production is carbon-neutral. This means that all our
@@ -34,7 +34,8 @@ export default function SustainabilityPage() {
       >
         <p>
           Our solar panels provide all the necessary energy for our business to run fully on solar
-          energy. Also our car is fully electric and we ride our bikes whenever possible.
+          energy. Also our car is fully electric, and it stays parked whenever our legs can do the
+          job.
         </p>
       </Split>
 
@@ -46,8 +47,8 @@ export default function SustainabilityPage() {
         flip
       >
         <p>
-          The car that we use for work travels is fully electric and we do short trips the typical
-          Amsterdam way – by bike!
+          The car that we use for work travels is fully electric. For everything closer to home, our
+          favourite zero-emission engine is a good cup of coffee and a comfortable pair of shoes.
         </p>
       </Split>
 

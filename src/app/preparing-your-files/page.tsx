@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Guide } from "@/components/blocks/Guide";
 import { Hero } from "@/components/blocks/Hero";
 import { ContactBlock } from "@/components/blocks/ContactBlock";
-import { OrderCta } from "@/components/blocks/OrderCta";
+import { ContactCta } from "@/components/blocks/ContactCta";
 import { Promos } from "@/components/blocks/Promos";
 import { Split } from "@/components/blocks/Split";
 import { Note, Sheet } from "@/components/blocks/Text";
@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 };
 
 const steps = [
+  { id: "ai-approval", label: "AI approval" },
   { id: "requirements", label: "Printing requirements" },
   { id: "maximum-size", label: "Maximum print size" },
   { id: "preflight", label: "Check your file" },
@@ -43,13 +44,32 @@ export default function PreparingFilesPage() {
           print.
         </p>
         <p>
-          It can be a little daunting at first, so please feel completely free to contact us via
-          email or on the chat. You can ask us any questions you might have about preparing your art
-          for printing.
+          It can be a little daunting at first, so please feel completely free to contact us. You can
+          ask us any questions you might have about preparing your art for printing.
         </p>
       </Hero>
 
       <Guide steps={steps}>
+        <Split
+          id="ai-approval"
+          image="ai-technology"
+          alt="Large blue letters AI standing on a patterned surface"
+          eyebrow="Unique"
+          title="AI technology"
+          credit="Art by Steve Johnson"
+        >
+          <p>
+            We have developed a special technology to immediately recognise whether the digital file
+            is ready for print – amongst other things, it checks your file’s PPI.
+          </p>
+          <p>
+            It will enable us to inform you in case your file still needs work or if it was sent to us
+            with insufficient resolution. This way we avoid printing out artworks that are not
+            satisfactory to the artist’s customers.
+          </p>
+          <p>Every order passes through this approval before it is printed.</p>
+        </Split>
+
         <Split
           id="requirements"
           image="requirements"
@@ -232,7 +252,7 @@ export default function PreparingFilesPage() {
       </Guide>
 
       <ContactBlock />
-      <OrderCta />
+      <ContactCta />
       <Promos />
     </Sheet>
   );

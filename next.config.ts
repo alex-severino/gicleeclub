@@ -21,31 +21,36 @@ const legacyPaths: Record<string, string> = {
   "/pages/sustainability-statement": "/sustainability",
   "/pages/contact-us": "/contact-us",
   "/pages/shipping": "/shipping",
-  "/pages/order": "/order",
   "/pages/terms-and-conditions": "/terms-and-conditions",
   "/pages/privacy-policy": "/privacy-policy",
-  "/products/giclee-printing": "/order/art-print",
-  "/products/order-your-print": "/order/art-print",
-  "/products/sample-packs": "/order/sample-pack",
-  "/products/proof-printing-strip": "/order/proof-strip",
-  "/products/premium-portfolio-set": "/order/portfolio-set",
 };
+
+/** No orders on the site for now: every route to ordering leads to a conversation. */
+const orderPaths = ["/order", "/order/:path*", "/pages/order", "/products/:path*"];
 
 const nextConfig: NextConfig = {
   /* config options here */
   cacheComponents: true,
   partialPrefetching: true,
+  devIndicators: false,
   images: {
     formats: ["image/avif", "image/webp"],
     qualities: [75, 88],
     deviceSizes: [640, 828, 1080, 1280, 1600, 1920, 2560],
   },
   async redirects() {
-    return Object.entries(legacyPaths).map(([source, destination]) => ({
-      source,
-      destination,
-      permanent: true,
-    }));
+    return [
+      ...Object.entries(legacyPaths).map(([source, destination]) => ({
+        source,
+        destination,
+        permanent: true,
+      })),
+      ...orderPaths.map((source) => ({
+        source,
+        destination: "/contact-us",
+        permanent: false,
+      })),
+    ];
   },
   turbopack: {
     rules: {

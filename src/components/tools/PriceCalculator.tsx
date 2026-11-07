@@ -2,8 +2,11 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { euro, pricing, type SizeId } from "@/lib/pricing";
-import { stocks, type StockId } from "@/lib/site";
+import { CurrencySelect } from "@/components/shell/CurrencySelect";
+import { Money } from "@/components/shell/Money";
+import { pricing, type SizeId } from "@/lib/pricing";
+import { contactHref, papers, type PaperId } from "@/lib/site";
+import { useCurrency } from "@/lib/useCurrency";
 
 /** Every A size is half the one before it, so they nest into one sheet. */
 function Nest({ size, onPick }: { size: SizeId; onPick: (id: SizeId) => void }) {
@@ -34,22 +37,31 @@ function Nest({ size, onPick }: { size: SizeId; onPick: (id: SizeId) => void }) 
   );
 }
 
+function RateNote() {
+  const { code, date } = useCurrency();
+  const day = new Intl.DateTimeFormat("en-GB", { dateStyle: "long" }).format(new Date(date));
+  return (
+    <p className="label" style={{ marginTop: "0.6rem" }} aria-live="polite">
+      {code === "GBP"
+        ? "Prices are in pounds sterling."
+        : `Converted from pounds at the ${day} rate, as a guide. We charge in pounds sterling.`}
+    </p>
+  );
+}
+
 export function PriceCalculator() {
   const [size, setSize] = useState<SizeId>("A2");
-  const [paper, setPaper] = useState<StockId>("photo-rag");
+  const [paper, setPaper] = useState<PaperId>("photo-rag");
   const [quantity, setQuantity] = useState(1);
   const [sticker, setSticker] = useState(false);
   const [certificate, setCertificate] = useState(false);
 
   const chosen = pricing.sizes.find((s) => s.id === size) ?? pricing.sizes[0];
-  const total = chosen.price * quantity;
-  const query = new URLSearchParams({
-    size,
-    paper,
-    quantity: String(quantity),
-    sticker: sticker ? "1" : "0",
-    certificate: certificate ? "1" : "0",
-  });
+  const paperName = papers.find((p) => p.id === paper)?.name;
+  const extras = [sticker && "branded package sticker", certificate && "Certificate of Authenticity"]
+    .filter(Boolean)
+    .join(" and ");
+  const about = `${quantity} × ${size} art print on ${paperName}${extras ? `, with ${extras}` : ""}`;
 
   return (
     <section className="tool" id="calculator" aria-labelledby="calculator-title">
@@ -85,15 +97,15 @@ export function PriceCalculator() {
           <div className="calc__group">
             <span>Hahnemühle paper</span>
             <div className="calc__chips" role="group" aria-label="Paper">
-              {stocks.map((s) => (
+              {papers.map((p) => (
                 <button
-                  key={s.id}
+                  key={p.id}
                   type="button"
                   className="chip"
-                  aria-pressed={s.id === paper}
-                  onClick={() => setPaper(s.id)}
+                  aria-pressed={p.id === paper}
+                  onClick={() => setPaper(p.id)}
                 >
-                  {s.name}
+                  {p.name}
                 </button>
               ))}
             </div>
@@ -138,34 +150,72 @@ export function PriceCalculator() {
 
           <div className="calc__total">
             <output className="calc__price" aria-live="polite">
-              {euro(total)}
+              <Money gbp={chosen.price * quantity} />
             </output>
             <span>
-              {quantity} × {size} on {stocks.find((s) => s.id === paper)?.name}
+              {quantity} × {size} on {paperName}
             </span>
+            <CurrencySelect />
           </div>
-          {(sticker || certificate) && (
-            <p className="label" style={{ marginTop: "0.6rem" }}>
-              We will confirm the price of your extras with your order.
+          <RateNote />
+          {extras && (
+            <p className="label" style={{ marginTop: "0.4rem" }}>
+              We will confirm the price of your extras with you.
             </p>
           )}
           {!pricing.confirmed && (
-            <p className="label" style={{ marginTop: "0.6rem" }}>
-              Indicative prices, final price confirmed with your order.
+            <p className="label" style={{ marginTop: "0.4rem" }}>
+              Indicative prices. We confirm the final price when we have approved your file.
             </p>
           )}
-          <Link
-            className="btn"
-            href={`/order/art-print?${query}`}
-            style={{ marginTop: "1.5rem" }}
-          >
-            Order this print
+          <Link className="btn" href={contactHref(about)} style={{ marginTop: "1.5rem" }}>
+            Contact us about this print
           </Link>
           <p className="label" style={{ marginTop: "1rem" }}>
-            If you wish to order custom sizes, please <Link className="inline" href="/contact-us">email us</Link>.
+            If you wish to order custom sizes, please{" "}
+            <Link className="inline" href="/contact-us">
+              email us
+            </Link>
+            .
           </p>
         </div>
       </div>
+
+      <table className="price-list">
+        <caption className="eyebrow">Our prices at a glance</caption>
+        <tbody>
+          {pricing.sizes.map(({ id, mm, price }) => (
+            <tr key={id}>
+              <th scope="row">Art print {id}</th>
+              <td>
+                {mm[0]} × {mm[1]} mm
+              </td>
+              <td>
+                <Money gbp={price} />
+              </td>
+            </tr>
+          ))}
+          <tr>
+            <th scope="row">Sample pack</th>
+            <td>4 artworks on 4 papers</td>
+            <td>
+              <Money gbp={pricing.samplePack} />
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Proof printing strip</th>
+            <td>1100 × 100 mm</td>
+            <td>
+              <Money gbp={pricing.proofStrip} />
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Premium Portfolio Set</th>
+            <td>A5 | A4 | A3</td>
+            <td>On request</td>
+          </tr>
+        </tbody>
+      </table>
     </section>
   );
 }

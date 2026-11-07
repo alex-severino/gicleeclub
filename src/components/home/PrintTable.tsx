@@ -110,7 +110,7 @@ export function PrintTable({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <section className="board" ref={board} data-ink="order">
+    <section className="board" ref={board} data-ink="contact">
       <div className="board__prints">
         {prints.map((print) => (
           <figure

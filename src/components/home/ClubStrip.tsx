@@ -1,11 +1,12 @@
 import Image from "next/image";
+import { Rail } from "@/components/blocks/Rail";
 
 const perks = [
   { icon: "24h", title: "24h Dispatch", text: "We ship within one working day" },
   { icon: "shipping", title: "Free shipping for European orders", text: "And we also ship worldwide of course" },
   { icon: "quality", title: "Outstanding print quality", text: "Latest printing and paper tech at your service" },
-  { icon: "eu", title: "EU customs-free", text: "And no VAT for all other countries" },
-  { icon: "support", title: "Support chat", text: "Ask us anything" },
+  { icon: "ai", title: "AI technology", text: "A unique tool for perfect printing results" },
+  { icon: "support", title: "Contact us", text: "Ask us anything" },
   { icon: "eco", title: "Eco aware", text: "We are eco aware" },
 ];
 
@@ -33,10 +34,12 @@ export function ClubStrip() {
         Join the Club
       </h2>
       <div className="strip">
+        <Rail dark />
         <div className="strip__track">
           <Perks />
           <Perks hidden />
         </div>
+        <Rail dark />
       </div>
     </section>
   );

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { Legal } from "@/components/blocks/Legal";
-import { terms } from "@/content/legal";
+import { terms, termsIntro } from "@/content/legal";
 
 export const metadata: Metadata = {
   title: "Terms and Conditions",
-  description: "The general terms and conditions of Giclée Club.",
+  description: "The terms and conditions of Art Britannia Ltd trading as Giclée Club.",
 };
 
 export default function TermsPage() {
-  return <Legal title="Terms and Conditions" sections={terms} />;
+  return <Legal title="Terms and Conditions" intro={termsIntro} sections={terms} />;
 }

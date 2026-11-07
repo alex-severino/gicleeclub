@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/blocks/Hero";
-import { OrderCta } from "@/components/blocks/OrderCta";
+import { ContactCta } from "@/components/blocks/ContactCta";
 import { Promos } from "@/components/blocks/Promos";
 import { Sheet } from "@/components/blocks/Text";
 
@@ -23,7 +23,7 @@ export default function ShippingPage() {
         eyebrow="Free shipping"
         title={["All of", "Europe"]}
         credit="Image by KOBU Agency"
-        action={{ href: "/order/art-print", label: "Order your art print" }}
+        action={{ href: "/contact-us", label: "Contact us" }}
       >
         <p>We ship to all of Europe for free and for money to the rest of the world.</p>
       </Hero>
@@ -40,7 +40,7 @@ export default function ShippingPage() {
         </p>
       </section>
 
-      <OrderCta />
+      <ContactCta />
       <Promos />
     </Sheet>
   );

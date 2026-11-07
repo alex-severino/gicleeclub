@@ -1,14 +1,14 @@
 /**
- * DRAFT PRINT PRICES. Replace before launch.
+ * DRAFT PRINT PRICES. Replace before relying on them.
  *
- * No price list for prints exists in the source material: the old Prices page
- * was a "Calculator HERE" placeholder. The A-size figures below are the last
- * live Shopify variants (May 2026), and those were the fee for the "Giclée
- * Printing Quality Check", not for a print. They are here so the calculator
- * has real numbers to work with. Set `confirmed: true` once they are real and
- * the "indicative" note disappears from the calculator and order forms.
+ * All prices are in pounds sterling. No price list for prints exists in the
+ * source material: the old Prices page was a "Calculator HERE" placeholder.
+ * The A-size figures below are the last live Shopify variants (May 2026), which
+ * were the fee for the "Giclée Printing Quality Check", not for a print. The
+ * sample pack and proof strip were "only €5" in the copy and are now £5.
  *
- * The €5 sample pack and proof strip prices are confirmed by the website copy.
+ * Set `confirmed: true` once the prices are real and the "indicative" note
+ * disappears from the calculator.
  */
 export const pricing = {
   confirmed: false,
@@ -25,10 +25,3 @@ export const pricing = {
 } as const;
 
 export type SizeId = (typeof pricing.sizes)[number]["id"];
-
-export const euro = (value: number) =>
-  new Intl.NumberFormat("en-IE", {
-    style: "currency",
-    currency: "EUR",
-    maximumFractionDigits: value % 1 ? 2 : 0,
-  }).format(value);

@@ -38,9 +38,7 @@ export function Footer() {
             <br />
             <Link href="/privacy-policy">Privacy Policy</Link>
             <br />
-            Chamber of Commerce
-            <br />
-            (KVK) {studio.kvk}
+            <Link href="/shipping">Shipping</Link>
           </p>
         </div>
       </div>
@@ -48,8 +46,8 @@ export function Footer() {
         <Logo className="" />
       </Link>
       <div className="footer__base">
-        <span>© 2026 Giclée Club</span>
-        <span>Hand-printed in Amsterdam</span>
+        <span>© 2026 {studio.legalName}</span>
+        <span>Registered in England &amp; Wales · Company No. {studio.companyNumber}</span>
       </div>
     </footer>
   );

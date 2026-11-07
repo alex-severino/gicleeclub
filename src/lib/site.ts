@@ -2,13 +2,19 @@
 
 export const studio = {
   name: "Giclée Club",
+  legalName: "Art Britannia Ltd trading as Giclée Club",
+  companyNumber: "16631916",
   email: "hello@gicleeclub.com",
-  street: "Grootzeil 107, 1034LS",
-  city: "Amsterdam, The Netherlands",
-  kvk: "90185528",
-  instagram: "https://www.instagram.com/posteress_amsterdam",
+  street: "12 Mulberry Place, Pinnell Road",
+  city: "London SE9 6AR",
+  instagram: "https://www.instagram.com/gicleeclub/",
   url: "https://www.gicleeclub.com",
 };
+
+/** Nothing is ordered on the site: every order starts as a message to the studio. */
+export function contactHref(about?: string) {
+  return about ? `/contact-us?about=${encodeURIComponent(about)}#contact` : "/contact-us";
+}
 
 /** Each page has its own colour story, taken from Angelina's gradient pairs. */
 export type InkName = keyof typeof inks;
@@ -32,7 +38,6 @@ export const inks = {
   planet: ["#ff7e3f", "#ffb1e0"],
   shipping: ["#2466fd", "#fe5581"],
   contact: ["#5000b4", "#ff7e3f"],
-  order: ["#6f3fff", "#ffb1e0"],
   legal: ["#9ba8ae", "#424749"],
 } as const;
 
@@ -167,18 +172,16 @@ export const routes: Record<string, { ink: InkName; title: string }> = {
   "/sustainability": { ink: "planet", title: "Sustainability" },
   "/contact-us": { ink: "contact", title: "Contact" },
   "/shipping": { ink: "shipping", title: "Shipping" },
-  "/order": { ink: "order", title: "Order" },
   "/terms-and-conditions": { ink: "legal", title: "Terms" },
   "/privacy-policy": { ink: "legal", title: "Privacy" },
 };
 
 export function routeFor(pathname: string) {
-  const base = pathname.startsWith("/order") ? "/order" : pathname;
-  return routes[base] ?? routes["/"];
+  return routes[pathname] ?? routes["/"];
 }
 
-/** The four Hahnemühle stocks the whole site can be "printed" on. */
-export const stocks = [
+/** The four Hahnemühle papers. */
+export const papers = [
   {
     id: "photo-rag",
     name: "Photo Rag",
@@ -221,4 +224,4 @@ export const stocks = [
   },
 ] as const;
 
-export type StockId = (typeof stocks)[number]["id"];
+export type PaperId = (typeof papers)[number]["id"];

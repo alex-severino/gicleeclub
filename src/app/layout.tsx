@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Footer } from "@/components/shell/Footer";
 import { Header } from "@/components/shell/Header";
 import { PageTransition } from "@/components/shell/PageTransition";
-import { StockPicker } from "@/components/shell/StockPicker";
 import { studio } from "@/lib/site";
 import "./globals.css";
 
@@ -26,15 +25,15 @@ export const metadata: Metadata = {
     template: "%s — Giclée Club",
   },
   description:
-    "Museum quality Giclée printing on Hahnemühle FineArt papers. Hand-printed in Amsterdam, delivered worldwide.",
+    "Museum quality Giclée printing on Hahnemühle FineArt papers. Hand-printed in London, delivered worldwide.",
   openGraph: {
     siteName: studio.name,
     type: "website",
   },
 };
 
-/** Runs before first paint so motion and the chosen paper never flash. */
-const prepaint = `(function(){var d=document.documentElement;d.classList.add('js');try{var s=localStorage.getItem('gc-stock');if(s)d.dataset.stock=s}catch(e){}})()`;
+/** Runs before first paint so content that animates in never flashes. */
+const prepaint = `document.documentElement.classList.add('js')`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
@@ -51,14 +50,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Header />
         <main id="main">{children}</main>
         <Footer />
-        <StockPicker />
         <Link className="ask" href="/contact-us" aria-label="Ask us anything">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M3 4h18v13H8l-5 4z" />
           </svg>
         </Link>
         <PageTransition />
-        <div className="paper" aria-hidden="true" />
       </body>
     </html>
   );

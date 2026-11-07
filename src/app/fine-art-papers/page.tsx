@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Bleed } from "@/components/blocks/Bleed";
 import { Hero } from "@/components/blocks/Hero";
-import { OrderCta } from "@/components/blocks/OrderCta";
+import { ContactCta } from "@/components/blocks/ContactCta";
 import { Promos } from "@/components/blocks/Promos";
 import { Split } from "@/components/blocks/Split";
 import { Sheet, Statement, Ticks } from "@/components/blocks/Text";
@@ -76,7 +76,7 @@ export default function PapersPage() {
         alt="Fanned sheets of Hahnemühle paper beside an amber to pink field"
         eyebrow="FineArt media"
         title={["Hahnemühle", "Papers"]}
-        action={{ href: "/order/art-print", label: "Order your art print" }}
+        action={{ href: "/contact-us", label: "Contact us" }}
       >
         <p>
           Hahnemühle’s Digital FineArt Collection has a wide range of unique artisan papers with a
@@ -130,7 +130,7 @@ export default function PapersPage() {
         </div>
       ))}
 
-      <OrderCta />
+      <ContactCta />
       <Promos />
     </Sheet>
   );

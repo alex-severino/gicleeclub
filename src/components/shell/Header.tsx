@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { Logo } from "@/components/Logo";
+import { CurrencySelect } from "@/components/shell/CurrencySelect";
 import { nav, routeFor, type NavLink } from "@/lib/site";
 
 const groups = nav.filter((item) => "items" in item);
@@ -115,8 +116,8 @@ export function Header() {
         onMouseEnter={() => window.clearTimeout(closing.current)}
       >
         {!solid && (
-          <Link className="announce" href="/shipping">
-            Free shipping to Europe
+          <Link className="announce" href="/contact-us">
+            To order, contact us
           </Link>
         )}
         <div className="bar">
@@ -151,8 +152,9 @@ export function Header() {
                 </Link>
               ),
             )}
-            <Link className="order-btn" href="/order" onPointerEnter={() => setOpen(null)}>
-              Order
+            <CurrencySelect />
+            <Link className="contact-btn" href="/contact-us" onPointerEnter={() => setOpen(null)}>
+              Contact us
             </Link>
           </nav>
 
@@ -222,9 +224,12 @@ export function Header() {
             </Link>
           ),
         )}
-        <Link className="btn btn--pink" href="/order" style={{ marginTop: "1.6rem" }}>
-          Order
+        <Link className="btn btn--pink" href="/contact-us" style={{ marginTop: "1.6rem" }}>
+          Contact us
         </Link>
+        <div style={{ marginTop: "1rem" }}>
+          <CurrencySelect />
+        </div>
       </div>
     </>
   );

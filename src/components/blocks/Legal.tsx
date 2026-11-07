@@ -1,17 +1,89 @@
-import type { LegalSection } from "@/content/legal";
+import Link from "next/link";
+import { lastUpdated, type LegalItem, type LegalSection } from "@/content/legal";
 import { Sheet } from "./Text";
 
-export function Legal({ title, sections }: { title: string; sections: LegalSection[] }) {
+/** Renders [Label](href) links inside legal text. */
+function Inline({ text }: { text: string }) {
+  return text.split(/(\[[^\]]+\]\([^)]+\))/g).map((part, i) => {
+    const link = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (!link) return part;
+    const [, label, href] = link;
+    if (href.startsWith("/")) {
+      return (
+        <Link className="inline" key={i} href={href}>
+          {label}
+        </Link>
+      );
+    }
+    return (
+      <a
+        className="inline"
+        key={i}
+        href={href}
+        {...(href.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}
+      >
+        {label}
+      </a>
+    );
+  });
+}
+
+function Items({ section, number }: { section: LegalSection; number: number }) {
+  let clause = 0;
+  return section.items.map((item: LegalItem, i) => {
+    if (Array.isArray(item)) {
+      return (
+        <ul className="legal__list" key={i}>
+          {item.map((line) => (
+            <li key={line}>{line}</li>
+          ))}
+        </ul>
+      );
+    }
+    if (typeof item !== "string") {
+      return (
+        <blockquote className="legal__quote" key={i}>
+          {item.quote.map((line) => (
+            <p key={line}>{line}</p>
+          ))}
+        </blockquote>
+      );
+    }
+    clause += 1;
+    return (
+      <p className="legal__clause" key={i}>
+        <span>
+          {number}.{clause}
+        </span>
+        <span>
+          <Inline text={item} />
+        </span>
+      </p>
+    );
+  });
+}
+
+export function Legal({
+  title,
+  intro,
+  sections,
+}: {
+  title: string;
+  intro: string;
+  sections: LegalSection[];
+}) {
   return (
     <Sheet ink="legal">
       <div className="legal">
         <h1 className="h-lg">{title}</h1>
+        <p className="label">Art Britannia Ltd trading as Giclée Club. Last updated {lastUpdated}.</p>
+        <p className="legal__intro">{intro}</p>
         {sections.map((section, i) => (
-          <section key={`${section.heading}-${i}`}>
-            {section.heading && <h2>{section.heading}</h2>}
-            {section.items.map((item) => (
-              <p key={item}>{item}</p>
-            ))}
+          <section key={section.heading}>
+            <h2>
+              {i + 1}. {section.heading}
+            </h2>
+            <Items section={section} number={i + 1} />
           </section>
         ))}
       </div>

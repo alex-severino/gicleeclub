@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/blocks/Hero";
-import { OrderCta } from "@/components/blocks/OrderCta";
+import { ContactCta } from "@/components/blocks/ContactCta";
 import { Promos } from "@/components/blocks/Promos";
 import { Split } from "@/components/blocks/Split";
 import { Sheet } from "@/components/blocks/Text";
@@ -68,7 +68,7 @@ export default function CertificatePage() {
         </p>
       </Split>
 
-      <OrderCta />
+      <ContactCta />
       <Promos />
     </Sheet>
   );

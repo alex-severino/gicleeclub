@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ContactBlock } from "@/components/blocks/ContactBlock";
 import { Guide } from "@/components/blocks/Guide";
 import { Hero } from "@/components/blocks/Hero";
-import { OrderCta } from "@/components/blocks/OrderCta";
+import { ContactCta } from "@/components/blocks/ContactCta";
 import { Promos } from "@/components/blocks/Promos";
 import { Split } from "@/components/blocks/Split";
 import { Note, Sheet, Ticks } from "@/components/blocks/Text";
@@ -160,7 +160,7 @@ export default function SoftProofingPage() {
       </Guide>
 
       <ContactBlock />
-      <OrderCta />
+      <ContactCta />
       <Promos />
     </Sheet>
   );
