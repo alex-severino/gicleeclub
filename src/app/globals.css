@@ -432,7 +432,7 @@ a.inline {
   display: block;
   flex: none;
   color: #000;
-  width: 8.6rem;
+  width: 6.88rem;
   height: auto;
   overflow: visible;
   shape-rendering: geometricPrecision;
@@ -494,25 +494,6 @@ a:hover .logo__accent {
 }
 .primary__item[aria-expanded="true"] svg {
   transform: rotate(180deg);
-}
-
-.contact-btn {
-  display: inline-flex;
-  align-items: center;
-  height: 3.05rem;
-  padding-inline: 1.7em;
-  background: var(--color-pink);
-  color: var(--color-ink);
-  font-size: 0.86rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  transition: background 0.25s;
-}
-@media (hover: hover) {
-  .contact-btn:hover {
-    background: var(--color-lilac);
-  }
 }
 
 /* Menu panel: paper feeding down out of the bar. */
@@ -699,7 +680,7 @@ a:hover .logo__accent {
     color: #fff;
   }
   .logo {
-    width: 7.2rem;
+    width: 5.76rem;
   }
 }
 
@@ -768,27 +749,6 @@ a:hover .logo__accent {
 .wipe[data-phase="cover"] .wipe__title {
   opacity: 1;
   transition: opacity 0.25s 0.26s;
-}
-
-.ask {
-  position: fixed;
-  z-index: 45;
-  right: var(--gutter);
-  bottom: 16px;
-  display: grid;
-  place-items: center;
-  width: 3.2rem;
-  height: 3.2rem;
-  border-radius: 50%;
-  background: #6c3df9;
-  color: #fff;
-  box-shadow: 0 10px 26px -10px rgb(80 0 180 / 0.9);
-  transition: transform 0.35s var(--ease-out);
-}
-@media (hover: hover) {
-  .ask:hover {
-    transform: rotate(var(--tilt)) scale(1.06);
-  }
 }
 
 /* ---------------------------------------------------------------------------
@@ -2733,6 +2693,24 @@ a:hover .logo__accent {
 }
 
 /* Currency */
+.currency-dock {
+  position: fixed;
+  z-index: 40;
+  left: max(36px, env(safe-area-inset-left));
+  bottom: max(36px, env(safe-area-inset-bottom));
+  background: #fff;
+  color: #000;
+  box-shadow: inset 0 0 0 1.5px #000;
+}
+.currency-dock .currency {
+  height: 2.15rem;
+  box-shadow: none;
+}
+.currency-dock .currency select {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  padding: 0 1.85em 0 0.85rem;
+}
 .currency {
   position: relative;
   display: inline-flex;

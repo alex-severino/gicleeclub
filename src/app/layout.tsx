@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Krona_One, Montserrat } from "next/font/google";
-import Link from "next/link";
+import { CurrencyDock } from "@/components/shell/CurrencySelect";
 import { Footer } from "@/components/shell/Footer";
 import { Header } from "@/components/shell/Header";
 import { PageTransition } from "@/components/shell/PageTransition";
@@ -50,11 +50,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Header />
         <main id="main">{children}</main>
         <Footer />
-        <Link className="ask" href="/contact-us" aria-label="Ask us anything">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M3 4h18v13H8l-5 4z" />
-          </svg>
-        </Link>
+        <CurrencyDock />
         <PageTransition />
       </body>
     </html>

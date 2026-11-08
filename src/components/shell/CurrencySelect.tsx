@@ -21,3 +21,12 @@ export function CurrencySelect() {
     </label>
   );
 }
+
+/** A quiet corner stamp so the bar can stay a menu. */
+export function CurrencyDock() {
+  return (
+    <div className="currency-dock">
+      <CurrencySelect />
+    </div>
+  );
+}

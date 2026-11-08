@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { Logo } from "@/components/Logo";
-import { CurrencySelect } from "@/components/shell/CurrencySelect";
 import { nav, routeFor, type NavLink } from "@/lib/site";
 
 const groups = nav.filter((item) => "items" in item);
@@ -147,10 +146,6 @@ export function Header() {
                 </Link>
               ),
             )}
-            <CurrencySelect />
-            <Link className="contact-btn" href="/contact-us" onPointerEnter={() => setOpen(null)}>
-              Contact us
-            </Link>
           </nav>
 
           <button
@@ -218,12 +213,6 @@ export function Header() {
             </Link>
           ),
         )}
-        <Link className="btn btn--pink" href="/contact-us" style={{ marginTop: "1.6rem" }}>
-          Contact us
-        </Link>
-        <div style={{ marginTop: "1rem" }}>
-          <CurrencySelect />
-        </div>
       </div>
     </>
   );

@@ -149,13 +149,9 @@ export const nav: NavItem[] = [
         href: "/sustainability",
         image: "/media/section/solar-panels.png",
       },
-      {
-        label: "Contact Us",
-        href: "/contact-us",
-        image: "/media/section/gloves.png",
-      },
     ],
   },
+  { label: "Contact", href: "/contact-us" },
 ];
 
 /** Route → ink and the title flashed on the page transition. */
