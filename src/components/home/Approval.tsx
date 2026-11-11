@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
+import { ApprovalArtwork } from "@/components/home/ApprovalArtwork";
 
-/** Every order is approved before it prints, paired with the original blue AI artwork. */
+/** File approval paired with a print-test illustration in the brand's visual language. */
 export function Approval() {
   return (
     <section className="approval" data-ink="icc">
@@ -30,15 +30,7 @@ export function Approval() {
         </div>
 
         <figure className="approval__art">
-          <Image
-            src="/media/section/ai-technology.png"
-            alt="Large blue AI letters surrounded by fine looping lines on a patterned surface"
-            width={1000}
-            height={1120}
-            sizes="(max-width: 860px) 92vw, 46vw"
-            quality={88}
-          />
-          <figcaption className="label">Art by Steve Johnson</figcaption>
+          <ApprovalArtwork />
         </figure>
       </div>
     </section>

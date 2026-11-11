@@ -55,9 +55,9 @@ export default function WhoWeArePage() {
         </p>
         <p>
           The long view is a print house that treats a family photograph with the same seriousness as
-          a limited edition. A studio you can visit. Frames painted by hand, so a print can arrive
-          ready to hang. Packaging you can put your name on. And, in time, a place where people can
-          see work on the wall, talk about paper, and leave with something they will keep.
+          a limited edition. A studio you can visit. Packaging you can put your name on. And, in time,
+          a place where people can see work on the wall, talk about paper, and leave with something
+          they will keep.
         </p>
       </Statement>
 
@@ -88,9 +88,8 @@ export default function WhoWeArePage() {
         flip
       >
         <p>
-          We are here for the moment a digital image becomes physical: trimmed, sleeved, sometimes
-          framed in a Farrow &amp; Ball colour, packed with gloves and tissue, and sent out as an
-          object rather than a download.
+          We are here for the moment a digital image becomes physical: trimmed, sleeved, packed with
+          gloves and tissue, and sent out as an object rather than a download.
         </p>
         <p>
           That object should be able to hang for a lifetime. Certificates, holograms and careful
@@ -110,7 +109,7 @@ export default function WhoWeArePage() {
         </p>
         <p>
           The studio is small on purpose. You can write, you can visit, and you can ask for a
-          personal note, a branded sticker or a painted frame. The aim is a print house you can
+          personal note or a branded sticker. The aim is a print house you can
           actually reach — and a standard that does not drop when the order is one sheet.
         </p>
       </Split>

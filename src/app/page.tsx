@@ -2,9 +2,8 @@ import Image from "next/image";
 import { Action } from "@/components/blocks/Action";
 import { Bleed } from "@/components/blocks/Bleed";
 import { Approval } from "@/components/home/Approval";
-import { Sunburst } from "@/components/blocks/Shapes";
+import { PlanetWheels } from "@/components/home/PlanetWheels";
 import { ClubStrip } from "@/components/home/ClubStrip";
-import { FrameShowcase } from "@/components/home/FrameShowcase";
 import { PrintHero } from "@/components/home/PrintHero";
 import { PrintClosing } from "@/components/home/PrintClosing";
 import { SheetStack } from "@/components/home/SheetStack";
@@ -49,8 +48,6 @@ export default function HomePage() {
         </div>
       </PaperLab>
 
-      <FrameShowcase />
-
       <SheetStack />
 
       <section className="planet" data-scroll="" data-ink="planet">
@@ -63,10 +60,7 @@ export default function HomePage() {
             quality={88}
           />
         </div>
-        <div className="planet__accents" aria-hidden="true">
-          <Sunburst className="planet__sun" />
-          <Sunburst className="planet__sun planet__sun--orange" />
-        </div>
+        <PlanetWheels />
         <div className="planet__card" data-reveal="rise">
           <p className="eyebrow">Contributing to</p>
           <h2 className="h-md">The well-being of our planet</h2>

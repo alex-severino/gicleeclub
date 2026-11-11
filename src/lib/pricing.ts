@@ -8,22 +8,18 @@
  * label and about level once their delivery is added, because ours includes
  * delivery. The sample pack and proof strip were "only €5" in the old copy.
  *
- * `frame` is a frame painted by hand in a Farrow & Ball colour, glazed and
- * ready to hang, with UK delivery. `mount` adds a window mount and the larger
- * frame it needs. `null` means made to order and priced by quote.
- *
  * Set `confirmed: true` once the prices are real and the "indicative" note
  * disappears from the calculators.
  */
 export const pricing = {
   confirmed: false,
   sizes: [
-    { id: "A5", mm: [148, 210], price: 12, frame: 65, mount: 15 },
-    { id: "A4", mm: [210, 297], price: 18, frame: 89, mount: 19 },
-    { id: "A3", mm: [297, 420], price: 24, frame: 125, mount: 25 },
-    { id: "A2", mm: [420, 594], price: 42, frame: 179, mount: 35 },
-    { id: "A1", mm: [594, 841], price: 75, frame: 279, mount: 49 },
-    { id: "A0", mm: [841, 1189], price: 145, frame: null, mount: null },
+    { id: "A5", mm: [148, 210], price: 12 },
+    { id: "A4", mm: [210, 297], price: 18 },
+    { id: "A3", mm: [297, 420], price: 24 },
+    { id: "A2", mm: [420, 594], price: 42 },
+    { id: "A1", mm: [594, 841], price: 75 },
+    { id: "A0", mm: [841, 1189], price: 145 },
   ],
   samplePack: 5,
   proofStrip: 5,
@@ -34,6 +30,3 @@ export type SizeId = (typeof pricing.sizes)[number]["id"];
 export function sizeFor(id: SizeId) {
   return pricing.sizes.find((s) => s.id === id) ?? pricing.sizes[0];
 }
-
-/** The smallest frame price, for "from" lines. */
-export const framesFrom = Math.min(...pricing.sizes.flatMap((s) => (s.frame ? [s.frame] : [])));
