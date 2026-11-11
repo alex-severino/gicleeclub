@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
 import { PaintedFrame } from "@/components/blocks/PaintedFrame";
-import { CurrencySelect } from "@/components/shell/CurrencySelect";
 import { Money, RateNote } from "@/components/shell/Money";
 import {
   artworks,
@@ -237,7 +236,6 @@ export function FramePicker() {
             <span>
               {size} print, painted frame{mount ? " and mount" : ""}
             </span>
-            <CurrencySelect />
           </div>
           {framed ? (
             <p className="label" style={{ marginTop: "0.6rem" }}>

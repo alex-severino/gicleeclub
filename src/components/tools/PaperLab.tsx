@@ -14,10 +14,10 @@ const art: Record<PaperId, { src: string; credit: string }> = {
 
 /** How each surface answers the light: relief, sheen, gloss, grain scale, paper white. */
 const surface: Record<PaperId, { m: [number, number, number, number]; tint: [number, number, number] }> = {
-  "photo-rag": { m: [0.95, 0.03, 18, 1.5], tint: [0.985, 0.98, 0.965] },
-  "german-etching": { m: [1.4, 0.03, 14, 1.25], tint: [0.982, 0.975, 0.955] },
-  pearl: { m: [0.5, 0.34, 40, 1.9], tint: [1, 1, 0.995] },
-  bamboo: { m: [0.95, 0.02, 14, 1.3], tint: [0.968, 0.942, 0.888] },
+  "photo-rag": { m: [0.42, 0.008, 32, 3.4], tint: [0.985, 0.98, 0.965] },
+  "german-etching": { m: [0.62, 0.006, 28, 2.9], tint: [0.982, 0.975, 0.955] },
+  pearl: { m: [0.22, 0.028, 64, 4.4], tint: [1, 1, 0.995] },
+  bamboo: { m: [0.36, 0.005, 30, 3.5], tint: [0.985, 0.975, 0.950] },
 };
 
 const vertex = `
@@ -51,14 +51,16 @@ vec3 sheet(sampler2D art, sampler2D height, vec2 cover, vec4 mat, vec3 tint) {
 
   vec2 d = (uLight - vUv) * vec2(aspect, 1.);
   float dist = length(d);
-  vec3 l = normalize(vec3(d, .36));
+  vec3 l = normalize(vec3(d * .4, 1.2));
   float rake = max(dot(n, l), 0.) / max(l.z, .2);
   float pool = 1. / (1. + dist * dist * 2.2);
-  float light = .66 + .42 * pool;
-  vec3 col = albedo * light * mix(1., clamp(rake, .5, 1.6), .78);
+  float light = .97 + .02 * pool;
+  // Fine grain stays visible even in still, diffuse light, including on the border.
+  float grain = 1. + (h - .5) * mat.x * .32;
+  vec3 col = albedo * grain * light * mix(1., clamp(rake, .88, 1.12), .55);
   vec3 half_ = normalize(l + vec3(0., 0., 1.));
   col += pow(max(dot(n, half_), 0.), mat.z) * mat.y * pool;
-  return col;
+  return clamp(col, 0., 1.);
 }
 
 void main() {
@@ -85,7 +87,7 @@ export function PaperLab({ children }: { children?: ReactNode }) {
   const stage = useRef<HTMLDivElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
   const select = useRef<((id: PaperId) => void) | null>(null);
-  const [supported, setSupported] = useState(true);
+  const [previewReady, setPreviewReady] = useState(false);
   const current = papers.find((p) => p.id === paper) ?? papers[0];
 
   useEffect(() => {
@@ -93,10 +95,8 @@ export function PaperLab({ children }: { children?: ReactNode }) {
     const host = stage.current;
     if (!el || !host) return;
     const gl = el.getContext("webgl", { antialias: false, alpha: false });
-    if (!gl) {
-      const frame = requestAnimationFrame(() => setSupported(false));
-      return () => cancelAnimationFrame(frame);
-    }
+    // The photographed surface remains visible if WebGL is unavailable.
+    if (!gl) return;
 
     const shader = (type: number, source: string) => {
       const s = gl.createShader(type)!;
@@ -105,11 +105,20 @@ export function PaperLab({ children }: { children?: ReactNode }) {
       return s;
     };
     const program = gl.createProgram()!;
-    gl.attachShader(program, shader(gl.VERTEX_SHADER, vertex));
-    gl.attachShader(program, shader(gl.FRAGMENT_SHADER, fragment));
+    const vs = shader(gl.VERTEX_SHADER, vertex);
+    const fs = shader(gl.FRAGMENT_SHADER, fragment);
+    gl.attachShader(program, vs);
+    gl.attachShader(program, fs);
     gl.linkProgram(program);
+    gl.deleteShader(vs);
+    gl.deleteShader(fs);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      gl.deleteProgram(program);
+      return;
+    }
     gl.useProgram(program);
-    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+    const buffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
     const position = gl.getAttribLocation(program, "p");
     gl.enableVertexAttribArray(position);
@@ -142,6 +151,7 @@ export function PaperLab({ children }: { children?: ReactNode }) {
     let shown: Layer | null = null;
     let incoming: Layer | null = null;
     let pass = 1;
+    let selection = 0;
 
     const light = { x: 0.34, y: 0.66, tx: 0.34, ty: 0.66 };
     let touched = 0;
@@ -190,8 +200,8 @@ export function PaperLab({ children }: { children?: ReactNode }) {
       if (disposed || !visible) return;
       // When nobody is steering, the lamp drifts slowly across the sheet.
       if (!still && time - touched > 2600) {
-        light.tx = 0.5 + Math.cos(time / 2600) * 0.42;
-        light.ty = 0.5 + Math.sin(time / 1900) * 0.36;
+        light.tx = 0.5 + Math.cos(time / 2600) * 0.20;
+        light.ty = 0.5 + Math.sin(time / 1900) * 0.18;
       }
       light.x += (light.tx - light.x) * 0.09;
       light.y += (light.ty - light.y) * 0.09;
@@ -227,15 +237,26 @@ export function PaperLab({ children }: { children?: ReactNode }) {
     };
 
     const show = async (id: PaperId) => {
-      const layer = await load(id);
-      if (disposed) return;
-      if (!shown) {
-        shown = layer;
-      } else if (layer.id !== shown.id) {
-        incoming = layer;
-        pass = 0;
+      const request = ++selection;
+      try {
+        const layer = await load(id);
+        if (disposed || request !== selection || gl.isContextLost()) return;
+        if (!shown || still) {
+          shown = layer;
+          incoming = null;
+        } else if (layer.id !== shown.id) {
+          incoming = layer;
+          pass = 0;
+        } else {
+          incoming = null;
+        }
+        resize();
+        draw();
+        setPreviewReady(true);
+        run();
+      } catch {
+        if (!disposed && request === selection) setPreviewReady(false);
       }
-      run();
     };
     select.current = (id) => void show(id);
 
@@ -264,6 +285,12 @@ export function PaperLab({ children }: { children?: ReactNode }) {
       light.ty = 1 - (event.clientY - box.top) / box.height;
       touched = performance.now();
     };
+    const contextLost = (event: Event) => {
+      event.preventDefault();
+      cancelAnimationFrame(raf);
+      setPreviewReady(false);
+    };
+    el.addEventListener("webglcontextlost", contextLost);
     host.addEventListener("pointermove", steer);
     host.addEventListener("pointerdown", steer);
     window.addEventListener("resize", resize);
@@ -272,6 +299,7 @@ export function PaperLab({ children }: { children?: ReactNode }) {
       disposed = true;
       cancelAnimationFrame(raf);
       watcher.disconnect();
+      el.removeEventListener("webglcontextlost", contextLost);
       host.removeEventListener("pointermove", steer);
       host.removeEventListener("pointerdown", steer);
       window.removeEventListener("resize", resize);
@@ -280,6 +308,7 @@ export function PaperLab({ children }: { children?: ReactNode }) {
         gl.deleteTexture(layer.art);
         gl.deleteTexture(layer.height);
       });
+      gl.deleteBuffer(buffer);
       gl.deleteProgram(program);
     };
   }, []);
@@ -293,14 +322,25 @@ export function PaperLab({ children }: { children?: ReactNode }) {
       <div className="lab__grid">
         <div>
           <div className="lab__stage" ref={stage}>
-            {supported ? (
-              <canvas ref={canvas} aria-label={`A print on ${current.name} under a moving lamp`} role="img" />
-            ) : (
-              <Image src={`/media/wide/${paper}.png`} alt={`Macro photograph of ${current.name}`} fill sizes="55vw" />
-            )}
+            <Image
+              src={`/media/wide/${paper}.png`}
+              alt={`Close-up photograph of ${current.name}, showing its paper texture`}
+              fill
+              sizes="(max-width: 960px) 92vw, 55vw"
+              aria-hidden={previewReady}
+            />
+            <canvas
+              ref={canvas}
+              data-ready={previewReady ? "" : undefined}
+              aria-label={`A print on ${current.name} with a visible paper grain`}
+              aria-hidden={!previewReady}
+              role="img"
+            />
           </div>
           <p className="label" style={{ marginTop: "0.8rem" }}>
-            {art[paper].credit}. Move across the sheet to rake the light over the real paper surface.
+            {previewReady
+              ? `${art[paper].credit}. Move across the print to explore the paper grain and finish.`
+              : `A closer look at the ${current.name} paper surface.`}
           </p>
         </div>
         <div>

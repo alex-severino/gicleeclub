@@ -25,11 +25,6 @@ export function Footer() {
           <p>
             <a href={`mailto:${studio.email}`}>{studio.email}</a>
           </p>
-          <p>
-            <a href={studio.instagram} target="_blank" rel="noreferrer">
-              Instagram
-            </a>
-          </p>
         </div>
         <div>
           <h2>Legal Info</h2>

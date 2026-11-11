@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { CurrencySelect } from "@/components/shell/CurrencySelect";
 import { Money, RateNote } from "@/components/shell/Money";
 import { framesFrom, pricing, sizeFor, type SizeId } from "@/lib/pricing";
 import { contactHref, papers, type PaperId } from "@/lib/site";
@@ -194,7 +193,6 @@ export function PriceCalculator() {
               {quantity} × {size} on {paperName}
               {frame ? ", framed" : ""}
             </span>
-            <CurrencySelect />
           </div>
           <RateNote />
           {extras && (

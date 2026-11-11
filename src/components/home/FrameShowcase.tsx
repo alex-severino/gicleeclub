@@ -46,59 +46,61 @@ export function FrameShowcase() {
 
   return (
     <section className="showcase" ref={root} data-ink="frames" aria-labelledby="showcase-title">
-      <div className="showcase__art">
-        <div className="fp__wall">
-          <PaintedFrame
-            paint={paint.hex}
-            art={{ src: art.src, w: art.w, h: art.h }}
-            size="A3"
-            mount
-            label={`A print in a ${paint.name} frame with a white mount`}
-          />
-        </div>
-        <p className="label" style={{ marginTop: "0.7rem" }}>
-          {art.credit}
-        </p>
-      </div>
-      <div className="showcase__text" data-reveal="rise">
-        <p className="eyebrow">New · Farrow &amp; Ball colours</p>
-        <h2 className="h-lg" id="showcase-title">
-          Hand-painted
-          <br />
-          frames
-        </h2>
-        <div className="prose-sheet">
-          <p>
-            Your print can arrive ready to hang, in a solid wood frame we paint by hand in the Farrow
-            &amp; Ball colour of your choice.
+      <div className="showcase__grid">
+        <div className="showcase__art">
+          <div className="fp__wall">
+            <PaintedFrame
+              paint={paint.hex}
+              art={{ src: art.src, w: art.w, h: art.h }}
+              size="A3"
+              mount
+              label={`A print in a ${paint.name} frame with a white mount`}
+            />
+          </div>
+          <p className="label" style={{ marginTop: "0.7rem" }}>
+            {art.credit}
           </p>
         </div>
-        <div className="showcase__swatches" role="radiogroup" aria-label="Frame colour">
-          {picks.map((pick, i) => (
-            <button
-              key={pick.no}
-              type="button"
-              role="radio"
-              aria-checked={i === index}
-              aria-label={`${pick.name} No. ${pick.no}`}
-              title={`${pick.name} No. ${pick.no}`}
-              className="fp__swatch"
-              data-dark={isDark(pick.hex) ? "" : undefined}
-              style={{ "--c": pick.hex } as CSSProperties}
-              onClick={() => {
-                setHeld(true);
-                setIndex(i);
-              }}
-            />
-          ))}
+        <div className="showcase__text" data-reveal="rise">
+          <p className="eyebrow">New · Farrow &amp; Ball colours</p>
+          <h2 className="h-lg" id="showcase-title">
+            Hand-painted
+            <br />
+            frames
+          </h2>
+          <div className="prose-sheet">
+            <p>
+              Your print can arrive ready to hang, in a solid wood frame we paint by hand in the Farrow
+              &amp; Ball colour of your choice.
+            </p>
+          </div>
+          <div className="showcase__swatches" role="radiogroup" aria-label="Frame colour">
+            {picks.map((pick, i) => (
+              <button
+                key={pick.no}
+                type="button"
+                role="radio"
+                aria-checked={i === index}
+                aria-label={`${pick.name} No. ${pick.no}`}
+                title={`${pick.name} No. ${pick.no}`}
+                className="fp__swatch"
+                data-dark={isDark(pick.hex) ? "" : undefined}
+                style={{ "--c": pick.hex } as CSSProperties}
+                onClick={() => {
+                  setHeld(true);
+                  setIndex(i);
+                }}
+              />
+            ))}
+          </div>
+          <p className="showcase__name label" aria-live={held ? "polite" : "off"}>
+            {paint.name} No. {paint.no}
+          </p>
+          <Action href="/painted-frames" label="Choose your colour" />
+          <p className="label" style={{ marginTop: "1rem" }}>
+            Frames from <Money gbp={framesFrom} />, any Farrow &amp; Ball colour.
+          </p>
         </div>
-        <p className="showcase__name label" aria-live={held ? "polite" : "off"}>
-          {paint.name} No. {paint.no}
-        </p>
-        <Action href="/painted-frames" label="Choose your colour" />
-        <p className="label" style={{ marginTop: "1rem" }}>
-          Frames from <Money gbp={framesFrom} />, any Farrow &amp; Ball colour.
-        </p>
       </div>
     </section>
   );

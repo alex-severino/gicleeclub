@@ -3,8 +3,6 @@
 import { useSyncExternalStore } from "react";
 import { currencies, fallbackRates, type CurrencyCode, type RateTable } from "./currency";
 
-const KEY = "gc-currency";
-
 type State = RateTable & { code: CurrencyCode };
 
 const initial: State = { code: "GBP", ...fallbackRates };
@@ -23,7 +21,10 @@ function loadRates() {
   if (requested) return;
   requested = true;
   fetch("/api/rates")
-    .then((response) => response.json() as Promise<RateTable>)
+    .then((response) => {
+      if (!response.ok) throw new Error("Rates unavailable");
+      return response.json() as Promise<RateTable>;
+    })
     .then((table) => publish(table))
     .catch(() => {
       // The stored rates still give a fair guide.
@@ -34,29 +35,23 @@ function subscribe(listener: () => void) {
   listeners.add(listener);
   if (!restored) {
     restored = true;
-    try {
-      const saved = localStorage.getItem(KEY) as CurrencyCode | null;
-      if (saved && saved !== "GBP" && currencies.includes(saved)) {
-        publish({ code: saved });
-        loadRates();
-      }
-    } catch {
-      // Private mode: stay in pounds.
-    }
+    void fetch("/api/currency", { cache: "no-store" })
+      .then((response) => {
+        if (!response.ok) throw new Error("Currency lookup unavailable");
+        return response.json() as Promise<{ code: CurrencyCode }>;
+      })
+      .then(({ code }) => {
+        if (!currencies.includes(code)) return;
+        publish({ code });
+        if (code !== "GBP") loadRates();
+      })
+      .catch(() => {
+        // Without a country lookup, keep the sterling source prices.
+      });
   }
   return () => {
     listeners.delete(listener);
   };
-}
-
-export function setCurrency(code: CurrencyCode) {
-  try {
-    localStorage.setItem(KEY, code);
-  } catch {
-    // The choice just lasts for this visit.
-  }
-  publish({ code });
-  if (code !== "GBP") loadRates();
 }
 
 export function useCurrency() {

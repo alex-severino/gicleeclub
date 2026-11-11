@@ -30,3 +30,18 @@ export function formatMoney(gbp: number, code: CurrencyCode, rates: Rates) {
     maximumFractionDigits: whole ? 0 : 2,
   }).format(gbp * rates[code]);
 }
+
+/** Supported local currencies; other destinations keep the sterling price. */
+export function currencyForCountry(country: string | null): CurrencyCode {
+  const code = country?.trim().toUpperCase();
+  const local: Record<string, CurrencyCode> = {
+    GB: "GBP", US: "USD", CA: "CAD", AU: "AUD", CH: "CHF", LI: "CHF",
+    SE: "SEK", NO: "NOK", DK: "DKK", GL: "DKK", FO: "DKK", JP: "JPY",
+  };
+  const euro = new Set([
+    "AT", "BE", "BG", "HR", "CY", "EE", "FI", "FR", "DE", "GR", "IE", "IT",
+    "LV", "LT", "LU", "MT", "NL", "PT", "SK", "SI", "ES", "AD", "MC", "SM", "VA",
+  ]);
+  if (code && euro.has(code)) return "EUR";
+  return (code && local[code]) || "GBP";
+}

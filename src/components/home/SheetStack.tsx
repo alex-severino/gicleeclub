@@ -87,13 +87,11 @@ export function SheetStack() {
           data-ink={sheet.ink}
           style={{ zIndex: i + 1 } as CSSProperties}
         >
-          <span className="sheet__index" aria-hidden="true">
-            {String(i + 1).padStart(2, "0")}/{String(sheets.length).padStart(2, "0")}
-          </span>
           <div className="sheet__art">
             <Print
               src={`/media/section/${sheet.image}.png`}
               alt={sheet.alt}
+              credit={sheet.credit}
               sizes="(max-width: 860px) 92vw, 42vw"
             />
           </div>
@@ -104,7 +102,6 @@ export function SheetStack() {
               <p key={text}>{text}</p>
             ))}
             <Action href={sheet.href} label="Learn more" />
-            {sheet.credit && <p className="label" style={{ marginTop: "1.1rem" }}>{sheet.credit}</p>}
           </div>
         </section>
       ))}

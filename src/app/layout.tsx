@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Krona_One, Montserrat } from "next/font/google";
-import { CurrencyDock } from "@/components/shell/CurrencySelect";
 import { Footer } from "@/components/shell/Footer";
 import { Header } from "@/components/shell/Header";
 import { PageTransition } from "@/components/shell/PageTransition";
@@ -21,11 +20,11 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   metadataBase: new URL(studio.url),
   title: {
-    default: "Giclée Club — Museum quality printing for anyone",
+    default: "Giclée Club – Museum quality printing for visual artists",
     template: "%s — Giclée Club",
   },
   description:
-    "Museum quality Giclée printing for everyone, on Hahnemühle FineArt papers. Hand-printed in London, delivered worldwide.",
+    "Bring your artwork and photographs to life on Hahnemühle FineArt papers. Hand-printed in our London studio and delivered worldwide.",
   openGraph: {
     siteName: studio.name,
     type: "website",
@@ -50,7 +49,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Header />
         <main id="main">{children}</main>
         <Footer />
-        <CurrencyDock />
         <PageTransition />
       </body>
     </html>
