@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { Logo } from "@/components/Logo";
 import { nav, routeFor, type NavLink } from "@/lib/site";
+import { HomeLink } from "./HomeLink";
 
 const groups = nav.filter((item) => "items" in item);
 
@@ -115,9 +116,9 @@ export function Header() {
         onMouseEnter={() => window.clearTimeout(closing.current)}
       >
         <div className="bar">
-          <Link href="/" aria-label="Giclée Club, home">
+          <HomeLink>
             <Logo />
-          </Link>
+          </HomeLink>
 
           <nav className="primary" aria-label="Main">
             {nav.map((item) =>

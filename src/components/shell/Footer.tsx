@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Logo } from "@/components/Logo";
 import { studio } from "@/lib/site";
 import { Newsletter } from "./Newsletter";
+import { HomeLink } from "./HomeLink";
 
 export function Footer() {
   return (
@@ -37,9 +38,9 @@ export function Footer() {
           </p>
         </div>
       </div>
-      <Link className="footer__mark" href="/" aria-label="Giclée Club, home">
+      <HomeLink className="footer__mark">
         <Logo className="" />
-      </Link>
+      </HomeLink>
       <div className="footer__base">
         <span>© 2026 {studio.legalName}</span>
         <span>Registered in England &amp; Wales · Company No. {studio.companyNumber}</span>
