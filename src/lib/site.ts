@@ -50,7 +50,12 @@ export type NavLink = {
 
 export type NavItem =
   | { label: string; href: string }
-  | { label: string; items: NavLink[] };
+  | { label: string; sections: NavSection[] };
+
+export type NavSection = {
+  label?: string;
+  items: NavLink[];
+};
 
 const gicleePrinting: NavLink = {
   label: "Giclée Printing",
@@ -65,83 +70,97 @@ const brandedPackaging: NavLink = {
 
 export const nav: NavItem[] = [
   {
-    label: "What We Do",
-    items: [
-      gicleePrinting,
-      brandedPackaging,
+    label: "Printing",
+    sections: [
       {
-        label: "Certificate of Authenticity",
-        href: "/certificate-of-authenticity",
-        image: "/media/section/certificate.png",
+        label: "Services & extras",
+        items: [
+          gicleePrinting,
+          brandedPackaging,
+          {
+            label: "Certificate of Authenticity",
+            href: "/certificate-of-authenticity",
+            image: "/media/section/certificate.png",
+          },
+          {
+            label: "Proof Printing Strip",
+            href: "/proof-printing-strip",
+            image: "/media/section/proof-strip.png",
+          },
+          {
+            label: "Premium Portfolio Set",
+            href: "/premium-portfolio-set",
+            image: "/media/section/portfolio.png",
+          },
+          {
+            label: "Sample Packs",
+            href: "/sample-packs",
+            image: "/media/section/sp-mixed-arts.png",
+          },
+        ],
       },
       {
-        label: "Proof Printing Strip",
-        href: "/proof-printing-strip",
-        image: "/media/section/proof-strip.png",
+        label: "Papers & equipment",
+        items: [
+          {
+            label: "Fine Art Papers",
+            href: "/fine-art-papers",
+            image: "/media/section/papers.png",
+          },
+          {
+            label: "Our Printers",
+            href: "/high-end-printers",
+            image: "/media/section/printers.png",
+          },
+        ],
       },
-      {
-        label: "Premium Portfolio Set",
-        href: "/premium-portfolio-set",
-        image: "/media/section/portfolio.png",
-      },
-    ],
-  },
-  { label: "Sample Packs", href: "/sample-packs" },
-  { label: "Prices", href: "/prices" },
-  {
-    label: "Info",
-    items: [
-      gicleePrinting,
-      {
-        label: "High-End Printers",
-        href: "/high-end-printers",
-        image: "/media/section/printers.png",
-      },
-      {
-        label: "Fine Art Papers",
-        href: "/fine-art-papers",
-        image: "/media/section/papers.png",
-      },
-      brandedPackaging,
     ],
   },
   {
     label: "Help",
-    items: [
+    sections: [
       {
-        label: "Preparing Your Files",
-        href: "/preparing-your-files",
-        image: "/media/section/requirements.png",
-      },
-      {
-        label: "Soft Proofing",
-        href: "/soft-proofing",
-        image: "/media/section/monitor.png",
-      },
-      {
-        label: "ICC Print Profiles",
-        href: "/icc-profiles",
-        image: "/media/section/icc-chart.png",
+        items: [
+          {
+            label: "Preparing Your Files",
+            href: "/preparing-your-files",
+            image: "/media/section/requirements.png",
+          },
+          {
+            label: "Soft Proofing",
+            href: "/soft-proofing",
+            image: "/media/section/monitor.png",
+          },
+          {
+            label: "ICC Print Profiles",
+            href: "/icc-profiles",
+            image: "/media/section/icc-chart.png",
+          },
+        ],
       },
     ],
   },
   {
     label: "About",
-    items: [
+    sections: [
       {
-        label: "Who We Are",
-        href: "/who-we-are",
-        image: "/media/section/studio-6.png",
-      },
-      {
-        label: "Our Print Studio",
-        href: "/our-print-studio",
-        image: "/media/section/studio-2.png",
-      },
-      {
-        label: "Sustainability",
-        href: "/sustainability",
-        image: "/media/section/solar-panels.png",
+        items: [
+          {
+            label: "Who We Are",
+            href: "/who-we-are",
+            image: "/media/section/studio-6.png",
+          },
+          {
+            label: "Our Print Studio",
+            href: "/our-print-studio",
+            image: "/media/section/studio-2.png",
+          },
+          {
+            label: "Sustainability",
+            href: "/sustainability",
+            image: "/media/section/solar-panels.png",
+          },
+        ],
       },
     ],
   },

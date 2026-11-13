@@ -5,10 +5,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { Logo } from "@/components/Logo";
-import { nav, routeFor, type NavLink } from "@/lib/site";
+import { nav, routeFor, type NavSection } from "@/lib/site";
 import { HomeLink } from "./HomeLink";
 
-const groups = nav.filter((item) => "items" in item);
+const groups = nav.filter((item) => "sections" in item);
 
 function Chevron() {
   return (
@@ -24,7 +24,7 @@ export function Header() {
 
   const [open, setOpen] = useState<string | null>(null);
   const [shown, setShown] = useState<string>(groups[0].label);
-  const [preview, setPreview] = useState(0);
+  const [preview, setPreview] = useState(groups[0].sections[0].items[0].href);
   const [drawer, setDrawer] = useState(false);
   const [solid, setSolid] = useState(false);
   const [hidden, setHidden] = useState(false);
@@ -74,7 +74,10 @@ export function Header() {
 
   const show = (label: string) => {
     window.clearTimeout(closing.current);
-    if (label !== shown) setPreview(0);
+    if (label !== shown) {
+      const group = groups.find((item) => item.label === label);
+      if (group) setPreview(group.sections[0].items[0].href);
+    }
     setShown(label);
     setOpen(label);
   };
@@ -97,7 +100,8 @@ export function Header() {
   };
 
   const group = nav.find((item) => item.label === shown);
-  const links: NavLink[] = group && "items" in group ? group.items : [];
+  const sections: NavSection[] = group && "sections" in group ? group.sections : [];
+  const links = sections.flatMap((section) => section.items);
 
   return (
     <>
@@ -122,7 +126,7 @@ export function Header() {
 
           <nav className="primary" aria-label="Main">
             {nav.map((item) =>
-              "items" in item ? (
+              "sections" in item ? (
                 <button
                   key={item.label}
                   type="button"
@@ -162,24 +166,34 @@ export function Header() {
         </div>
 
         <div className="mega" id="menu-panel" ref={panel} data-open={open ? "" : undefined}>
-          <div className="mega__grid">
+          <div className="mega__grid" data-grouped={sections.length > 1 ? "" : undefined}>
             <div className="mega__links">
-              {links.map((link, index) => (
-                <Link
-                  key={link.href}
-                  className="mega__link"
-                  href={link.href}
-                  data-active={preview === index ? "" : undefined}
-                  onPointerEnter={() => setPreview(index)}
-                  onFocus={() => setPreview(index)}
+              {sections.map((section, index) => (
+                <div
+                  key={section.label ?? index}
+                  className="mega__section"
+                  role={section.label ? "group" : undefined}
+                  aria-label={section.label}
                 >
-                  {link.label}
-                </Link>
+                  {section.label && <p className="menu-section-title">{section.label}</p>}
+                  {section.items.map((link) => (
+                    <Link
+                      key={link.href}
+                      className="mega__link"
+                      href={link.href}
+                      data-active={preview === link.href ? "" : undefined}
+                      onPointerEnter={() => setPreview(link.href)}
+                      onFocus={() => setPreview(link.href)}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
               ))}
             </div>
             <div className="mega__preview" aria-hidden="true">
               {open &&
-                links.map((link, index) => (
+                links.map((link) => (
                   <Image
                     key={link.href}
                     src={link.image}
@@ -187,7 +201,7 @@ export function Header() {
                     fill
                     sizes="28rem"
                     loading="eager"
-                    data-active={preview === index ? "" : undefined}
+                    data-active={preview === link.href ? "" : undefined}
                   />
                 ))}
             </div>
@@ -197,14 +211,24 @@ export function Header() {
 
       <div className="drawer" data-ink={ink} data-open={drawer ? "" : undefined}>
         {nav.map((item) =>
-          "items" in item ? (
+          "sections" in item ? (
             <details key={item.label}>
               <summary className="drawer__item">{item.label}</summary>
               <div className="drawer__sub">
-                {item.items.map((link) => (
-                  <Link key={link.href} href={link.href}>
-                    {link.label}
-                  </Link>
+                {item.sections.map((section, index) => (
+                  <div
+                    key={section.label ?? index}
+                    className="drawer__section"
+                    role={section.label ? "group" : undefined}
+                    aria-label={section.label}
+                  >
+                    {section.label && <p className="menu-section-title">{section.label}</p>}
+                    {section.items.map((link) => (
+                      <Link key={link.href} href={link.href}>
+                        {link.label}
+                      </Link>
+                    ))}
+                  </div>
                 ))}
               </div>
             </details>
