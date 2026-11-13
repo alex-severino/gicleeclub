@@ -21,7 +21,7 @@ export function PlanetHero() {
           All our papers and packaging are 100% recyclable. Our car is fully electric, and the
           shortest trips run on nothing but good coffee and comfortable shoes.
         </p>
-        <Action href="#clean-energy" label="Explore our approach" />
+        <Action href="/sustainability" scrollTarget="clean-energy" label="Explore our approach" />
       </div>
       <p className="planet__credit label">Photo by Appolinary Kalashnikova</p>
     </section>

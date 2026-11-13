@@ -11,6 +11,14 @@ const BARS = Array.from({ length: 9 }, (_, i) => i);
 
 type Phase = "idle" | "cover" | "reveal";
 
+function scrollToSection(id: string) {
+  const section = document.getElementById(id);
+  if (!section) return;
+  section.scrollIntoView({ block: "start" });
+  if (!section.hasAttribute("tabindex")) section.tabIndex = -1;
+  section.focus({ preventScroll: true });
+}
+
 /** Internal links sweep the sheet with ribbons of the destination's ink. */
 export function PageTransition() {
   const router = useRouter();
@@ -18,8 +26,13 @@ export function PageTransition() {
   const [phase, setPhase] = useState<Phase>("idle");
   const [destination, setDestination] = useState(() => routeFor(pathname));
   const target = useRef<string | null>(null);
+  const scrollTarget = useRef<string | null>(null);
 
   useEffect(() => {
+    const clearHash = () => {
+      if (location.hash) history.replaceState(history.state, "", location.pathname + location.search);
+    };
+    clearHash();
     const onClick = (event: MouseEvent) => {
       if (
         event.defaultPrevented ||
@@ -27,42 +40,68 @@ export function PageTransition() {
         event.metaKey ||
         event.ctrlKey ||
         event.shiftKey ||
-        event.altKey ||
-        matchMedia("(prefers-reduced-motion: reduce)").matches
+        event.altKey
       ) {
         return;
       }
       const anchor = (event.target as Element).closest?.("a");
       if (!anchor || anchor.target === "_blank" || anchor.hasAttribute("download")) return;
       const url = new URL(anchor.href, location.href);
-      if (url.origin !== location.origin || url.pathname === location.pathname) return;
+      if (url.origin !== location.origin) return;
+      const section = anchor.dataset.scrollTarget;
+      if (url.pathname === location.pathname) {
+        if (section) {
+          event.preventDefault();
+          event.stopPropagation();
+          scrollToSection(section);
+        }
+        return;
+      }
+      const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reducedMotion && !section) return;
       if (target.current) return;
 
       // Hold the navigation until the sheet is covered.
       event.preventDefault();
       event.stopPropagation();
-      const href = url.pathname + url.search + url.hash;
+      const href = url.pathname + url.search;
       target.current = url.pathname;
+      scrollTarget.current = section ?? null;
       router.prefetch(href);
+      if (reducedMotion) {
+        router.push(href, { scroll: !section });
+        return;
+      }
       setDestination(routeFor(url.pathname));
       setPhase("cover");
-      window.setTimeout(() => router.push(href), COVER_MS);
+      window.setTimeout(() => router.push(href, { scroll: !section }), COVER_MS);
       // If the page never arrives, uncover the one we are on.
       window.setTimeout(() => {
         if (target.current !== url.pathname) return;
         target.current = null;
+        scrollTarget.current = null;
         setPhase("reveal");
         window.setTimeout(() => setPhase("idle"), REVEAL_MS);
       }, GIVE_UP_MS);
     };
     document.addEventListener("click", onClick, true);
-    return () => document.removeEventListener("click", onClick, true);
+    window.addEventListener("hashchange", clearHash);
+    return () => {
+      document.removeEventListener("click", onClick, true);
+      window.removeEventListener("hashchange", clearHash);
+    };
   }, [router]);
 
   useEffect(() => {
     if (target.current !== pathname) return;
     target.current = null;
-    const reveal = window.setTimeout(() => setPhase("reveal"), 90);
+    const reveal = window.setTimeout(() => {
+      if (scrollTarget.current) {
+        scrollToSection(scrollTarget.current);
+        scrollTarget.current = null;
+      }
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches) setPhase("reveal");
+    }, 90);
     const rest = window.setTimeout(() => setPhase("idle"), 90 + REVEAL_MS);
     return () => {
       window.clearTimeout(reveal);

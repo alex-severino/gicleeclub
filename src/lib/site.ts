@@ -31,7 +31,7 @@ export function isPageVisible(pathname: string) {
 
 /** Nothing is ordered on the site: every order starts as a message to the studio. */
 export function contactHref(about?: string) {
-  return about ? `/contact-us?about=${encodeURIComponent(about)}#contact` : "/contact-us";
+  return about ? `/contact-us?about=${encodeURIComponent(about)}` : "/contact-us";
 }
 
 /** Each page has its own colour story, taken from Angelina's gradient pairs. */
@@ -188,7 +188,7 @@ export const nav: NavItem[] = [
 
 /** Route → ink and the title flashed on the page transition. */
 export const routes: Record<string, { ink: InkName; title: string }> = {
-  "/": { ink: "home", title: "Highest quality printing" },
+  "/": { ink: "home", title: "We print for artists" },
   "/giclee-printing": { ink: "giclee", title: "Giclée Printing" },
   "/branded-packaging": { ink: "packaging", title: "Branded Packaging" },
   "/certificate-of-authenticity": { ink: "certificate", title: "Certificate" },

@@ -10,7 +10,8 @@ const layers = [
     summary: "Pixel counts, file settings and print-size calculations. A precise starting point.",
     detail: "Our browser-based preparation tool reads supported file data. For TIFFs, this includes colour mode, bit depth and embedded ICC profiles. It calculates print sizes from pixel dimensions, so you can prepare your file before studio approval.",
     terms: ["Pixel dimensions", "RGB / 8 bit", "TIFF metadata"],
-    href: "/preparing-your-files#preflight",
+    href: "/preparing-your-files",
+    scrollTarget: "preflight",
     link: "Explore the file check",
   },
   {
@@ -21,7 +22,8 @@ const layers = [
     summary: "AI helps flag technical concerns before your artwork reaches a printer.",
     detail: "Resolution is considered as part of your file’s technical quality. A 300 PPI label alone is not the whole picture. When a concern is raised, we discuss the file and your intended print with you before proceeding.",
     terms: ["File quality", "Resolution", "Issues flagged for review"],
-    href: "/preparing-your-files#ai-approval",
+    href: "/preparing-your-files",
+    scrollTarget: "ai-approval",
     link: "About file approval",
   },
   {
@@ -33,6 +35,7 @@ const layers = [
     detail: "Our studio talks through the options with you, from a more suitable print size to a different paper or a revised file. We confirm the agreed file, paper, size and order with you before printing. You can ask us to look at a result with you.",
     terms: ["Personal guidance", "Review together", "Agreed before print"],
     href: contactHref(),
+    scrollTarget: undefined,
     link: "Speak with the studio",
   },
   {
@@ -44,6 +47,7 @@ const layers = [
     detail: "ICC profiles describe how a particular printer and paper reproduce colour, and support soft proofing before print. Our HP DesignJet Z9+ with V-Trimmer and Epson SureColor SC-P700 bring together precision printing and careful finishing.",
     terms: ["ICC profiles", "Soft proofing", "Pigment inkjet"],
     href: "/icc-profiles",
+    scrollTarget: undefined,
     link: "Explore colour management",
   },
 ] as const;
@@ -81,7 +85,7 @@ export function PrintTechnology() {
                 <ul className="print-tech__terms" role="list">
                   {layer.terms.map((term) => <li key={term}>{term}</li>)}
                 </ul>
-                <Link className="text-link" href={layer.href}>
+                <Link className="text-link" href={layer.href} data-scroll-target={layer.scrollTarget}>
                   {layer.link}<span aria-hidden="true">{"\u00a0\u00a0"}→</span>
                 </Link>
               </div>

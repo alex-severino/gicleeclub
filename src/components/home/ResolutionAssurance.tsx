@@ -29,7 +29,7 @@ export function ResolutionAssurance() {
             A problem caught here saves a wasted print, a missed deadline and a disappointing
             conversation with your client.
           </p>
-          <Link className="text-link" href="/preparing-your-files#resolution">
+          <Link className="text-link" href="/preparing-your-files" data-scroll-target="resolution">
             Understand what makes a file ready
             <span aria-hidden="true">{"\u00a0\u00a0"}→</span>
           </Link>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
+import { usePathname } from "next/navigation";
 
 /** Long how-to pages keep their contents in view and mark where you are. */
 export function Guide({
@@ -10,6 +11,7 @@ export function Guide({
   steps: { id: string; label: string }[];
   children: ReactNode;
 }) {
+  const pathname = usePathname();
   const [current, setCurrent] = useState(steps[0].id);
 
   useEffect(() => {
@@ -35,7 +37,8 @@ export function Guide({
           {steps.map((step) => (
             <li key={step.id}>
               <a
-                href={`#${step.id}`}
+                href={pathname}
+                data-scroll-target={step.id}
                 data-on={current === step.id ? "" : undefined}
                 aria-current={current === step.id ? "location" : undefined}
               >

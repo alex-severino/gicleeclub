@@ -5,10 +5,11 @@ export type ActionProps = {
   label: string;
   kind?: "ghost" | "pink";
   download?: boolean;
+  scrollTarget?: string;
 };
 
 /** The one button on the site. Files and outside links stay plain anchors. */
-export function Action({ href, label, kind, download }: ActionProps) {
+export function Action({ href, label, kind, download, scrollTarget }: ActionProps) {
   const className = kind ? `btn btn--${kind}` : "btn";
   if (download) {
     return (
@@ -25,7 +26,7 @@ export function Action({ href, label, kind, download }: ActionProps) {
     );
   }
   return (
-    <Link className={className} href={href}>
+    <Link className={className} href={href} data-scroll-target={scrollTarget}>
       {label}
     </Link>
   );

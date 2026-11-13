@@ -154,7 +154,7 @@ export default function PreparingFilesPage() {
           </p>
           <p>
             In order to create a correct TIFF file for printing, please follow our export
-            instructions in the <a href="#vector-export">Vector File Export</a> section below.
+            instructions in the <a href="/preparing-your-files" data-scroll-target="vector-export">Vector File Export</a> section below.
           </p>
         </Split>
 

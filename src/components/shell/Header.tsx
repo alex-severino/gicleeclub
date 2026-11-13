@@ -105,7 +105,7 @@ export function Header() {
 
   return (
     <>
-      <a className="skip" href="#main">
+      <a className="skip" href={pathname} data-scroll-target="main">
         Skip to content
       </a>
       <div className="scrim" data-open={open ? "" : undefined} aria-hidden="true" />

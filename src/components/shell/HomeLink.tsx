@@ -3,11 +3,11 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-/** Repeated clicks on the homepage must scroll even when its hash is unchanged. */
+/** Repeated clicks on the homepage return to the top without changing its URL. */
 export function HomeLink({ children, className }: { children: ReactNode; className?: string }) {
   return (
     <Link
-      href="/#opening"
+      href="/"
       className={className}
       aria-label="Giclée Club, home"
       onNavigate={(event) => {
