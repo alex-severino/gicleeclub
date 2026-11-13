@@ -69,7 +69,7 @@ const sheets: {
     eyebrow: "A5 | A4 | A3 prints",
     title: "Premium Portfolio Set",
     text: [
-      "Give your work the presentation it deserves. We will send your prints on the paper of your choice to any destination in a stylish black envelope branded with your logo for maximum effect.",
+      "Give your work the presentation it deserves. Your prints on the paper of your choice, in a stylish black envelope branded with your logo for maximum effect.",
     ],
     href: "/premium-portfolio-set",
     credit: "Art by Tim Stief, Augustine Wong, Sappho Bakker",

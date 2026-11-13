@@ -1,50 +1,34 @@
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
 import { studio } from "@/lib/site";
-import { Newsletter } from "./Newsletter";
 import { HomeLink } from "./HomeLink";
+import { Newsletter } from "./Newsletter";
 
 export function Footer() {
   return (
     <footer className="footer" data-ink="home">
       <div className="footer__cols">
-        <div>
-          <h2>Sign up</h2>
-          <p>Subscribe to get special offers!</p>
+        <div className="footer__studio">
+          <h2>From the studio</h2>
+          <p>Notes on print, process and the details that matter.</p>
           <Newsletter />
         </div>
-        <div>
-          <h2>Postal Address</h2>
-          <p>
-            {studio.street}
-            <br />
-            {studio.city}
-          </p>
-        </div>
-        <div>
+        <div className="footer__contact">
           <h2>Contact</h2>
-          <p>
-            <a href={`mailto:${studio.email}`}>{studio.email}</a>
-          </p>
+          <a href={`mailto:${studio.email}`}>{studio.email}</a>
         </div>
-        <div>
-          <h2>Legal Info</h2>
-          <p>
+        <div className="footer__info">
+          <h2>Information</h2>
+          <div className="footer__links">
             <Link href="/terms-and-conditions">Terms and Conditions</Link>
-            <br />
             <Link href="/privacy-policy">Privacy Policy</Link>
-            <br />
-            <Link href="/shipping">Shipping</Link>
-          </p>
+          </div>
         </div>
       </div>
       <HomeLink className="footer__mark">
         <Logo className="" />
       </HomeLink>
-      <div className="footer__base">
-        <span>© 2026 {studio.legalName}</span>
-        <span>Registered in England &amp; Wales · Company No. {studio.companyNumber}</span>
-      </div>
+      <p className="footer__base">© 2026 {studio.name}</p>
     </footer>
   );
 }

@@ -9,7 +9,7 @@ import { Sheet, Statement } from "@/components/blocks/Text";
 export const metadata: Metadata = {
   title: "Who We Are",
   description:
-    "Giclée Club is a London print house making museum quality Giclée prints for anyone — family photographs, posters, paintings, illustration and graphic design — and sending them worldwide.",
+    "Giclée Club is a London print studio pairing AI file approval and precision Giclée technology with archival papers and personal care.",
 };
 
 export default function WhoWeArePage() {
@@ -22,9 +22,9 @@ export default function WhoWeArePage() {
         title={["A print house", "for anyone"]}
       >
         <p>
-          Giclée Club is a family print studio in London. We make museum quality Giclée prints for
-          anyone who wants something worth keeping — a family photograph, a favourite poster, a
-          painting, a piece of illustration or graphic design.
+          Giclée Club is a family print studio in London. We bring together AI file approval,
+          precision printing and personal care to make museum quality Giclée prints — from a
+          family photograph or favourite poster to painting, illustration and graphic design.
         </p>
       </Hero>
 
@@ -49,9 +49,9 @@ export default function WhoWeArePage() {
         </p>
         <p>
           Nothing is sold through a basket on this site. You write to us. Your file is read by our
-          approval system before it ever reaches a printer. If it is not ready, we tell you. If it
-          is, we print it in London, pack it as if it were our own, and send it wherever you are. A
-          small order is treated with the same care as a large one.
+          AI approval system before it ever reaches a printer. If it is not ready, we tell you. If it
+          is, we print it in London and pack it as if it were our own. A small order is treated with
+          the same care as a large one.
         </p>
         <p>
           The long view is a print house that treats a family photograph with the same seriousness as
@@ -100,12 +100,12 @@ export default function WhoWeArePage() {
       <Split
         image="gloves"
         alt="White cotton handling gloves beside a cardboard print tube"
-        eyebrow="London, then anywhere"
+        eyebrow="From our London studio"
         title="A conversation, then a print"
       >
         <p>
           Orders start as a message, not a checkout. We confirm the file, the paper, the size and
-          the price with you. Then we print under one roof in London and deliver worldwide.
+          the price with you. Then we print under one roof in London, with careful finishing and packing.
         </p>
         <p>
           The studio is small on purpose. You can write, you can visit, and you can ask for a

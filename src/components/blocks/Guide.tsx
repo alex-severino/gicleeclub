@@ -31,15 +31,19 @@ export function Guide({
   return (
     <div className="guide">
       <nav className="guide__nav" aria-label="On this page">
-        <ol>
+        <ul role="list">
           {steps.map((step) => (
             <li key={step.id}>
-              <a href={`#${step.id}`} data-on={current === step.id ? "" : undefined}>
+              <a
+                href={`#${step.id}`}
+                data-on={current === step.id ? "" : undefined}
+                aria-current={current === step.id ? "location" : undefined}
+              >
                 {step.label}
               </a>
             </li>
           ))}
-        </ol>
+        </ul>
       </nav>
       <div className="guide__body">{children}</div>
     </div>

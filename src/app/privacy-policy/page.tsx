@@ -4,7 +4,7 @@ import { privacy, privacyIntro } from "@/content/legal";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "How Art Britannia Ltd trading as Giclée Club handles your personal data.",
+  description: "How Giclée Club handles your personal data.",
 };
 
 export default function PrivacyPage() {

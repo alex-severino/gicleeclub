@@ -2,14 +2,32 @@
 
 export const studio = {
   name: "Giclée Club",
-  legalName: "Art Britannia Ltd trading as Giclée Club",
-  companyNumber: "16631916",
   email: "hello@gicleeclub.com",
-  street: "12 Mulberry Place, Pinnell Road",
-  city: "London SE9 6AR",
   instagram: "https://www.instagram.com/gicleeclub/",
   url: "https://www.gicleeclub.com",
 };
+
+/** Retained studio records; these are not part of the public-facing copy. */
+export const studioDetails = {
+  legalName: "Art Britannia Ltd trading as Giclée Club",
+  companyNumber: "16631916",
+  street: "12 Mulberry Place, Pinnell Road",
+  city: "London SE9 6AR",
+};
+
+/** Keep paused content in the code so it can be restored when needed. */
+export const siteVisibility = {
+  prices: false,
+  shipping: false,
+  contactOrderIntro: false,
+  portfolioTemplates: false,
+};
+
+export function isPageVisible(pathname: string) {
+  if (pathname === "/prices") return siteVisibility.prices;
+  if (pathname === "/shipping") return siteVisibility.shipping;
+  return true;
+}
 
 /** Nothing is ordered on the site: every order starts as a message to the studio. */
 export function contactHref(about?: string) {
@@ -116,6 +134,7 @@ export const nav: NavItem[] = [
       },
     ],
   },
+  ...(siteVisibility.prices ? [{ label: "Prices", href: "/prices" }] : []),
   {
     label: "Help",
     sections: [

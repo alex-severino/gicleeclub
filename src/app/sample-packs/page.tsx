@@ -6,12 +6,12 @@ import { Split } from "@/components/blocks/Split";
 import { Sheet } from "@/components/blocks/Text";
 import { Money } from "@/components/shell/Money";
 import { pricing } from "@/lib/pricing";
-import { contactHref } from "@/lib/site";
+import { contactHref, siteVisibility } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Sample Packs",
   description:
-    "Get your hands on what our Giclée printing service can deliver. See how our artisan papers perform with different types of images. For only £5!",
+    "Get your hands on what our Giclée printing service can deliver. See how our artisan papers perform with different types of images.",
 };
 
 const packs = [
@@ -70,7 +70,8 @@ export default function SamplePacksPage() {
       >
         <p>
           Get your hands on what our Giclée printing service can deliver. See how our artisan papers
-          perform with different types of images. For only <Money gbp={pricing.samplePack} />!
+          perform with different types of images.
+          {siteVisibility.prices && <> For only <Money gbp={pricing.samplePack} />!</>}
         </p>
       </Hero>
 

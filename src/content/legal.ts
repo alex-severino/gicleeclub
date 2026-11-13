@@ -8,7 +8,7 @@
 export type LegalItem = string | string[] | { quote: string[] };
 export type LegalSection = { heading: string; items: LegalItem[] };
 
-export const lastUpdated = "7 November 2026";
+export const lastUpdated = "13 November 2026";
 
 export const termsIntro =
   "These terms apply to everything we print and supply. They explain who we are, how ordering works, what happens if something goes wrong, and your right to cancel. If you are a consumer, nothing in them takes away your legal rights.";
@@ -17,9 +17,9 @@ export const terms: LegalSection[] = [
   {
     heading: "About us",
     items: [
-      "Giclée Club is a trading name of Art Britannia Ltd, a company registered in England and Wales with company number 16631916. Our registered office is 12 Mulberry Place, Pinnell Road, London SE9 6AR.",
-      "You can contact us at [hello@gicleeclub.com](mailto:hello@gicleeclub.com) or by post at the address above.",
-      "“We”, “us” and “our” mean Art Britannia Ltd trading as Giclée Club. “You” means the person or business ordering from us.",
+      "Giclée Club is a print studio in London.",
+      "You can contact us at [hello@gicleeclub.com](mailto:hello@gicleeclub.com).",
+      "“We”, “us” and “our” mean Giclée Club. “You” means the person or business ordering from us.",
       "You are a “consumer” if you are an individual buying wholly or mainly for purposes outside your trade, business, craft or profession. You are a “business customer” if you are not. An artist buying prints to sell is a business customer. Some of these terms apply only to one or the other, and they say so.",
     ],
   },
@@ -36,7 +36,7 @@ export const terms: LegalSection[] = [
     items: [
       "We do not take orders or payments on our website. To order, [contact us](/contact-us).",
       "Every order that includes a file passes through our AI approval system, which checks the quality of your file, including its resolution. If your file needs work, we will tell you, so that you can correct it or choose a different size.",
-      "The prices and calculator on our website, and any quotation we send, are not an offer we are bound to accept. Any price shown as indicative is a guide until we confirm it.",
+      "Any quotation we send is a guide until we confirm your order and its final price by email.",
       "A contract between us begins only when we confirm your order by email. Where your order includes a file, we will do this after it has passed approval.",
       "We may decline an order, for example if a file cannot be printed to our standards, if we cannot supply the product, or if the artwork appears to be unlawful. If you have paid anything for that order, we will refund it.",
     ],
@@ -54,8 +54,8 @@ export const terms: LegalSection[] = [
     heading: "Prices",
     items: [
       "Our prices are in pounds sterling. They include VAT where it applies. They do not include delivery or other charges unless we say so.",
-      "Our website can show prices in other currencies. These are a guide only, based on recent exchange rates. We charge in pounds sterling.",
-      "The price that applies to your order is the one in our order confirmation. We can change the prices on our website at any time, but this does not affect orders we have already confirmed.",
+      "We confirm your quotation directly with you. We charge in pounds sterling.",
+      "The price that applies to your order is the one in our order confirmation. Changes to our pricing do not affect orders we have already confirmed.",
       "If our costs rise in a way we could not have foreseen and we need to change the price of a confirmed order before we start work on it, we will tell you first. You can then cancel the order and we will refund anything you have paid.",
       "If the rate of VAT changes between our order confirmation and delivery, we will adjust the VAT you pay, unless you have already paid in full.",
     ],
@@ -84,10 +84,9 @@ export const terms: LegalSection[] = [
     heading: "Delivery",
     items: [
       "We deliver to the address you give us. Sample packs and other stock items are supplied while stocks last.",
-      "We will confirm any delivery charge before you commit to an order. Free delivery applies to the countries listed on our [Shipping](/shipping) page.",
+      "We will confirm delivery arrangements and any delivery charge directly with you before you commit to an order.",
       "Delivery dates are estimates. Unless we agree otherwise, we will deliver without undue delay and within 30 days after we confirm your order. If you are a consumer, the law gives you rights if we are late. If you are a business customer, a delay does not entitle you to compensation or to end the contract, unless we have agreed that in writing.",
       "Please make sure someone can receive your delivery. If a delivery fails, or you ask us to delay it, you must pay our reasonable extra costs of storage and redelivery.",
-      "Orders delivered outside the United Kingdom may be subject to import duties, taxes and customs charges on arrival. You are responsible for paying these.",
       "If a package looks opened or damaged when it arrives, please tell the courier if you can, take photographs, and let us know straight away. If you are a business customer and you do not do this within 7 days of delivery, we are not liable for damage in transit.",
     ],
   },
@@ -96,11 +95,11 @@ export const terms: LegalSection[] = [
     items: [
       "Most of what we supply is made to your specification. This includes art prints of your artwork, proof strips, Premium Portfolio Sets, branded stickers and certificates. Under the Consumer Contracts (Information, Cancellation and Additional Charges) Regulations 2013, the 14-day right to cancel does not apply to these products. You keep your rights if a product is faulty.",
       "For sample packs and other products that are not made to your specification, you can cancel without giving a reason. You have 14 days from the day after you receive the product, or the last product if your order arrives in parts.",
-      "To cancel, tell us clearly by email to [hello@gicleeclub.com](mailto:hello@gicleeclub.com) or by post. You can use this wording, but you do not have to:",
+      "To cancel, tell us clearly by email to [hello@gicleeclub.com](mailto:hello@gicleeclub.com). You can use this wording, but you do not have to:",
       {
         quote: [
-          "To: Art Britannia Ltd trading as Giclée Club, 12 Mulberry Place, Pinnell Road, London SE9 6AR, hello@gicleeclub.com",
-          "I hereby give notice that I cancel my contract of sale of the following goods: [goods]. Ordered on [date] and received on [date]. Name: [your name]. Address: [your address]. Signature (if sent on paper). Date: [date].",
+          "To: Giclée Club, hello@gicleeclub.com",
+          "I hereby give notice that I cancel my contract of sale of the following goods: [goods]. Ordered on [date] and received on [date]. Name: [your name]. Date: [date].",
         ],
       },
       "You must send the product back within 14 days after telling us you are cancelling. If you return your complete order, we will pay the cost of returning it. Otherwise, you must pay it.",
@@ -177,7 +176,7 @@ export const privacy: LegalSection[] = [
   {
     heading: "Who we are",
     items: [
-      "Art Britannia Ltd trading as Giclée Club is the controller of your personal data. We are registered in England and Wales with company number 16631916. Our registered office is 12 Mulberry Place, Pinnell Road, London SE9 6AR.",
+      "Giclée Club is the controller of your personal data.",
       "For any question about this policy, contact Angelina de Almeida Severino at [hello@gicleeclub.com](mailto:hello@gicleeclub.com).",
     ],
   },
@@ -277,7 +276,6 @@ export const privacy: LegalSection[] = [
     heading: "Cookies",
     items: [
       "Our website does not use analytics, advertising or tracking cookies.",
-      "If you choose a currency, your browser remembers that choice on your own device so that prices keep showing in it. This stays in your browser, and you can clear it at any time in your browser settings.",
       "If we ever add cookies that need your consent, we will ask you first and update this policy.",
       "Our website links to other sites, such as Instagram. Their own privacy policies apply once you leave our website.",
     ],

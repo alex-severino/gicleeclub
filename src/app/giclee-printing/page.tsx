@@ -32,6 +32,10 @@ export default function GicleePrintingPage() {
           photograph, a poster for your wall, digital illustration, graphic design or the
           reproduction of a painting.
         </p>
+        <p>
+          At Giclée Club, AI file approval and colour-managed printing support that process, with
+          careful paper selection and finishing by our studio team.
+        </p>
       </Hero>
 
       <Split

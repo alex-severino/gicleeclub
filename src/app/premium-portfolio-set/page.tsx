@@ -4,7 +4,7 @@ import { ContactCta } from "@/components/blocks/ContactCta";
 import { Promos } from "@/components/blocks/Promos";
 import { Split } from "@/components/blocks/Split";
 import { Sheet } from "@/components/blocks/Text";
-import { contactHref } from "@/lib/site";
+import { contactHref, siteVisibility } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Premium Portfolio Set",
@@ -43,25 +43,27 @@ export default function PortfolioPage() {
         </p>
       </Split>
 
-      <Split
-        image="cv-cl-note"
-        alt="A CV, cover letter and handwritten note template on a dark table"
-        eyebrow="Add to your set"
-        title="Cover letter | CV | Note"
-        action={{
-          href: "/downloads/Giclee-Club_Templates_CV_CL_Note.zip",
-          label: "Download templates",
-          download: true,
-        }}
-        flip
-      >
-        <p>
-          Include an A4 cover letter, A4 CV or an A5 note in the set to complete your presentation.
-          Any combination of these items is possible. They will be printed on 160 grams white paper
-          in b/w or colour depending on your uploaded file.
-        </p>
-        <p>You can choose to use the templates that we created for the cover letter, CV and note.</p>
-      </Split>
+      {siteVisibility.portfolioTemplates && (
+        <Split
+          image="cv-cl-note"
+          alt="A CV, cover letter and handwritten note template on a dark table"
+          eyebrow="Add to your set"
+          title="Cover letter | CV | Note"
+          action={{
+            href: "/downloads/Giclee-Club_Templates_CV_CL_Note.zip",
+            label: "Download templates",
+            download: true,
+          }}
+          flip
+        >
+          <p>
+            Include an A4 cover letter, A4 CV or an A5 note in the set to complete your presentation.
+            Any combination of these items is possible. They will be printed on 160 grams white paper
+            in b/w or colour depending on your uploaded file.
+          </p>
+          <p>You can choose to use the templates that we created for the cover letter, CV and note.</p>
+        </Split>
+      )}
 
       <Split
         image="envelopes"
@@ -91,8 +93,8 @@ export default function PortfolioPage() {
           blank round seal stamp.
         </p>
         <p>
-          We will send this envelope to anywhere in the world packed in biodegradable bubble wrap
-          and wrapped in recycled paper for extra protection.
+          Your envelope is packed in biodegradable bubble wrap and wrapped in recycled paper for
+          extra protection.
         </p>
       </Split>
 

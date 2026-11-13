@@ -1,8 +1,8 @@
 import type { MetadataRoute } from "next";
-import { routes, studio } from "@/lib/site";
+import { isPageVisible, routes, studio } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return Object.keys(routes).map((path) => ({
+  return Object.keys(routes).filter(isPageVisible).map((path) => ({
     url: `${studio.url}${path === "/" ? "" : path}`,
   }));
 }

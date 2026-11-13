@@ -20,13 +20,30 @@ export const PROJECT = {
 const MARKER = "gicleeclubVerifiedCommit";
 const activeStates = new Set(["INITIALIZING", "QUEUED", "BUILDING"]);
 const state = (deployment) => deployment.readyState ?? deployment.state;
-const commitSha = (deployment) => deployment.meta?.githubCommitSha;
+const commitSha = (deployment) => deployment.meta?.githubCommitSha ?? deployment.meta?.gitCommitSha;
+const commitRef = (deployment) => deployment.meta?.githubCommitRef ?? deployment.meta?.gitCommitRef;
+
+export function releaseMetadata(sha, message, link) {
+  return {
+    [MARKER]: sha,
+    gitCommitSha: sha,
+    gitCommitRef: PROJECT.branch,
+    gitCommitMessage: message,
+    ...(link?.type === "github" ? {
+      githubCommitSha: sha,
+      githubCommitRef: PROJECT.branch,
+      githubCommitMessage: message,
+      githubCommitOrg: link.org,
+      githubCommitRepo: link.repo,
+    } : {}),
+  };
+}
 
 export function matchingGitBuilds(deployments, sha) {
   return deployments.filter((deployment) =>
     deployment.source === "git" &&
     deployment.target === "production" &&
-    deployment.meta?.githubCommitRef === PROJECT.branch &&
+    commitRef(deployment) === PROJECT.branch &&
     commitSha(deployment) === sha &&
     activeStates.has(state(deployment)),
   );
@@ -121,12 +138,15 @@ async function main() {
   const api = async (endpoint, method) => JSON.parse(await output("vercel", [
     "api", endpoint, "--scope", PROJECT.team, ...(method ? ["--method", method] : []),
   ]));
-  const project = await api(`/v9/projects/${PROJECT.name}`).catch(() => {
-    throw new Error(`Vercel project "${PROJECT.name}" not found. Import the repository at vercel.com/new first.`);
-  });
+  const [project, customReachesVercel] = await Promise.all([
+    api(`/v9/projects/${PROJECT.name}`).catch(() => {
+      throw new Error(`Vercel project "${PROJECT.name}" not found. Import the repository at vercel.com/new first.`);
+    }),
+    reachesVercel(PROJECT.domain),
+  ]);
   const projectId = project.id;
   const aliases = project.targets?.production?.alias ?? [];
-  const domain = pickServingDomain(await reachesVercel(PROJECT.domain), aliases) ?? `${PROJECT.name}.vercel.app`;
+  const domain = pickServingDomain(customReachesVercel, aliases) ?? `${PROJECT.name}.vercel.app`;
   if (domain !== PROJECT.domain) console.log(`${PROJECT.domain} does not reach Vercel yet; verifying on ${domain}.`);
 
   const recent = async () => (await api(
@@ -142,26 +162,32 @@ async function main() {
   const remoteSha = async () =>
     (await output("git", ["ls-remote", PROJECT.remote, `refs/heads/${PROJECT.branch}`])).split(/\s/)[0];
 
-  let live = await serving();
+  let [live, deployments, remote] = await Promise.all([serving(), recent(), remoteSha()]);
 
   if (flags.has("--check")) {
     console.log(`Commit:  ${sha}${dirty ? " (working tree has uncommitted changes)" : ""}`);
-    console.log(`Remote:  ${(await remoteSha()) === sha ? "matches" : "differs (push needed)"}`);
+    console.log(`Remote:  ${remote === sha ? "matches" : "differs (push needed)"}`);
     console.log(live
       ? `Live:    ${live.url} (${state(live)}, ${live.source}, ${commitSha(live)?.slice(0, 7) ?? "no commit"})`
       : "Live:    nothing deployed yet");
-    console.log(`Pending Git builds for this commit: ${matchingGitBuilds(await recent(), sha).length}`);
+    console.log(`Pending Git builds for this commit: ${matchingGitBuilds(deployments, sha).length}`);
     console.log(isLiveCommit(live, sha) ? "Already live; no rebuild needed." : "A direct deployment is needed.");
     return;
   }
 
-  if (flags.has("--ship")) await interactive("git", ["push", "-u", PROJECT.remote, PROJECT.branch]);
-  if (await remoteSha() !== sha) {
+  const pushed = flags.has("--ship") && remote !== sha;
+  if (pushed) {
+    const pushStarted = Date.now();
+    await interactive("git", ["push", "-u", PROJECT.remote, PROJECT.branch]);
+    [remote, deployments] = await Promise.all([remoteSha(), recent()]);
+    console.log(`Git push: ${((Date.now() - pushStarted) / 1000).toFixed(1)}s`);
+  }
+  if (remote !== sha) {
     throw new Error(`${PROJECT.remote}/${PROJECT.branch} is not at ${sha.slice(0, 7)}; push it before deploying.`);
   }
 
-  async function cancelDuplicates() {
-    const jobs = matchingGitBuilds(await recent(), sha);
+  async function cancelDuplicates(candidates) {
+    const jobs = matchingGitBuilds(candidates ?? await recent(), sha);
     for (const job of jobs) {
       try {
         await api(`/v12/deployments/${job.uid}/cancel`, "PATCH");
@@ -175,31 +201,40 @@ async function main() {
     return jobs.length;
   }
 
-  let cancelled = await cancelDuplicates();
-  // The push webhook can arrive just after git push returns. Catch it before it
-  // occupies the build slot; leave other commits, previews, and CLI deployments alone.
-  if (flags.has("--ship") && !cancelled && !isLiveCommit(live, sha)) {
-    console.log("Checking for the Git push deployment before releasing directly...");
-    for (let attempt = 0; attempt < 5 && !cancelled; attempt++) {
-      await delay(1000);
-      cancelled = await cancelDuplicates();
-    }
-  }
+  const cancelled = await cancelDuplicates(deployments);
 
   let buildSeconds;
+  let verificationStarted = Date.now();
   if (isLiveCommit(live, sha)) {
     console.log(`Commit ${sha.slice(0, 7)} is already live at https://${domain}; skipped rebuilding.`);
   } else {
-    if (activeDirectReleases(await recent(), sha).length) {
+    if (activeDirectReleases(deployments, sha).length) {
       throw new Error(`A direct release of ${sha.slice(0, 7)} is already running; let it finish.`);
     }
     if (await output("git", ["rev-parse", "HEAD"]) !== sha || await output("git", ["status", "--porcelain"])) {
       throw new Error("Working tree changed during release; commit changes and release again.");
     }
-    await interactive("vercel", [
-      "deploy", "--prod", "--yes", "--project", projectId, "--scope", PROJECT.team,
-      "--meta", `${MARKER}=${sha}`,
+    const message = await output("git", ["log", "-1", "--format=%s"]);
+    const metadata = releaseMetadata(sha, message, project.link);
+    // Watch for a delayed Git webhook while the direct deployment uploads and
+    // builds, rather than holding up the deployment to wait for that webhook.
+    const watchGitBuild = async () => {
+      if (!pushed || cancelled) return;
+      const deadline = Date.now() + 10000;
+      while (Date.now() < deadline) {
+        await delay(500);
+        if (await cancelDuplicates()) return;
+      }
+    };
+    const results = await Promise.allSettled([
+      interactive("vercel", [
+        "deploy", "--prod", "--yes", "--project", projectId, "--scope", PROJECT.team,
+        ...Object.entries(metadata).flatMap(([key, value]) => ["--meta", `${key}=${value}`]),
+      ]),
+      watchGitBuild(),
     ]);
+    for (const result of results) if (result.status === "rejected") throw result.reason;
+    verificationStarted = Date.now();
     for (let attempt = 0; attempt < 30 && !isLiveCommit(live, sha); attempt++) {
       if (attempt) await delay(2000);
       live = await serving();
@@ -210,15 +245,17 @@ async function main() {
     if (live.buildingAt && live.ready) buildSeconds = (live.ready - live.buildingAt) / 1000;
   }
   // Also catch a delayed webhook after the direct deployment has completed.
-  await cancelDuplicates();
-
-  const response = await fetch(`https://${domain}/`, { cache: "no-store" });
+  const [, response] = await Promise.all([
+    cancelDuplicates(),
+    fetch(`https://${domain}/`, { cache: "no-store", signal: AbortSignal.timeout(15000) }),
+  ]);
   if (!response.ok) throw new Error(`https://${domain}/ returned HTTP ${response.status}.`);
   const remaining = matchingGitBuilds(await recent(), sha).length;
   if (remaining) throw new Error(`${remaining} duplicate Git build(s) still pending for ${sha.slice(0, 7)}.`);
 
   console.log(`Live: https://${domain} serves ${sha.slice(0, 7)} (${live.url}, READY, HTTP ${response.status}).`);
   if (buildSeconds !== undefined) console.log(`Vercel build: ${buildSeconds.toFixed(1)}s`);
+  console.log(`Verification: ${((Date.now() - verificationStarted) / 1000).toFixed(1)}s`);
   console.log(`End-to-end release: ${((Date.now() - started) / 1000).toFixed(1)}s`);
 }
 

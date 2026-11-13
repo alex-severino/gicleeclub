@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
-import { activeDirectReleases, isLiveCommit, matchingGitBuilds, pickServingDomain, uncoveredLocalFiles } from "./deploy.mjs";
+import { activeDirectReleases, isLiveCommit, matchingGitBuilds, pickServingDomain, releaseMetadata, uncoveredLocalFiles } from "./deploy.mjs";
 
 const sha = "current-commit";
 const job = {
@@ -55,6 +55,40 @@ test("CLI deployments count as live only with the verified-commit marker", () =>
     ...job.meta, gicleeclubVerifiedCommit: sha,
   } }, sha), false);
   assert.equal(isLiveCommit({ ...cli, meta: { ...job.meta, gicleeclubVerifiedCommit: sha } }, sha), true);
+});
+
+test("worktree CLI metadata verifies the live commit without a polling timeout", () => {
+  const cli = {
+    ...job,
+    source: "cli",
+    readyState: "READY",
+    meta: { gitCommitSha: sha, gitCommitRef: "main", gicleeclubVerifiedCommit: sha },
+  };
+  assert.equal(isLiveCommit(cli, sha), true);
+  assert.equal(isLiveCommit({ ...cli, meta: { gitCommitSha: sha } }, sha), false);
+  assert.equal(isLiveCommit({ ...cli, meta: { ...cli.meta, gitCommitSha: "another-commit" } }, sha), false);
+  assert.equal(isLiveCommit({ ...cli, meta: { ...cli.meta, gicleeclubVerifiedCommit: "another-commit" } }, sha), false);
+  assert.equal(isLiveCommit({ ...cli, readyState: "BUILDING" }, sha), false);
+  assert.deepEqual(matchingGitBuilds([cli], sha), []);
+});
+
+test("conflicting GitHub metadata cannot be bypassed with a generic Git SHA", () => {
+  const cli = { ...job, source: "cli", readyState: "READY", meta: {
+    githubCommitSha: "another-commit", gitCommitSha: sha, gicleeclubVerifiedCommit: sha,
+  } };
+  assert.equal(isLiveCommit(cli, sha), false);
+});
+
+test("CLI releases include the real commit title and GitHub repository details", () => {
+  const metadata = releaseMetadata(sha, "Publish the current Giclée Club website", {
+    type: "github", org: "alex-severino", repo: "gicleeclub",
+  });
+  assert.equal(metadata.githubCommitMessage, "Publish the current Giclée Club website");
+  assert.equal(metadata.githubCommitSha, sha);
+  assert.equal(metadata.githubCommitRef, "main");
+  assert.equal(metadata.githubCommitOrg, "alex-severino");
+  assert.equal(metadata.githubCommitRepo, "gicleeclub");
+  assert.equal(isLiveCommit({ source: "cli", readyState: "READY", meta: metadata }, sha), true);
 });
 
 test("a project with nothing deployed yet is not live", () => {

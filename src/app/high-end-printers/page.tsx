@@ -149,7 +149,7 @@ export default function PrintersPage() {
       <Split
         image="printheads"
         alt="Diagram of ink drops of different sizes on a printhead"
-        eyebrow="High-tech"
+        eyebrow="Hi-Tech"
         title="Printheads"
         credit="Image by Epson Corporation"
         flip

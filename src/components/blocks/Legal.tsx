@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { lastUpdated, type LegalItem, type LegalSection } from "@/content/legal";
+import { studio } from "@/lib/site";
 import { Sheet } from "./Text";
 
 /** Renders [Label](href) links inside legal text. */
@@ -76,7 +77,7 @@ export function Legal({
     <Sheet ink="legal">
       <div className="legal">
         <h1 className="h-lg">{title}</h1>
-        <p className="label">Art Britannia Ltd trading as Giclée Club. Last updated {lastUpdated}.</p>
+        <p className="label">{studio.name}. Last updated {lastUpdated}.</p>
         <p className="legal__intro">{intro}</p>
         {sections.map((section, i) => (
           <section key={section.heading}>

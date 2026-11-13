@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { Hero } from "@/components/blocks/Hero";
 import { ContactCta } from "@/components/blocks/ContactCta";
 import { Promos } from "@/components/blocks/Promos";
 import { Sheet } from "@/components/blocks/Text";
+import { siteVisibility } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Shipping",
-  description: "We ship to all of Europe for free, and worldwide.",
+  description: "Contact the Giclée Club studio to discuss delivery for your print.",
+  robots: siteVisibility.shipping ? undefined : { index: false, follow: false },
 };
 
 const countries =
@@ -15,6 +18,8 @@ const countries =
   );
 
 export default function ShippingPage() {
+  if (!siteVisibility.shipping) notFound();
+
   return (
     <Sheet ink="shipping">
       <Hero

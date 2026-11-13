@@ -9,7 +9,7 @@ import { Sheet, Statement } from "@/components/blocks/Text";
 export const metadata: Metadata = {
   title: "Our Print Studio",
   description:
-    "Giclée Club is located in London, with the latest gear including powerful computers, printers and cutters.",
+    "Inside our London print studio: AI file approval, colour-managed Giclée printing and careful finishing, all under one roof.",
 };
 
 const photos = [
@@ -37,8 +37,9 @@ export default function PrintStudioPage() {
       </Hero>
 
       <Statement title="Our space and equipment">
-        Our studio has the latest gear including powerful computers, printers, cutters as well as
-        safe and dry paper and packaging storage space.
+        AI file approval and colour-managed printing sit alongside careful handling and finishing.
+        Our studio brings together powerful computers, professional printers and cutters, with
+        safe, dry storage for our papers and packaging.
       </Statement>
 
       <section className="mosaic">

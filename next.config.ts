@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { siteVisibility } from "./src/lib/site";
 
 /** Old Shopify paths, so existing links and search results keep working. */
 const legacyPaths: Record<string, string> = {
@@ -28,6 +29,12 @@ const legacyPaths: Record<string, string> = {
 /** No orders on the site for now: every route to ordering leads to a conversation. */
 const orderPaths = ["/order", "/order/:path*", "/pages/order", "/products/:path*"];
 
+/** Retain the original example templates, which contain a sample postal address. */
+const portfolioTemplatePaths = [
+  "/downloads/Giclee-Club_Templates_CV_CL_Note.zip",
+  "/media/section/cv-cl-note.png",
+];
+
 const nextConfig: NextConfig = {
   /* config options here */
   cacheComponents: true,
@@ -40,6 +47,13 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      ...(!siteVisibility.portfolioTemplates
+        ? portfolioTemplatePaths.map((source) => ({
+            source,
+            destination: "/contact-us",
+            permanent: false,
+          }))
+        : []),
       ...Object.entries(legacyPaths).map(([source, destination]) => ({
         source,
         destination,

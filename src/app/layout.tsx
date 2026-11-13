@@ -20,11 +20,11 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   metadataBase: new URL(studio.url),
   title: {
-    default: "Giclée Club – Museum quality printing for visual artists",
+    default: "Hi-Tech Museum Quality Printing for Visual Artists — Giclée Club",
     template: "%s — Giclée Club",
   },
   description:
-    "Bring your artwork and photographs to life on Hahnemühle FineArt papers. Hand-printed in our London studio and delivered worldwide.",
+    "Hi-Tech museum quality printing for visual artists. AI file approval and meticulous London studio care, for work your reputation rests on.",
   openGraph: {
     siteName: studio.name,
     type: "website",

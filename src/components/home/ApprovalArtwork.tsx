@@ -1,6 +1,6 @@
 const inks = ["#2466fd", "#6f3fff", "#ca89ea", "#ffb1e0", "#ff7e3f", "#ffa602"];
 
-/** Vector print checks use the section's exact grey as their paper ground. */
+/** The original print-test geometry in the Giclée Club brand colours. */
 export function ApprovalArtwork() {
   return (
     <svg className="approval__illustration" viewBox="0 0 640 640" role="img" aria-label="A graphic print proof with colour swatches, fine resolution lines and a magnified detail, in Giclée Club colours">

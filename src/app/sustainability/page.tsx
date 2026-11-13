@@ -1,32 +1,22 @@
 import type { Metadata } from "next";
 import { ContactBlock } from "@/components/blocks/ContactBlock";
-import { Hero } from "@/components/blocks/Hero";
+import { PlanetHero } from "@/components/blocks/PlanetHero";
 import { Split } from "@/components/blocks/Split";
 import { Sheet } from "@/components/blocks/Text";
 
 export const metadata: Metadata = {
   title: "Sustainability",
   description:
-    "We do our part to make sure our production is carbon-neutral: solar energy, electric transport and fully recyclable packaging.",
+    "Solar-powered printing, electric transport and fully recyclable papers and packaging. A considered approach at our London print studio.",
 };
 
 export default function SustainabilityPage() {
   return (
     <Sheet ink="planet">
-      <Hero
-        name="wind-turbines"
-        alt="Three wind turbines over open fields, beside an orange field with pink sunbursts"
-        eyebrow="Sustainability"
-        title={["Environmental", "Awareness"]}
-        credit="Photo by Mon Jester"
-      >
-        <p>
-          We do our part to make sure our production is carbon-neutral. This means that all our
-          production emissions are offset.
-        </p>
-      </Hero>
+      <PlanetHero />
 
       <Split
+        id="clean-energy"
         image="solar-panels"
         alt="Solar panels on the roof of the print house"
         eyebrow="We use"

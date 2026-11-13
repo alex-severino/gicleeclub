@@ -11,7 +11,7 @@ import { Preflight } from "@/components/tools/Preflight";
 export const metadata: Metadata = {
   title: "Preparing Your Files",
   description:
-    "Follow our guidelines to get the best out of your print: resolution, safe areas, borders, flattening and exporting your file.",
+    "Prepare your artwork for AI file approval and precision Giclée printing: resolution, safe areas, borders, flattening and exporting your file.",
 };
 
 const steps = [
@@ -39,8 +39,8 @@ export default function PreparingFilesPage() {
         action={{ href: "/contact-us", label: "Contact us" }}
       >
         <p>
-          Making sure that your file is correctly prepared is the key for a great quality,
-          high-definition print. Follow our guidelines to get the best out of your print.
+          A carefully prepared file is the starting point for a detailed, faithful print. These
+          guidelines help you prepare your artwork for AI approval and our colour-managed print workflow.
         </p>
         <p>
           It can be a little daunting at first, so please feel completely free to contact us. You can
@@ -53,18 +53,18 @@ export default function PreparingFilesPage() {
           id="ai-approval"
           image="ai-technology"
           alt="Large blue letters AI standing on a patterned surface"
-          eyebrow="Unique"
-          title="AI technology"
+          eyebrow="Before printing"
+          title="AI file approval"
           credit="Art by Steve Johnson"
         >
           <p>
-            We have developed a special technology to immediately recognise whether the digital file
-            is ready for print – amongst other things, it checks your file’s PPI.
+            Your artwork passes through our AI approval system before it reaches a printer. It
+            checks technical details, including resolution, to help identify files that need attention.
           </p>
           <p>
-            It will enable us to inform you in case your file still needs work or if it was sent to us
-            with insufficient resolution. This way nothing leaves our printers unless it can meet
-            museum quality.
+            If your file needs work, we will let you know so you can adjust it or choose a more
+            suitable print size. Technology supports the process; our studio team is here to help
+            with your questions about paper, colour and preparation.
           </p>
           <p>Every order passes through this approval before it is printed.</p>
         </Split>
@@ -125,13 +125,18 @@ export default function PreparingFilesPage() {
           flip
         >
           <p>
-            If you increase the resolution in Photoshop by clicking Image ➔ Image Size{" "}
-            <strong>with Resample ticked</strong>, Photoshop will artificially create more pixels per
-            inch without improving the quality of the image.
+            A file labelled 300 PPI is not automatically ready for print. Changing the resolution
+            with <strong>Resample unticked</strong> changes the intended print size, while keeping
+            the same pixels and image detail.
           </p>
           <p>
-            This forced resolution change will result in a low quality image that is{" "}
-            <strong>not suitable for printing</strong>.
+            Increasing the resolution <strong>with Resample ticked</strong> adds pixels by
+            interpolation. It does not recover original detail that was missing. A small image
+            enlarged this way can still look soft or pixelated in print.
+          </p>
+          <p>
+            Send us your original file and tell us the size you have in mind. Our AI approval
+            checks its technical quality before printing, and we will let you know if it needs attention.
           </p>
         </Split>
 

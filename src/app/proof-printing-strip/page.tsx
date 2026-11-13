@@ -8,12 +8,12 @@ import { Sheet } from "@/components/blocks/Text";
 import { Money } from "@/components/shell/Money";
 import { ProofStripTool } from "@/components/tools/ProofStripTool";
 import { pricing } from "@/lib/pricing";
-import { contactHref } from "@/lib/site";
+import { contactHref, siteVisibility } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Proof Printing Strip",
   description:
-    "Preview your print. It is great to feel safe when ordering a big print, and proof printing is here to help. For only £5!",
+    "Pair digital file checks with a physical proof. See the colour, sharpness and feel of your print before committing to a larger size.",
 };
 
 export default function ProofStripPage() {
@@ -28,8 +28,9 @@ export default function ProofStripPage() {
         action={{ href: contactHref("Proof Printing Strip"), label: "Contact us" }}
       >
         <p>
-          It is great to feel safe when ordering a big print. Proof printing is here to help you
-          with it. For only <Money gbp={pricing.proofStrip} />!
+          Pair digital file checks with a physical proof. See the colour, sharpness and feel of
+          your print before committing to a larger size.
+          {siteVisibility.prices && <> For only <Money gbp={pricing.proofStrip} />!</>}
         </p>
       </Hero>
 
